@@ -1,0 +1,23 @@
+{
+  "name": "city_bugdet_helper",
+  "version": "1.0.0",
+  "description": "Utility app for budgeting",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikovic/cityBudgetHelper.git"
+  },
+  "keywords": [
+    "budget",
+    "procurement"
+  ],
+  "author": "Ivan Kovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ikovic/cityBudgetHelper/issues"
+  },
+  "homepage": "https://github.com/ikovic/cityBudgetHelper#readme"
+}
