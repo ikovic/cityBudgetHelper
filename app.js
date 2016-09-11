@@ -2,7 +2,7 @@ var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     config = require('./src/config/config'),
-    Sequelize = require('sequelize');
+    models = require('./src/models');
 
 // configure app to use bodyParser for POST data
 app.use(bodyParser.json());
@@ -14,14 +14,18 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 
 // synchronize MySQL on start
-var sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, config.db.options);
-sequelize
+models.sequelize
     .authenticate()
     .then(function (err) {
         console.log('Connection has been established successfully.');
+    })
+    .then(function (err) {
+        return models.sequelize.sync()
+    })
+    .then(function () {
         app.listen(process.env.PORT || config.port, function () {
             console.log('Listening on port 3000...');
-        })
+        });
     })
     .catch(function (err) {
         console.log('Unable to connect to the database:', err);
