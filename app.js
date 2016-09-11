@@ -25,9 +25,6 @@ models.sequelize
             console.log('Listening on port 3000...');
         });
     })
-    .catch(function (err) {
-        console.log('Unable to connect to the database:', err);
-    })
     .catch(function(err) {
        console.log('Error!', err);
     });
