@@ -18,9 +18,7 @@ models.sequelize
     .authenticate()
     .then(function (err) {
         console.log('Connection has been established successfully.');
-    })
-    .then(function (err) {
-        return models.sequelize.sync()
+        return models.sequelize.sync();
     })
     .then(function () {
         app.listen(process.env.PORT || config.port, function () {
@@ -29,4 +27,7 @@ models.sequelize
     })
     .catch(function (err) {
         console.log('Unable to connect to the database:', err);
+    })
+    .catch(function(err) {
+       console.log('Error!', err);
     });

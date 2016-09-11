@@ -1,4 +1,3 @@
-
 module.exports = function (sequelize, DataTypes) {
     var Organization = sequelize.define('Organization', {
         id: {
@@ -30,5 +29,10 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         tableName: 'organization'
     });
+
+    Organization.associate = function (models) {
+        Organization.hasMany(models.Budget);
+    };
+
     return Organization;
 };
