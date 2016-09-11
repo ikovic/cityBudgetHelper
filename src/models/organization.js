@@ -25,6 +25,10 @@ module.exports = function (sequelize, DataTypes) {
         address: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        taxpayer: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
     }, {
         tableName: 'organization'

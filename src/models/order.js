@@ -10,12 +10,13 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        amount: {
-            type: DataTypes.DOUBLE,
-            allowNull: true
-        },
         dateReceived: {
             type: DataTypes.DATE,
+            allowNull: true
+        },
+        type: {
+            type: DataTypes.ENUM,
+            values: ['roba', 'rad', 'usluga'],
             allowNull: true
         }
     }, {
