@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var browserify = require('browserify');  // Bundles JS.
 var del = require('del');  // Deletes files.
 var babelify = require('babelify');  // Transforms React JSX to JS.
@@ -18,6 +19,7 @@ var paths = {
 gulp.task('styles', function () {
     gulp.src(paths.CSS_SRC)
         .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer())
         .pipe(gulp.dest(paths.CSS_BUILD))
 });
 
