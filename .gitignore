@@ -40,5 +40,5 @@ jspm_packages
 .idea
 
 # built assets
-public/css
-public/js
+public/css/main.css
+public/js/bundle.js
