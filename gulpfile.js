@@ -1,95 +1,40 @@
 var gulp = require('gulp');
-var react = require('gulp-react');
-var autoprefixer = require('gulp-autoprefixer');
-var babel = require('gulp-babel');
-var concat = require('gulp-concat');
-var notify = require('gulp-notify');
-var newer = require('gulp-newer');
-var filter = require('gulp-filter');
-var plumber = require('gulp-plumber');
 var sass = require('gulp-sass');
+var browserify = require('browserify');  // Bundles JS.
+var del = require('del');  // Deletes files.
+var babelify = require('babelify');  // Transforms React JSX to JS.
+var source = require('vinyl-source-stream');
 
-var path = {
-    HTML: './src/views/index.html',
-    ALL: ['./src/views/*.js', './src/views/**/*.js', './src/views/index.html'],
-    JS: ['./src/views/*.js', './src/views/**/*.js'],
-    MINIFIED_OUT: 'build.min.js',
-    DEST_SRC: './public/src',
-    DEST_BUILD: './public',
-    DEST: 'dist'
+// source & build paths
+var paths = {
+    CSS_SRC: './src/client/main.scss',
+    CSS_BUILD: './public/css/',
+    JS_MAIN: './src/client/app.js',
+    JS_SRC: './src/client/**/*.js',
+    JS_BUILD: './public/js'
 };
 
-var onError = function (err) {
-    notify.onError({
-        title: "Error",
-        message: "<%= error %>"
-    })(err);
-    this.emit('end');
-};
-
-var plumberOptions = {
-    errorHandler: onError
-};
-
-// Copy react.js and react-dom.js to assets/js/src/vendor
-// only if the copy in node_modules is "newer"
-gulp.task('copy-react', function () {
-    return gulp.src('node_modules/react/dist/react.js')
-        .pipe(newer('./public/react.js'))
-        .pipe(gulp.dest('./public'));
-});
-gulp.task('copy-react-dom', function () {
-    return gulp.src('node_modules/react-dom/dist/react-dom.js')
-        .pipe(newer('./public/react-dom.js'))
-        .pipe(gulp.dest('./public'));
+// sass compile
+gulp.task('styles', function () {
+    gulp.src(paths.CSS_SRC)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(paths.CSS_BUILD))
 });
 
-// maybe do the same for redux
-
-gulp.task('concat', ['copy-react'], function () {
-    return gulp.src('./src/views/**/.js')
-        .pipe(babel({
-            only: [
-                './src/views/**/.js'
-            ],
-            compact: false
-        }))
-        .pipe(concat('app.js'))
-        .pipe(gulp.dest('./public/'));
+// Our JS task. It will Browserify our code and compile React JSX files.
+gulp.task('js', function () {
+    browserify(paths.JS_MAIN)
+        .transform(babelify, {presets: ["es2015", "react"]})
+        .bundle()
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest(paths.JS_BUILD));
 });
 
-// Compile Sass to CSS
-gulp.task('sass', function () {
-    var autoprefixerOptions = {
-        browsers: ['last 2 versions']
-    };
-
-    var filterOptions = '**/*.css';
-
-    var reloadOptions = {
-        stream: true
-    };
-
-    var sassOptions = {
-        includePaths: []
-    };
-
-    return gulp.src('assets/sass/**/*.scss')
-        .pipe(plumber(plumberOptions))
-        .pipe(sass(sassOptions))
-        .pipe(autoprefixer(autoprefixerOptions))
-        .pipe(gulp.dest('assets/css'))
-        .pipe(filter(filterOptions));
+// Rerun the task when a file changes
+gulp.task('watch', function() {
+  gulp.watch(paths.CSS_SRC, ['styles']);
+  gulp.watch(paths.JS_SRC, ['js']);
 });
 
-// Watch JS/JSX and Sass files
-gulp.task('watch', function () {
-    gulp.watch('views/**/*.{js,jsx}', ['concat']);
-    gulp.watch('views/**/*.scss', ['sass']);
-});
-
-gulp.task('watch', function () {
-    gulp.watch(path.ALL, ['transform', 'copy']);
-});
-
-gulp.task('build', ['sass', 'copy-js-vendor', 'concat']);
+// The default task (called when you run `gulp` from cli)
+gulp.task('default', ['watch', 'styles', 'js']);

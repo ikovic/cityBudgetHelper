@@ -38,3 +38,7 @@ jspm_packages
 
 # JetBrains stuff
 .idea
+
+# built assets
+public/css
+public/js
