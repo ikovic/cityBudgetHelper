@@ -36,6 +36,7 @@ module.exports = function (sequelize, DataTypes) {
 
     Organization.associate = function (models) {
         Organization.hasMany(models.Budget);
+        Organization.hasMany(models.User);
     };
 
     return Organization;

@@ -3,11 +3,15 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     config = require('./src/config/config'),
     models = require('./src/models'),
-    controllers = require('./src/controllers')(app);
+    controllers = require('./src/controllers')(app),
+    passport = require('./src/auth/passport')(models);
 
 // configure app to use bodyParser for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+// configure authentication
+app.use(passport.initialize());
 
 // wire in controllers
 app.use(controllers);
