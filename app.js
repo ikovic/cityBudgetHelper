@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 
 // wire in controllers
-app.use(controllers);
+app.use('/api/', passport.authenticate('jwt', { session: false}), controllers);
 
 // serve static files
 app.use(express.static('public'));
