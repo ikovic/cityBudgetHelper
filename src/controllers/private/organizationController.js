@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    models = require('../models');
+    models = require('../../models');
 
 /**
  * Organizations API
@@ -10,6 +10,7 @@ router.route('/organizations')
         models.Organization.findAll()
             .then(function (value) {
                 res.json(value);
+                return value;
             })
             .catch(function (error) {
                 console.log('Error with GET organization:', error);

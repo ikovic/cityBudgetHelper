@@ -3,7 +3,8 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     config = require('./src/config/config'),
     models = require('./src/models'),
-    controllers = require('./src/controllers')(app),
+    privateControllers = require('./src/controllers/private')(app),
+    publicControllers = require('./src/controllers/public')(app),
     passport = require('./src/auth/passport')(models);
 
 // configure app to use bodyParser for POST data
@@ -14,7 +15,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 
 // wire in controllers
-app.use('/api/', passport.authenticate('jwt', { session: false}), controllers);
+app.use('/api/', passport.authenticate('jwt', { session: false}), privateControllers);
+app.use('/', publicControllers);
 
 // serve static files
 app.use(express.static('public'));
