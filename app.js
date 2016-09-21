@@ -29,7 +29,7 @@ models.sequelize
         return models.sequelize.sync();
     })
     .then(function () {
-        app.listen(process.env.PORT || config.port, function () {
+        app.listen(process.env.PORT || config.app.port, function () {
             console.log('Listening on port 3000...');
         });
     })

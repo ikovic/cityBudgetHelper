@@ -1,10 +1,11 @@
 var passport = require('passport'),
     JwtStrategy = require('passport-jwt').Strategy,
-    ExtractJwt = require('passport-jwt').ExtractJwt;
+    ExtractJwt = require('passport-jwt').ExtractJwt,
+    config = require('../config/config');
 
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
-opts.secretOrKey = 'DO NOT USE IN PRODUCTION';
+opts.secretOrKey = config.jwt.secret;
 
 function configurePassportJwt(models) {
     passport.use(new JwtStrategy(opts, function (jwtPayload, done) {

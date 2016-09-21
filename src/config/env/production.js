@@ -4,14 +4,22 @@ const config = {
         database: 'budget_helper',
         username: 'root',
         password: 'root',
-        host: 'localhost',
-        port: 3306,
-        dialect: 'mysql',
-        pool: {
-            max: 5,
-            min: 0,
-            idle: 10000
+        options: {
+            host: 'localhost',
+            port: 3306,
+            dialect: 'mysql',
+            pool: {
+                max: 5,
+                min: 0,
+                idle: 10000
+            }
         }
+    },
+    jwt: {
+        secret: 'DO NOT USE IN PRODUCTION'
+    },
+    app: {
+        port: 3000
     }
 };
 

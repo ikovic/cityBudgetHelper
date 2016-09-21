@@ -15,7 +15,12 @@ const config = {
             }
         }
     },
-    port: 3000
+    jwt: {
+        secret: 'DO NOT USE IN PRODUCTION'
+    },
+    app: {
+        port: 3000
+    }
 };
 
 // export config

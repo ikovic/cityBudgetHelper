@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     jwt = require('jwt-simple'),
+    config = require('../../config/config'),
     User = require('../../models/user');
 
 router.route('/token')
@@ -13,7 +14,7 @@ router.route('/token')
 
 
             var payload = {id: 1};
-            var secret = 'DO NOT USE IN PRODUCTION';
+            var secret = config.jwt.secret;
             var token = jwt.encode(payload, secret);
 
             res.json(token);
