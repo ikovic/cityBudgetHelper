@@ -1,3 +1,5 @@
+var bcrypt = require('bcryptjs');
+
 module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define('User', {
         id: {
@@ -6,15 +8,35 @@ module.exports = function (sequelize, DataTypes) {
             primaryKey: true,
             autoIncrement: true
         },
-        username: {
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        lastName: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        password: {
             type: DataTypes.STRING,
             allowNull: true
         }
     }, {
-        tableName: 'user'
+        tableName: 'user',
+        instanceMethods: {
+            generateHash: function (password) {
+                return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+            },
+            validPassword: function (password) {
+                return bcrypt.compareSync(password, this.password);
+            }
+        }
     });
 
-    User.associate = function(models) {
+    User.associate = function (models) {
         User.belongsTo(models.Organization);
     };
 
