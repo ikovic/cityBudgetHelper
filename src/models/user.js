@@ -27,11 +27,19 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         tableName: 'user',
         instanceMethods: {
-            generateHash: function (password) {
-                return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+            generateHash: function (password, callback) {
+                bcrypt.genSalt(10, function (err, salt) {
+                    bcrypt.hash(password, salt, function (err, hash) {
+                        if (hash) {
+                            callback(hash);
+                        }
+                    });
+                });
             },
-            validPassword: function (password) {
-                return bcrypt.compareSync(password, this.password);
+            validPassword: function (password, callback) {
+                bcrypt.compare(password, this.password, function (err, res) {
+                    callback(res);
+                });
             }
         }
     });
