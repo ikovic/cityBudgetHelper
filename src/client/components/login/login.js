@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {withRouter} from 'react-router';
+import {Card, CardTitle, CardText, CardActions, Button, Textfield} from 'react-mdl'
 
 class UndecoratedLogin extends Component {
     constructor() {
@@ -21,11 +22,7 @@ class UndecoratedLogin extends Component {
 
     _login(e) {
         e.preventDefault();
-        var safeUsername = this.state.username.trim();
-        if (safeUsername.indexOf('@') > -1) {
-            safeUsername = safeUsername.split('@')[0];
-        }
-        console.log(safeUsername);
+        console.log(this.state.username);
     }
 
     _handleKeyPress(event) {
@@ -44,46 +41,25 @@ class UndecoratedLogin extends Component {
     render() {
 
         return (
-            <div className="login-wrapper">
-                <div className="form-wrapper">
-                    <form role="form" onSubmit={(e) => this._login(e)}>
-                        <div className="form-group">
-                            <div className="control-input">
-                                <input
-                                    type="email"
-                                    className="form-control mit-input"
-                                    id="inputUsername"
-                                    placeholder="Username"
-                                    value={this.state.username}
-                                    onChange={(e) => this._handleChange('username', e)}
-                                    onKeyPress={(e) => this._handleKeyPress(e)}
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="control-input">
-                                <input
-                                    type="password"
-                                    className="form-control mit-input"
-                                    id="inputPassword"
-                                    placeholder="Password"
-                                    value={this.state.password}
-                                    onChange={(e) => this._handleChange('password', e)}
-                                    onKeyPress={(e) => this._handleKeyPress(e)}
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <input
-                                value="Login"
-                                className="btn-login mit-button"
-                                type="submit"
-                            />
-                        </div>
-                    </form>
-                </div>
+            <div id="loginWrapper">
+                <Card shadow={0} style={{width: '320px', height: '300px', margin: 'auto'}}>
+                    <CardTitle style={{color: '#fff', background: '#3e4eb8 none repeat scroll 0 0'}}>Prijava</CardTitle>
+                    <CardText>
+                        <Textfield onChange={(e) => {this._handleChange('username', e)}}
+                                   label="Email..."
+                                   style={{width: '200px'}}/>
+                        <Textfield onChange={(e) => {this._handleChange('password', e)}}
+                                   label="Lozinka..."
+                                   type="password"
+                                   style={{width: '200px'}}/>
+                    </CardText>
+                    <CardActions border>
+                        <Button colored
+                                onClick={(e) => this._login(e)}>
+                            Kreni
+                        </Button>
+                    </CardActions>
+                </Card>
             </div>
         );
     }
