@@ -1,5 +1,6 @@
 var express = require('express'),
     app = express(),
+    path = require('path'),
     bodyParser = require('body-parser'),
     config = require('./src/config/config'),
     models = require('./src/models'),
@@ -20,6 +21,12 @@ app.use('/', publicControllers);
 
 // serve static files
 app.use(express.static('public'));
+
+// handle every other route with index.html, which will contain
+// a script tag to your application's JavaScript file(s).
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+});
 
 // synchronize MySQL on start
 models.sequelize
