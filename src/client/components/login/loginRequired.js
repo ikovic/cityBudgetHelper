@@ -20,6 +20,15 @@ class UndecoratedLoginRequired extends Component {
         }
     }
 
+    componentWillMount() {
+    //sessionStore.addChangeListener(this._onChange);
+
+    if (!this.state.loggedIn) {
+      //sessionActions.setLocation(this.props.location.pathname);
+      this.props.router.push('/login');
+    }
+  }
+
     render() {
         return (
             this.props.children
