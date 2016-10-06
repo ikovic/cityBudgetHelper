@@ -37,9 +37,7 @@ class UndecoratedLogin extends Component {
         this.setState(change);
     }
 
-
     render() {
-
         return (
             <div id="loginWrapper">
                 <Card shadow={0} style={{width: '320px', height: '300px', margin: 'auto'}}>
@@ -47,11 +45,11 @@ class UndecoratedLogin extends Component {
                     <CardText>
                         <Textfield onChange={(e) => {this._handleChange('username', e)}}
                                    label="Email..."
-                                   style={{width: '200px'}}/>
+                                   style={{width: '100%'}}/>
                         <Textfield onChange={(e) => {this._handleChange('password', e)}}
                                    label="Lozinka..."
                                    type="password"
-                                   style={{width: '200px'}}/>
+                                   style={{width: '100%'}}/>
                     </CardText>
                     <CardActions border>
                         <Button colored

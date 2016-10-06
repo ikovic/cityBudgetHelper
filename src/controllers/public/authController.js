@@ -10,18 +10,22 @@ router.route('/token')
             return res.sendStatus(400);
         } else {
             // get the email & password
-            models.User.findOne({
-                where: {
-                    email: req.body.email
-                }
-            })
+            models.User.findOne(
+                {
+                    attributes: ['firstName', 'lastName', 'email']
+                },
+                {
+                    where: {
+                        email: req.body.email
+                    }
+                })
                 .then(function (user) {
                     user.validPassword(req.body.password, function (isValid) {
                         if (isValid) {
                             var payload = {id: user.id};
                             var secret = config.jwt.secret;
                             var token = jwt.encode(payload, secret);
-                            res.json(token);
+                            res.json({user: user, token: token});
                         } else {
                             res.sendStatus(401);
                         }

@@ -39,7 +39,8 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "redux": "^3.6.0",
-    "sequelize": "^3.24.2"
+    "sequelize": "^3.24.2",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.14.0",

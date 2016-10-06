@@ -6,7 +6,8 @@ var express = require('express'),
     models = require('./src/models'),
     privateControllers = require('./src/controllers/private')(app),
     publicControllers = require('./src/controllers/public')(app),
-    passport = require('./src/auth/passport')(models);
+    passport = require('./src/auth/passport')(models),
+    bootstrap = require('./src/bootstrap/bootstrap')(models);
 
 // configure app to use bodyParser for POST data
 app.use(bodyParser.json());
@@ -16,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 
 // wire in controllers
-app.use('/api/', passport.authenticate('jwt', { session: false}), privateControllers);
+app.use('/api/', passport.authenticate('jwt', {session: false}), privateControllers);
 app.use('/', publicControllers);
 
 // serve static files
@@ -24,8 +25,8 @@ app.use(express.static('public'));
 
 // handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
-app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+app.get('*', function (request, response) {
+    response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 });
 
 // synchronize MySQL on start
@@ -36,9 +37,21 @@ models.sequelize
         return models.sequelize.sync();
     })
     .then(function () {
-        app.listen(process.env.PORT || config.app.port, function () {
-            console.log('Listening on port 3000...');
-        });
+        // bootstrap the data if required
+        if (config.bootstrap) {
+            console.log(bootstrap);
+            bootstrap.init().then(
+                app.listen(config.app.port, function () {
+                    console.log('Listening on port', config.app.port);
+                })
+            );
+        } else {
+            app.listen(config.app.port, function () {
+                console.log('Listening on port', config.app.port);
+            });
+        }
+
+
     })
     .catch(function (err) {
         console.log('Error!', err);
