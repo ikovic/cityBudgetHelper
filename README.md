@@ -12,7 +12,6 @@ This app will help you with connecting your budget with the subsequent orders an
 * [acl] - authorization for node.js
 * [jsreport] - reporting tool
 * [react-mdl] - MDL implemented with React components
-* Bootstrap
 * React
 * Redux
 
@@ -21,3 +20,6 @@ This app will help you with connecting your budget with the subsequent orders an
 [acl]: <https://www.npmjs.com/package/acl>
 [jsreport]: <https://www.npmjs.com/package/jsreport>
 [react-mdl]: <https://github.com/tleunen/react-mdl>
+
+### TODO
+Import bluebird as Promise to User model and then refactor the existing hashing methods as Promises.
