@@ -1,6 +1,17 @@
-var bootstrap = function (models) {
+var bootstrap = function (models, done) {
 
-    var init = function () {
+    // create a base user
+    var user = models.User.build({
+        email: 'test@mail.com',
+        firstName: 'Ivan',
+        lastName: 'Krivic'
+    });
+
+    // get a hashed password
+    models.User.generateHash('123456', function (hash) {
+        user.password = hash;
+
+        // create a base organization
         models.Organization.create({
             title: 'Organizacija',
             description: 'Opis organizacije',
@@ -10,27 +21,17 @@ var bootstrap = function (models) {
             taxpayer: true
         })
             .then(function (organization) {
-                var user = models.User.build({
-                    email: 'test@mail.com',
-                    firstName: 'Ivan',
-                    lastName: 'Krivic'
-                });
-
+                // associate the organization with the user
                 user.setOrganization(organization);
-
-                user.generateHash('123456', function (hash) {
-                    user.password = hash;
-                    user.save().then(function () {
-                        console.log('user', user, 'organization', organization);
-                        return organization;
-                    });
-                });
+                return user.save();
+            })
+            .then(function (user) {
+                done();
+            })
+            .catch(function (error) {
+                console.log(error);
             });
-    };
-
-    return {
-        init: init
-    }
+    });
 };
 
 module.exports = bootstrap;
