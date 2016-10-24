@@ -23,8 +23,7 @@ class UndecoratedLogin extends Component {
 
     _login(e) {
         e.preventDefault();
-        console.log(this.state.username);
-        post('localhost:3000/token', {
+        post('http://localhost:3000/token', {
             email: this.state.username,
             password: this.state.password
         }, (error, meta, body) => {
@@ -42,6 +41,12 @@ class UndecoratedLogin extends Component {
         let change = {};
         change[name] = e.target.value;
         this.setState(change);
+    }
+
+    mapStateToProps(state) {
+        return {
+          isLoggedIn: state.loggedIn
+        };
     }
 
     render() {

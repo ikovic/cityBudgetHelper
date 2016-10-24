@@ -5,6 +5,14 @@ export function get(url, callback) {
 }
 
 export function post(url, body, callback) {
-    fetchUrl(url, {method: 'POST', payload: body}, callback);
+    fetchUrl(url, {
+            method: 'POST',
+            payload: JSON.stringify(body),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        },
+        callback);
 }
 
