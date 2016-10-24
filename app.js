@@ -38,19 +38,20 @@ models.sequelize
     })
     .then(function () {
         // bootstrap the data if required
-        if (config.bootstrap) {
-            bootstrap(models, function () {
-                app.listen(config.app.port, function () {
-                    console.log('Listening on port', config.app.port);
-                })
-            });
-        } else {
-            app.listen(config.app.port, function () {
-                console.log('Listening on port', config.app.port);
-            });
-        }
-
-
+        /*if (config.bootstrap) {
+         bootstrap(models, function () {
+         app.listen(config.app.port, function () {
+         console.log('Listening on port', config.app.port);
+         })
+         });
+         } else {
+         app.listen(config.app.port, function () {
+         console.log('Listening on port', config.app.port);
+         });
+         }*/
+        app.listen(config.app.port, function () {
+            console.log('Listening on port', config.app.port);
+        });
     })
     .catch(function (err) {
         console.log('Error!', err);
