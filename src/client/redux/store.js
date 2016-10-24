@@ -1,4 +1,4 @@
 import {createStore, combineReducers} from 'redux';
-import sessionReducers from './reducers/sessionReducers';
+import sessionReducer from './reducers/sessionReducers';
 
-export default createStore(combineReducers(sessionReducers));
+export default createStore(combineReducers(sessionReducer));

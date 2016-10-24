@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {withRouter} from 'react-router';
 import {Card, CardTitle, CardText, CardActions, Button, Textfield} from 'react-mdl'
+import {post} from '../../util/fetch';
 
 class UndecoratedLogin extends Component {
     constructor() {
@@ -23,6 +24,12 @@ class UndecoratedLogin extends Component {
     _login(e) {
         e.preventDefault();
         console.log(this.state.username);
+        post('localhost:3000/token', {
+            email: this.state.username,
+            password: this.state.password
+        }, (error, meta, body) => {
+            console.log(error, meta, body);
+        })
     }
 
     _handleKeyPress(event) {
@@ -39,21 +46,22 @@ class UndecoratedLogin extends Component {
 
     render() {
         return (
-            <div id="loginWrapper">
-                <Card shadow={0} style={{width: '320px', height: '300px', margin: 'auto'}}>
-                    <CardTitle style={{color: '#fff', background: '#3e4eb8 none repeat scroll 0 0'}}>Prijava</CardTitle>
+            <div id="loginWrapper" >
+                <Card shadow={0} style={{width: '320px', height: '300px', margin: 'auto'}} >
+                    <CardTitle
+                        style={{color: '#fff', background: '#3e4eb8 none repeat scroll 0 0'}} >Prijava</CardTitle>
                     <CardText>
                         <Textfield onChange={(e) => {this._handleChange('username', e)}}
                                    label="Email..."
-                                   style={{width: '100%'}}/>
+                                   style={{width: '100%'}} />
                         <Textfield onChange={(e) => {this._handleChange('password', e)}}
                                    label="Lozinka..."
                                    type="password"
-                                   style={{width: '100%'}}/>
+                                   style={{width: '100%'}} />
                     </CardText>
-                    <CardActions border>
+                    <CardActions border >
                         <Button colored
-                                onClick={(e) => this._login(e)}>
+                                onClick={(e) => this._login(e)} >
                             Kreni
                         </Button>
                     </CardActions>
