@@ -19,14 +19,22 @@ class UndecoratedLogin extends Component {
         };
     }
 
+    componentDidMount() {
+        window.addEventListener('keypress', this._handleKeyPress, false);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keypress', this._handleKeyPress, false);
+    }
+
     _login(e) {
         e.preventDefault();
         /*post('http://localhost:3000/token', {
-            email: this.state.username,
-            password: this.state.password
-        }, (error, meta, body) => {
-            console.log(error, meta, body);
-        })*/
+         email: this.state.username,
+         password: this.state.password
+         }, (error, meta, body) => {
+         console.log(error, meta, body);
+         })*/
         this.props.dispatch(actions.login(this.state.username, this.state.password));
     }
 
