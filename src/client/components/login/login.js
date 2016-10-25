@@ -1,14 +1,15 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {Card, CardTitle, CardText, CardActions, Button, Textfield} from 'react-mdl'
 import {post} from '../../util/fetch';
+import actions from '../../redux/actions';
 
 class UndecoratedLogin extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this._login = this._login.bind(this);
-        this._onChange = this._onChange.bind(this);
         this._handleChange = this._handleChange.bind(this);
         this._handleKeyPress = this._handleKeyPress.bind(this);
 
@@ -18,17 +19,15 @@ class UndecoratedLogin extends Component {
         };
     }
 
-    _onChange() {
-    }
-
     _login(e) {
         e.preventDefault();
-        post('http://localhost:3000/token', {
+        /*post('http://localhost:3000/token', {
             email: this.state.username,
             password: this.state.password
         }, (error, meta, body) => {
             console.log(error, meta, body);
-        })
+        })*/
+        this.props.dispatch(actions.login(this.state.username, this.state.password));
     }
 
     _handleKeyPress(event) {
@@ -43,13 +42,8 @@ class UndecoratedLogin extends Component {
         this.setState(change);
     }
 
-    mapStateToProps(state) {
-        return {
-          isLoggedIn: state.loggedIn
-        };
-    }
-
     render() {
+        console.dir(this.props);
         return (
             <div id="loginWrapper" >
                 <Card shadow={0} style={{width: '320px', height: '300px', margin: 'auto'}} >
@@ -82,6 +76,12 @@ UndecoratedLogin.propTypes = {
     }).isRequired
 };
 
-var Login = withRouter(UndecoratedLogin);
+function mapStateToProps(state) {
+    return {
+        isLoggedIn: state.loggedIn
+    };
+}
+
+var Login = withRouter(connect(mapStateToProps)(UndecoratedLogin));
 
 export default Login;
