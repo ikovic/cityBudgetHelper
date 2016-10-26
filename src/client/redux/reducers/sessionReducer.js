@@ -3,7 +3,6 @@ import constants from '../constants';
 function sessionReducer(state = {}, action) {
     switch (action.type) {
         case constants.LOG_IN:
-            console.log('da da ');
             return Object.assign({}, state, {
                 loggedIn: true
             });

@@ -19,6 +19,13 @@ class UndecoratedLogin extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        if (nextProps.isLoggedIn) {
+            this.props.router.push('/');
+        }
+    }
+
     componentDidMount() {
         window.addEventListener('keypress', this._handleKeyPress, false);
     }
@@ -36,6 +43,7 @@ class UndecoratedLogin extends Component {
          console.log(error, meta, body);
          })*/
         this.props.dispatch(actions.login(this.state.username, this.state.password));
+        console.log('dispatch');
     }
 
     _handleKeyPress(event) {
@@ -51,7 +59,6 @@ class UndecoratedLogin extends Component {
     }
 
     render() {
-        console.dir(this.props);
         return (
             <div id="loginWrapper" >
                 <Card shadow={0} style={{width: '320px', height: '300px', margin: 'auto'}} >
