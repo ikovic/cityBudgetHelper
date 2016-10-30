@@ -42,8 +42,8 @@ class UndecoratedLogin extends Component {
          }, (error, meta, body) => {
          console.log(error, meta, body);
          })*/
-        this.props.dispatch(actions.login(this.state.username, this.state.password));
-        console.log('dispatch');
+        this.props.dispatch(actions.logIn(this.state.username, this.state.password));
+        this.props.router.push('/');
     }
 
     _handleKeyPress(event) {

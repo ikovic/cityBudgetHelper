@@ -1,7 +1,7 @@
 import constants from './constants';
 
 class Actions {
-    login(email, password) {
+    logIn(email, password) {
         return {
             type: constants.LOG_IN,
             data: {
