@@ -1,35 +1,30 @@
 import {Component, PropTypes} from 'react';
 import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
 
 class UndecoratedLoginRequired extends Component {
     constructor() {
         super();
-
         this._onChange = this._onChange.bind(this);
-        this.state = {
-            loggedIn: false
-        }
     }
 
     _onChange() {
-        var loggedIn = !this.state.loggedIn;
+        var loggedIn = !this.props.loggedIn;
         if (!loggedIn) {
             this.props.router.push('/login');
-        } else {
-            this.setState({loggedIn: !this.state.loggedIn});
         }
     }
 
     componentWillMount() {
-    //sessionStore.addChangeListener(this._onChange);
+        //sessionStore.addChangeListener(this._onChange);
 
-    if (!this.state.loggedIn) {
-      //sessionActions.setLocation(this.props.location.pathname);
-      this.props.router.push('/login');
+        if (!this.props.loggedIn) {
+            this.props.router.push('/login');
+        }
     }
-  }
 
     render() {
+        console.log(this.props);
         return (
             this.props.children
         );
@@ -44,6 +39,12 @@ UndecoratedLoginRequired.propTypes = {
     children: PropTypes.any
 };
 
-var LoginRequired = withRouter(UndecoratedLoginRequired);
+function mapStateToProps(state) {
+    return {
+        loggedIn: state.session.loggedIn
+    };
+}
+
+var LoginRequired = withRouter(connect(mapStateToProps)(UndecoratedLoginRequired));
 
 export default LoginRequired;

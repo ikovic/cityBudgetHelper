@@ -6,6 +6,7 @@ var express = require('express'),
 
 router.route('/token')
     .post(function (req, res) {
+        console.log(req.body);
         if (Object.keys(req.body).length === 0 && req.body.constructor === Object) {
             return res.sendStatus(400);
         } else {

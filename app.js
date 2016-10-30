@@ -7,7 +7,7 @@ var express = require('express'),
     privateControllers = require('./src/controllers/private')(app),
     publicControllers = require('./src/controllers/public')(app),
     passport = require('./src/auth/passport')(models),
-    bootstrap = require('./src/bootstrap/bootstrap')(models);
+    bootstrap = require('./src/bootstrap/bootstrap');
 
 // configure app to use bodyParser for POST data
 app.use(bodyParser.json());
@@ -38,20 +38,20 @@ models.sequelize
     })
     .then(function () {
         // bootstrap the data if required
-        if (config.bootstrap) {
-            console.log(bootstrap);
-            bootstrap.init().then(
-                app.listen(config.app.port, function () {
-                    console.log('Listening on port', config.app.port);
-                })
-            );
-        } else {
-            app.listen(config.app.port, function () {
-                console.log('Listening on port', config.app.port);
-            });
-        }
-
-
+        /*if (config.bootstrap) {
+         bootstrap(models, function () {
+         app.listen(config.app.port, function () {
+         console.log('Listening on port', config.app.port);
+         })
+         });
+         } else {
+         app.listen(config.app.port, function () {
+         console.log('Listening on port', config.app.port);
+         });
+         }*/
+        app.listen(config.app.port, function () {
+            console.log('Listening on port', config.app.port);
+        });
     })
     .catch(function (err) {
         console.log('Error!', err);

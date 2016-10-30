@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "start": "node app.js"
+    "start": "node app.js",
+    "debug": "node --debug app.js"
   },
   "engines": {
     "node": "4.4.7"
@@ -28,6 +29,7 @@
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "fetch": "^1.1.0",
     "jwt-simple": "^0.5.0",
     "mysql": "^2.11.1",
     "mysql2": "^1.0.0-rc.12",
