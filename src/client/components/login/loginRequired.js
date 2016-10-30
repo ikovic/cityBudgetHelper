@@ -41,7 +41,7 @@ UndecoratedLoginRequired.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        isLoggedIn: state.session.loggedIn
+        loggedIn: state.session.loggedIn
     };
 }
 
