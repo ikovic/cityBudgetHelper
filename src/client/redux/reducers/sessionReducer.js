@@ -6,12 +6,10 @@ function sessionReducer(state = {}, action) {
             return Object.assign({}, state, {
                 loggedIn: true
             });
-            break;
         case constants.LOG_OUT:
             return Object.assign({}, state, {
                 loggedIn: false
             });
-            break;
 
         default:
             return state;

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Drawer, List, ListItem, ListItemContent} from 'react-mdl';
 import actions from '../../../redux/actions';
@@ -26,6 +26,11 @@ class Sidebar extends Component {
     }
 
 }
+
+Sidebar.PropTypes = {
+    logOut: PropTypes.func.isRequired
+};
+
 
 function mapDispatchToProps(dispatch) {
     return ({
