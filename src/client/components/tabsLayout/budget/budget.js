@@ -42,7 +42,7 @@ export default class Budget extends Component {
                 >
                     <TableHeader name="position">Pozicija</TableHeader>
                     <TableHeader name="description">Opis</TableHeader>
-                    <TableHeader name="amount">Iznos</TableHeader>
+                    <TableHeader numeric name="amount">Iznos</TableHeader>
                 </DataTable>
             </section>
         );

@@ -1,6 +1,7 @@
 @import './components/tabsLayout/tabsLayout';
 @import './components/login/login';
-@import './components/tabsLayout/budget/budget';
+@import 'components/tabsLayout/budget/budget';
+@import 'components/tabsLayout/orders/orders';
 
 body {
   height: 100%;

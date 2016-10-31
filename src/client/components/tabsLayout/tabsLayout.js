@@ -1,6 +1,7 @@
 import React from 'react';
 import {Layout, Header, HeaderRow, HeaderTabs, Tab, Drawer, Content} from 'react-mdl';
 import Budget from './budget/budget';
+import Orders from './orders/orders';
 
 export default class TabsLayout extends React.Component {
 
@@ -13,7 +14,7 @@ export default class TabsLayout extends React.Component {
     handleTabChange(tabId) {
         switch (tabId) {
             case 0:
-                return tabId;
+                return <Orders/>;
             case 1:
                 return <Budget/>;
             case 2:
@@ -25,7 +26,7 @@ export default class TabsLayout extends React.Component {
 
     render() {
         return (
-            <div style={{height: '300px', position: 'relative'}}>
+            <div>
                 <Layout fixedHeader>
                     <Header>
                         <HeaderRow title="Distribucija troškova po stavci proračuna"/>
