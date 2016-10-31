@@ -6,7 +6,6 @@ import actions from '../../../redux/actions';
 class Sidebar extends Component {
 
     render() {
-        console.dir(this.props);
         return (
             <Drawer title="Postavke" >
                 <List>
