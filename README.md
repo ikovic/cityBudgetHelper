@@ -15,6 +15,22 @@ This app will help you with connecting your budget with the subsequent orders an
 * React
 * Redux
 
+### Development
+
+To run the application, make sure you have node.js and MySQL installed and then run the following commands:
+* install all the dependencies
+```sh
+$ npm install
+```
+* run the server
+```sh
+$ npm run start
+```
+* run Gulp in a separate terminal to compile front end assets
+```sh
+$ gulp
+```
+
 [sequelize]: <http://docs.sequelizejs.com/en/v3/>
 [passport]: <https://www.npmjs.com/package/passport>
 [acl]: <https://www.npmjs.com/package/acl>
