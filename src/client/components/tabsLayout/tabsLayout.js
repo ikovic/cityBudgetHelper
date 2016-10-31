@@ -26,7 +26,7 @@ export default class TabsLayout extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id="tabsLayout">
                 <Layout fixedHeader>
                     <Header>
                         <HeaderRow title="Distribucija troškova po stavci proračuna"/>
@@ -44,7 +44,7 @@ export default class TabsLayout extends React.Component {
                             <li>Organizacija</li>
                         </ul>
                     </Drawer>
-                    <Content>
+                    <Content id="appContent">
                         <div className="page-content">{this.handleTabChange(this.state.activeTab)}</div>
                     </Content>
                 </Layout>
