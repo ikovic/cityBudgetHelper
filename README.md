@@ -17,7 +17,11 @@ This app will help you with connecting your budget with the subsequent orders an
 
 ### Development
 
-To run the application, make sure you have node.js and MySQL installed and then run the following commands:
+To run the application, make sure you have node.js and MySQL installed and then do the following steps:
+
+* create a database called 'budget_helper'
+* create a user with credentials root/root 
+
 * install all the dependencies
 ```sh
 $ npm install
