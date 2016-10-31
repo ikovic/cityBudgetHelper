@@ -6,7 +6,8 @@
   "scripts": {
     "test": "test",
     "start": "node app.js",
-    "debug": "node --debug app.js"
+    "debug": "node --debug app.js",
+    "lint": "eslint './src/client/**/*.js' || exit 0"
   },
   "engines": {
     "node": "4.4.7"
@@ -50,6 +51,8 @@
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "del": "^2.2.2",
+    "eslint": "^3.8.0",
+    "eslint-plugin-react": "^6.4.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-sass": "^2.3.2",
