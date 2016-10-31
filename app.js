@@ -6,8 +6,7 @@ var express = require('express'),
     models = require('./src/models'),
     privateControllers = require('./src/controllers/private')(app),
     publicControllers = require('./src/controllers/public')(app),
-    passport = require('./src/auth/passport')(models),
-    bootstrap = require('./src/bootstrap/bootstrap');
+    passport = require('./src/auth/passport')(models);
 
 // configure app to use bodyParser for POST data
 app.use(bodyParser.json());
@@ -23,8 +22,7 @@ app.use('/', publicControllers);
 // serve static files
 app.use(express.static('public'));
 
-// handle every other route with index.html, which will contain
-// a script tag to your application's JavaScript file(s).
+// handle every other route with index.html
 app.get('*', function (request, response) {
     response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 });
@@ -37,18 +35,6 @@ models.sequelize
         return models.sequelize.sync();
     })
     .then(function () {
-        // bootstrap the data if required
-        /*if (config.bootstrap) {
-         bootstrap(models, function () {
-         app.listen(config.app.port, function () {
-         console.log('Listening on port', config.app.port);
-         })
-         });
-         } else {
-         app.listen(config.app.port, function () {
-         console.log('Listening on port', config.app.port);
-         });
-         }*/
         app.listen(config.app.port, function () {
             console.log('Listening on port', config.app.port);
         });
