@@ -10,6 +10,12 @@ class UndecoratedLoginRequired extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (!nextProps.loggedIn) {
+            this.props.router.push('/login');
+        }
+    }
+
     render() {
         return (
             this.props.children

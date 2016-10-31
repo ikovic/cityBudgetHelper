@@ -1,6 +1,7 @@
 import constants from './constants';
 
 class Actions {
+
     logIn(email, password) {
         return {
             type: constants.LOG_IN,
@@ -8,6 +9,13 @@ class Actions {
                 email,
                 password
             }
+        }
+    }
+
+    logOut() {
+        return {
+            type: constants.LOG_OUT,
+            data: null
         }
     }
 }
