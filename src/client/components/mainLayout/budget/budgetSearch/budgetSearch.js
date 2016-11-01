@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Card, CardActions, Textfield} from 'react-mdl';
+import {Card, CardText, CardTitle, Textfield} from 'react-mdl';
 
 export default class BudgetSearch extends Component {
 
@@ -7,16 +7,16 @@ export default class BudgetSearch extends Component {
         return (
             <div id="budgetSearchWrapper">
                 <Card shadow={0} style={{width: '512px', margin: 'auto', minHeight: '50px'}}>
-                    <CardActions border>
+                    <CardTitle>Pretraga</CardTitle>
+                    <CardText>
                         <Textfield
-                            onChange={() => {
-                            }}
+                            onChange={() => {}}
                             id="searchBudgetItems"
-                            label="Pretraga po poziciji"
+                            label="Pozicija"
                             floatingLabel
                             style={{width: '100%'}}
                         />
-                    </CardActions>
+                    </CardText>
                 </Card>
             </div>
         );

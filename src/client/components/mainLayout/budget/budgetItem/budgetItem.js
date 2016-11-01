@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {Card, CardTitle, CardText, CardActions, Button, CardMenu, IconButton} from 'react-mdl';
+import {Card, CardTitle, CardText, CardActions, Button, CardMenu, IconButton, Textfield} from 'react-mdl';
 
 export default class BudgetItem extends Component {
 
@@ -7,16 +7,38 @@ export default class BudgetItem extends Component {
         return (
             <div id="budgetItemWrapper">
                 <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
-                    <CardTitle style={{color: '#fff', height: '176px'}}>Welcome</CardTitle>
+                    <CardTitle>Stavka proračuna</CardTitle>
                     <CardText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
+                        <Textfield
+                            onChange={() => {
+                            }}
+                            label="Pozicija"
+                            floatingLabel
+                            style={{width: '100%'}}
+                        />
+                        <Textfield
+                            onChange={() => {
+                            }}
+                            label="Opis"
+                            floatingLabel
+                            rows={2}
+                            style={{width: '100%'}}
+                        />
+                        <Textfield
+                            onChange={() => {
+                            }}
+                            pattern="-?[0-9]*(\.[0-9]+)?"
+                            error="Unesite ispravan broj!"
+                            label="Iznos"
+                            floatingLabel
+                            style={{width: '100%'}}
+                        />
                     </CardText>
                     <CardActions border>
-                        <Button colored>Get Started</Button>
+                        <Button colored>OK</Button>
                     </CardActions>
-                    <CardMenu style={{color: '#fff'}}>
-                        <IconButton name="share"/>
+                    <CardMenu >
+                        <IconButton name="mode_edit"/>
                     </CardMenu>
                 </Card>
             </div>
