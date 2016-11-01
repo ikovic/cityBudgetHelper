@@ -1,23 +1,22 @@
 import React, {Component, PropTypes} from 'react';
-import {Card, CardTitle, CardText, CardActions, Button, CardMenu, IconButton} from 'react-mdl';
+import {Card, CardActions, Textfield} from 'react-mdl';
 
 export default class BudgetSearch extends Component {
 
     render() {
         return (
             <div id="budgetSearchWrapper">
-                <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
-                    <CardTitle style={{color: '#fff', height: '176px'}}>Welcome</CardTitle>
-                    <CardText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris sagittis pellentesque lacus eleifend lacinia...
-                    </CardText>
+                <Card shadow={0} style={{width: '512px', margin: 'auto', minHeight: '50px'}}>
                     <CardActions border>
-                        <Button colored>Get Started</Button>
+                        <Textfield
+                            onChange={() => {
+                            }}
+                            id="searchBudgetItems"
+                            label="Pretraga po poziciji"
+                            floatingLabel
+                            style={{width: '100%'}}
+                        />
                     </CardActions>
-                    <CardMenu style={{color: '#fff'}}>
-                        <IconButton name="share"/>
-                    </CardMenu>
                 </Card>
             </div>
         );
