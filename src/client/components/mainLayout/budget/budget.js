@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {DataTable, TableHeader, Grid, Cell} from 'react-mdl';
+import BudgetSearch from './budgetSearch/budgetSearch';
+import BudgetItem from './budgetItem/budgetItem';
 
 export default class Budget extends Component {
 
@@ -104,8 +106,9 @@ export default class Budget extends Component {
                             <TableHeader numeric name="amount">Iznos</TableHeader>
                         </DataTable>
                     </Cell>
-                    <Cell col={4}>
-                        <h1>SOME OTHER STUFF</h1>
+                    <Cell id="budgetTools" col={4}>
+                        <BudgetSearch/>
+                        <BudgetItem/>
                     </Cell>
                 </Grid>
             </section>
