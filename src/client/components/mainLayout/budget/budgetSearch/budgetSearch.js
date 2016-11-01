@@ -6,7 +6,7 @@ export default class BudgetSearch extends Component {
     render() {
         return (
             <div id="budgetSearchWrapper">
-                <Card shadow={0} style={{width: '512px', margin: 'auto', minHeight: '50px'}}>
+                <Card shadow={0} style={{width: '100%', margin: 'auto', minHeight: '50px'}}>
                     <CardTitle>Pretraga</CardTitle>
                     <CardText>
                         <Textfield

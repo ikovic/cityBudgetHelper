@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {DataTable, TableHeader, Grid, Cell} from 'react-mdl';
+import {DataTable, TableHeader, Grid, Cell, FABButton, Icon} from 'react-mdl';
 import BudgetSearch from './budgetSearch/budgetSearch';
 import BudgetItem from './budgetItem/budgetItem';
 
@@ -109,6 +109,11 @@ export default class Budget extends Component {
                     <Cell id="budgetTools" col={4}>
                         <BudgetSearch/>
                         <BudgetItem/>
+                        <div className="actionWrapper">
+                            <FABButton colored ripple>
+                                <Icon name="add"/>
+                            </FABButton>
+                        </div>
                     </Cell>
                 </Grid>
             </section>

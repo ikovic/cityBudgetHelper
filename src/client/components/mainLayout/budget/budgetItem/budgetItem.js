@@ -6,7 +6,7 @@ export default class BudgetItem extends Component {
     render() {
         return (
             <div id="budgetItemWrapper">
-                <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
+                <Card shadow={0} style={{width: '100%', margin: 'auto'}}>
                     <CardTitle>Stavka proračuna</CardTitle>
                     <CardText>
                         <Textfield
