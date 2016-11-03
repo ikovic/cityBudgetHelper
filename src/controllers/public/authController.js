@@ -6,14 +6,13 @@ var express = require('express'),
 
 router.route('/token')
     .post(function (req, res) {
-        console.log(req.body);
         if (Object.keys(req.body).length === 0 && req.body.constructor === Object) {
             return res.sendStatus(400);
         } else {
             // get the email & password
             models.User.findOne(
                 {
-                    attributes: ['firstName', 'lastName', 'email']
+                    attributes: ['firstName', 'lastName', 'email', 'hashedPassword']
                 },
                 {
                     where: {
@@ -21,7 +20,7 @@ router.route('/token')
                     }
                 })
                 .then(function (user) {
-                    user.validPassword(req.body.password, function (isValid) {
+                    models.User.validPassword(req.body.password, user.hashedPassword, function (isValid) {
                         if (isValid) {
                             var payload = {id: user.id};
                             var secret = config.jwt.secret;

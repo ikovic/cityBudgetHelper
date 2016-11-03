@@ -14,7 +14,7 @@ class UndecoratedLogin extends Component {
         this._handleKeyPress = this._handleKeyPress.bind(this);
 
         this.state = {
-            username: '',
+            email: '',
             password: ''
         };
     }
@@ -36,14 +36,16 @@ class UndecoratedLogin extends Component {
 
     _login(e) {
         e.preventDefault();
-        /*post('http://localhost:3000/token', {
-         email: this.state.username,
-         password: this.state.password
-         }, (error, meta, body) => {
-         console.log(error, meta, body);
-         })*/
-        this.props.dispatch(actions.logIn(this.state.username, this.state.password));
-        this.props.router.push('/');
+        post('http://localhost:3000/token', {
+            email: this.state.email,
+            password: this.state.password
+        }, (error, meta, body) => {
+            console.log(error, meta, body);
+            if (!error) {
+                this.props.dispatch(actions.logIn(this.state.email, this.state.password));
+                this.props.router.push('/');
+            }
+        });
     }
 
     _handleKeyPress(event) {
@@ -65,7 +67,7 @@ class UndecoratedLogin extends Component {
                     <CardTitle
                         style={{color: '#fff', background: '#3e4eb8 none repeat scroll 0 0'}} >Prijava</CardTitle>
                     <CardText>
-                        <Textfield onChange={(e) => {this._handleChange('username', e)}}
+                        <Textfield onChange={(e) => {this._handleChange('email', e)}}
                                    label="Email..."
                                    style={{width: '100%'}} />
                         <Textfield onChange={(e) => {this._handleChange('password', e)}}

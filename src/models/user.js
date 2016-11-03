@@ -37,8 +37,8 @@ module.exports = function (sequelize, DataTypes) {
                     });
                 });
             },
-            validPassword: function (password, callback) {
-                bcrypt.compare(password, this.password, function (err, res) {
+            validPassword: function (password, hashedPassword, callback) {
+                bcrypt.compare(password, hashedPassword, function (err, res) {
                     callback(res);
                 });
             }
