@@ -7,7 +7,8 @@
     "test": "test",
     "start": "node app.js",
     "debug": "node --debug app.js",
-    "lint": "eslint './src/client/**/*.js' || exit 0"
+    "lint": "eslint './src/client/**/*.js' || exit 0",
+    "bootstrap": "node app.js bootstrap"
   },
   "engines": {
     "node": "4.4.7"

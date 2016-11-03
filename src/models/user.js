@@ -20,18 +20,19 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
-        password: {
+        hashedPassword: {
             type: DataTypes.STRING,
             allowNull: true
         }
     }, {
         tableName: 'user',
         classMethods: {
-            generateHash: function (password, callback) {
+            setPassword: function (user, password, done) {
                 bcrypt.genSalt(10, function (err, salt) {
                     bcrypt.hash(password, salt, function (err, hash) {
                         if (hash) {
-                            callback(hash);
+                            user.hashedPassword = hash;
+                            done(user);
                         }
                     });
                 });
