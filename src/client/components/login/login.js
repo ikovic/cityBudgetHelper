@@ -40,11 +40,11 @@ class UndecoratedLogin extends Component {
             email: this.state.email,
             password: this.state.password
         }, (error, meta, body) => {
-            console.log(error, meta, body);
-            if (!error) {
+            var resObj = JSON.parse(body.toString());
+            if (!error && meta.status == 200) {
                 this.props.dispatch(actions.logIn(this.state.email, this.state.password));
-                this.props.router.push('/');
             }
+            this.props.router.push('/');
         });
     }
 

@@ -25,7 +25,11 @@ router.route('/token')
                             var payload = {id: user.id};
                             var secret = config.jwt.secret;
                             var token = jwt.encode(payload, secret);
-                            res.json({user: user, token: token});
+                            var ret = {
+                                user: user.dataValues,
+                                token
+                            };
+                            res.json(ret);
                         } else {
                             res.sendStatus(401);
                         }
