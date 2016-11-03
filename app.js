@@ -7,7 +7,8 @@ var express = require('express'),
     privateControllers = require('./src/controllers/private')(app),
     publicControllers = require('./src/controllers/public')(app),
     passport = require('./src/auth/passport')(models),
-    args = process.argv.slice(2);
+    args = process.argv.slice(2),
+    bootstrap = require('./src/util/bootstrap.js').bootstrap;
 
 // configure app to use bodyParser for POST data
 app.use(bodyParser.json());
@@ -37,7 +38,7 @@ models.sequelize
     })
     .then(function () {
         if (args[0] == 'bootstrap') {
-          console.log('Boobs! Also add users here');
+          console.log(bootstrap());
         } else {
           app.listen(config.app.port, function () {
             console.log('Listening on port', config.app.port);
