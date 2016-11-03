@@ -1,22 +1,22 @@
-{   "title": "testni org",
-    "description": "Neki random opis",
-    "OIB": 1234567895,
-    "IBAN": 35353543,
-    "address": "Boobsova",
-    "taxpayer": false,
-    "users":
-  [
+{
+  "title": "testni org",
+  "description": "Neki random opis",
+  "OIB": 1234567895,
+  "IBAN": 35353543,
+  "address": "Boobsova",
+  "taxpayer": false,
+  "users": [
     {
-      "email" : "markymark@example.com",
-      "firstName" : "Marky",
-      "lastName" : "Mark",
-      "password" : "1234"
+      "email": "markymark@example.com",
+      "firstName": "Marky",
+      "lastName": "Mark",
+      "password": "1234"
     },
     {
-      "email" : "antyant@example.com",
-      "firstName" : "Anty",
-      "lastName" : "Ant",
-      "password" : "5678"
+      "email": "antyant@example.com",
+      "firstName": "Anty",
+      "lastName": "Ant",
+      "password": "5678"
     }
   ]
 }
