@@ -12,9 +12,6 @@ router.route('/token')
             // get the email & password
             models.User.findOne(
                 {
-                    attributes: ['firstName', 'lastName', 'email', 'hashedPassword']
-                },
-                {
                     where: {
                         email: req.body.email
                     }
@@ -25,11 +22,31 @@ router.route('/token')
                             var payload = {id: user.id};
                             var secret = config.jwt.secret;
                             var token = jwt.encode(payload, secret);
-                            var ret = {
-                                user: user.dataValues,
-                                token
-                            };
-                            res.json(ret);
+                            user.getOrganization().then(function (organization) {
+                                var userRet = {
+                                    id: user.id,
+                                    email: user.email,
+                                    firstName: user.firstName,
+                                    lastName: user.lastName
+                                };
+                                var orgRet = {
+                                    id: organization.id,
+                                    title: organization.title,
+                                    description: organization.description,
+                                    OIB: organization.OIB,
+                                    IBAN: organization.IBAN,
+                                    address: organization.address,
+                                    taxpayer: organization.taxpayer
+                                };
+
+                                var ret = {
+                                    user: userRet,
+                                    organization: orgRet,
+                                    token
+                                };
+                                res.json(ret);
+                            });
+
                         } else {
                             res.sendStatus(401);
                         }

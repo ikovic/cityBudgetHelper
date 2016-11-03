@@ -41,6 +41,7 @@ class UndecoratedLogin extends Component {
             password: this.state.password
         }, (error, meta, body) => {
             var resObj = JSON.parse(body.toString());
+            console.dir(resObj);
             if (!error && meta.status == 200) {
                 this.props.dispatch(actions.logIn(this.state.email, this.state.password));
             }
