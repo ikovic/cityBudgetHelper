@@ -38,7 +38,8 @@ models.sequelize
     })
     .then(function () {
         if (args[0] == 'bootstrap') {
-          console.log(bootstrap());
+          //bootstrap(models);
+          bootstrap(models);
         } else {
           app.listen(config.app.port, function () {
             console.log('Listening on port', config.app.port);
