@@ -2,12 +2,12 @@ import constants from './constants';
 
 class Actions {
 
-    logIn(email, password) {
+    logIn(user, token) {
         return {
             type: constants.LOG_IN,
             data: {
-                email,
-                password
+                user,
+                token
             }
         }
     }
