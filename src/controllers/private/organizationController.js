@@ -18,4 +18,17 @@ router.route('/organizations')
             });
     });
 
+    router.route('/organizations/:org_id')
+        .get(function (req, res) {
+            models.Organization.findById(req.params.org_id)
+                .then(function (value) {
+                    res.json(value);
+                    return value;
+                })
+                .catch(function (error) {
+                    console.log('Error with GET organization:', error);
+                    res.json(error);
+                });
+        });
+
 module.exports = router;

@@ -16,5 +16,7 @@ router.route('/budgets')
                 res.json(error);
             });
     });
-
+// budget / id stuff
+// add filtering on /budgets route by organization. see 'rest api filtering express'
+// Postman - set header Authorization header / jwt from tokena
 module.exports = router;
