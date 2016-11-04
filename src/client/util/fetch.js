@@ -11,6 +11,7 @@ function getHeaders() {
     if (token) {
         headers['Authorization'] = 'JWT ' + token;
     }
+    return headers;
 }
 
 export function get(url, callback) {
