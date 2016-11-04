@@ -7,8 +7,30 @@ var express = require('express'),
  */
 router.route('/budgets')
     .get(function (req, res) {
-      if (!req.query.org_id){
-        models.Budget.findAll()
+        if (!req.query.org_id) {
+            models.Budget.findAll()
+                .then(function (value) {
+                    res.json(value);
+                })
+                .catch(function (error) {
+                    console.log('Error with GET budget:', error);
+                    res.json(error);
+                });
+        } else {
+            models.Budget.findAll({where: {OrganizationId: req.query.org_id}})
+                .then(function (value) {
+                    res.json(value);
+                })
+                .catch(function (error) {
+                    console.log('Error with GET budget:', error);
+                    res.json(error);
+                });
+        }
+    });
+
+router.route('/budgets/:budgets_id')
+    .get(function (req, res) {
+        models.Budget.findById(req.params.budgets_id)
             .then(function (value) {
                 res.json(value);
             })
@@ -16,29 +38,6 @@ router.route('/budgets')
                 console.log('Error with GET budget:', error);
                 res.json(error);
             });
-          } else {
-            models.Budget.findAll({ where: {OrganizationId: req.query.org_id}})
-                .then(function (value) {
-                    res.json(value);
-                })
-                .catch(function (error) {
-                    console.log('Error with GET budget:', error);
-                    res.json(error);
-                });
-          }
     });
 
-    router.route('/budgets/:budgets_id')
-        .get(function (req, res) {
-            models.Budget.findById(req.params.budgets_id)
-                .then(function (value) {
-                    res.json(value);
-                })
-                .catch(function (error) {
-                    console.log('Error with GET budget:', error);
-                    res.json(error);
-                });
-        });
-// add filtering on /budgets route by organization. see 'rest api filtering express'
-// Postman - set header Authorization header / jwt from tokena
 module.exports = router;
