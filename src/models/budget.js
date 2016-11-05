@@ -9,6 +9,16 @@ module.exports = function (sequelize, DataTypes) {
         year: {
             type: DataTypes.DATE,
             allowNull: true
+        },
+        default: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            defaultValue: 'Proračun'
         }
     }, {
         tableName: 'budget'

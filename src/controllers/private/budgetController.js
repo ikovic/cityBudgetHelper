@@ -7,7 +7,7 @@ var express = require('express'),
  */
 router.route('/budgets')
     .get(function (req, res) {
-        if (!req.query.org_id) {
+        if (!req.query.orgId) {
             models.Budget.findAll()
                 .then(function (value) {
                     res.json(value);
@@ -17,7 +17,7 @@ router.route('/budgets')
                     res.json(error);
                 });
         } else {
-            models.Budget.findAll({where: {OrganizationId: req.query.org_id}})
+            models.Budget.findAll({where: {OrganizationId: req.query.orgId}})
                 .then(function (value) {
                     res.json(value);
                 })

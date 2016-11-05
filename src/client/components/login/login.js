@@ -40,9 +40,8 @@ class UndecoratedLogin extends Component {
             email: this.state.email,
             password: this.state.password
         }, (error, meta, body) => {
-            var resObj = JSON.parse(body.toString());
-            //console.dir(resObj);
             if (!error && meta.status == 200) {
+                var resObj = JSON.parse(body.toString());
                 this.props.dispatch(actions.logIn(resObj.user, resObj.token));
             }
             this.props.router.push('/');
@@ -69,10 +68,12 @@ class UndecoratedLogin extends Component {
                         style={{color: '#fff', background: '#3e4eb8 none repeat scroll 0 0'}} >Prijava</CardTitle>
                     <CardText>
                         <Textfield onChange={(e) => {this._handleChange('email', e)}}
-                                   label="Email..."
+                                   label="Email"
+                                   floatingLabel
                                    style={{width: '100%'}} />
                         <Textfield onChange={(e) => {this._handleChange('password', e)}}
-                                   label="Lozinka..."
+                                   label="Lozinka"
+                                   floatingLabel
                                    type="password"
                                    style={{width: '100%'}} />
                     </CardText>

@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {DataTable, TableHeader, Grid, Cell, FABButton, Icon} from 'react-mdl';
+import {get} from '../../../util/fetch';
 import BudgetSearch from './budgetSearch/budgetSearch';
 import BudgetItem from './budgetItem/budgetItem';
 
@@ -15,6 +16,12 @@ export default class Budget extends Component {
     componentDidMount() {
         this.setTableHeight();
         window.addEventListener('resize', this.setTableHeight);
+        get('http://localhost:3000/api/budgets', (error, meta, body) => {
+            if (!error && meta.status == 200) {
+                var resObj = JSON.parse(body.toString());
+
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -29,74 +36,7 @@ export default class Budget extends Component {
                         <DataTable id="budgetTable"
                                    shadow={0}
                                    rows={[
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
-                                       {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
-                                       {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35},
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
-                                       {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
-                                       {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35},
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
-                                       {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
-                                       {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35},
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
-                                       {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
-                                       {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35},
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
-                                       {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
-                                       {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35},
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
-                                       {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
-                                       {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35},
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
-                                       {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
-                                       {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35},
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
-                                       {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
-                                       {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35},
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
-                                       {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
-                                       {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35},
-                                       {
-                                           position: 'Acrylic (Transparent)',
-                                           description: 'Boja za cestu',
-                                           amount: 2.90
-                                       },
+                                       {position: 'Acrylic (Transparent)', description: 'Boja za cestu', amount: 2.90},
                                        {position: 'Plywood (Birch)', description: 'Drvo za potpalu', amount: 1.25},
                                        {position: 'Laminate (Gold on Blue)', description: 'Laminat', amount: 2.35}
                                    ]}
