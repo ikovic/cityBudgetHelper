@@ -3,11 +3,7 @@ import {connect} from 'react-redux';
 import {Header, HeaderRow, HeaderTabs, Tab} from 'react-mdl';
 
 class TabsHeader extends Component {
-
     render() {
-
-        console.dir(this.props);
-
         return (
             <Header >
                 <HeaderRow title="Distribucija troškova po stavci proračuna">
@@ -23,12 +19,12 @@ class TabsHeader extends Component {
             </Header>
         );
     }
-
 }
 
 TabsHeader.propTypes = {
     activeTab: PropTypes.number.isRequired,
-    changeTab: PropTypes.func.isRequired
+    changeTab: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
