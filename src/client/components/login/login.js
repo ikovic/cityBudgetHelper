@@ -43,6 +43,7 @@ class UndecoratedLogin extends Component {
             if (!error && meta.status == 200) {
                 var resObj = JSON.parse(body.toString());
                 this.props.dispatch(actions.logIn(resObj.user, resObj.token));
+                this.props.dispatch(actions.loadOrganization(resObj.organization))
             }
             this.props.router.push('/');
         });
@@ -62,24 +63,28 @@ class UndecoratedLogin extends Component {
 
     render() {
         return (
-            <div id="loginWrapper" >
-                <Card shadow={0} style={{width: '320px', height: '300px', margin: 'auto'}} >
+            <div id="loginWrapper">
+                <Card shadow={0} style={{width: '320px', height: '300px', margin: 'auto'}}>
                     <CardTitle
-                        style={{color: '#fff', background: '#3e4eb8 none repeat scroll 0 0'}} >Prijava</CardTitle>
+                        style={{color: '#fff', background: '#3e4eb8 none repeat scroll 0 0'}}>Prijava</CardTitle>
                     <CardText>
-                        <Textfield onChange={(e) => {this._handleChange('email', e)}}
+                        <Textfield onChange={(e) => {
+                            this._handleChange('email', e)
+                        }}
                                    label="Email"
                                    floatingLabel
-                                   style={{width: '100%'}} />
-                        <Textfield onChange={(e) => {this._handleChange('password', e)}}
+                                   style={{width: '100%'}}/>
+                        <Textfield onChange={(e) => {
+                            this._handleChange('password', e)
+                        }}
                                    label="Lozinka"
                                    floatingLabel
                                    type="password"
-                                   style={{width: '100%'}} />
+                                   style={{width: '100%'}}/>
                     </CardText>
-                    <CardActions border >
+                    <CardActions border>
                         <Button colored
-                                onClick={(e) => this._login(e)} >
+                                onClick={(e) => this._login(e)}>
                             Kreni
                         </Button>
                     </CardActions>

@@ -18,6 +18,15 @@ class Actions {
             data: null
         }
     }
+
+    loadOrganization(organization) {
+        return {
+            type: constants.LOAD_ORGANIZATION,
+            data: {
+                organization
+            }
+        }
+    }
 }
 
 const actions = new Actions();
