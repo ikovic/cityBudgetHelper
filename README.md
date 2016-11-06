@@ -40,6 +40,3 @@ $ gulp
 [acl]: <https://www.npmjs.com/package/acl>
 [jsreport]: <https://www.npmjs.com/package/jsreport>
 [react-mdl]: <https://github.com/tleunen/react-mdl>
-
-### TODO
-Import bluebird as Promise to User model and then refactor the existing hashing methods as Promises.
