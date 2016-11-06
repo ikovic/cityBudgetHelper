@@ -1,14 +1,16 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import {Header, HeaderRow, HeaderTabs, Tab} from 'react-mdl';
 
-export default class TabsHeader extends Component {
-
+class TabsHeader extends Component {
     render() {
         return (
             <Header >
-                <HeaderRow title="Distribucija troškova po stavci proračuna" />
+                <HeaderRow title="Distribucija troškova po stavci proračuna">
+                    {this.props.user.firstName + " " + this.props.user.lastName}
+                </HeaderRow>
                 <HeaderTabs ripple activeTab={this.props.activeTab}
-                            onChange={(tabId) => this.props.changeTab(tabId)} >
+                            onChange={(tabId) => this.props.changeTab(tabId)}>
                     <Tab>Narudžbenice</Tab>
                     <Tab>Proračun</Tab>
                     <Tab>Dobavljači</Tab>
@@ -17,10 +19,18 @@ export default class TabsHeader extends Component {
             </Header>
         );
     }
-
 }
 
 TabsHeader.propTypes = {
     activeTab: PropTypes.number.isRequired,
-    changeTab: PropTypes.func.isRequired
+    changeTab: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
 };
+
+function mapStateToProps(state) {
+    return {
+        user: state.session.user
+    };
+}
+
+export default connect(mapStateToProps)(TabsHeader);

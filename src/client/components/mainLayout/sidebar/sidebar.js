@@ -16,6 +16,9 @@ class Sidebar extends Component {
                         <ListItemContent icon="people" >Organizacija</ListItemContent>
                     </ListItem>
                     <ListItem>
+                        <ListItemContent icon="account_balance" >Proračuni</ListItemContent>
+                    </ListItem>
+                    <ListItem>
                         <ListItemContent icon="power_settings_new" onClick={() => this.props.logOut()} >
                             Odjava
                         </ListItemContent>
