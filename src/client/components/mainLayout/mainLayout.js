@@ -37,6 +37,7 @@ export default class MainLayout extends React.Component {
     }
 
     // TODO http://stackoverflow.com/questions/35623656/how-can-i-display-a-modal-dialog-in-redux-that-performs-asynchronous-actions/35641680#35641680
+    // <BudgetDialog/>
     componentDidMount() {
         // for the dialog example, we have to register the dialogs window
         const dialogs = document.querySelector("dialog"); dialogs && dialogPolyfill.registerDialog(dialogs);
@@ -45,7 +46,6 @@ export default class MainLayout extends React.Component {
     render() {
         return (
             <div id="tabsLayout">
-                <BudgetDialog/>
                 <Layout fixedHeader>
                     <Header activeTab={this.state.activeTab} changeTab={this.handleTabChange}/>
                     <Sidebar />
