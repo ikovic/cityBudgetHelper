@@ -3,6 +3,9 @@
   #tableWrapper {
     height: 500px;
     overflow: auto;
+    padding-left: 3px;
+    padding-right: 6px;
+    padding-top: 1px;
   }
 
   #budgetTable {
@@ -10,6 +13,7 @@
   }
 
   #budgetTools {
+    padding-top: 1px;
     div.actionWrapper {
       width: 100%;
       text-align: right;

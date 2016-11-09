@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Grid, Cell, FABButton, Icon} from 'react-mdl';
+import {Grid, Cell, Card, CardTitle, CardText, FABButton, Icon} from 'react-mdl';
 import {get} from '../../../util/fetch';
 import actions from '../../../redux/actions';
 import BudgetTable from './budgetTable/budgetTable';
@@ -34,21 +34,26 @@ class Budget extends Component {
 
     render() {
         return (
-            <section id="budgetSection">
+            <section id="budgetSection" >
                 <Grid >
-                    <Cell id="tableWrapper" col={8}>
-                        {this.props.budget ?
-                            <BudgetTable budget={this.props.budget}/>
-                            :
-                            <h3>Polazni proračun nije postavljen</h3>
-                        }
+                    <Cell id="tableWrapper" col={8} >
+                        <Card shadow={0} style={{width: '100%', margin: 'auto', minHeight: '50px'}} >
+                            <CardTitle>Proračun</CardTitle>
+                            <CardText>
+                                {this.props.budget ?
+                                    <BudgetTable budget={this.props.budget} />
+                                    :
+                                    <h3>Polazni proračun nije postavljen</h3>
+                                }
+                            </CardText>
+                        </Card>
                     </Cell>
-                    <Cell id="budgetTools" col={4}>
+                    <Cell id="budgetTools" col={4} >
                         <BudgetSearch/>
                         <BudgetItem/>
-                        <div className="actionWrapper">
-                            <FABButton colored ripple>
-                                <Icon name="add"/>
+                        <div className="actionWrapper" >
+                            <FABButton colored ripple >
+                                <Icon name="add" />
                             </FABButton>
                         </div>
                     </Cell>
