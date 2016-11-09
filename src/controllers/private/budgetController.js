@@ -1,13 +1,24 @@
 var express = require('express'),
     router = express.Router(),
-    models = require('../../models');
-
+    models = require('../../models'),
+    filterHelper = require('../../util/filterHelper.js'),
+    budgetFilters = [{
+      urlName: 'orgId',
+      queryName: 'OrganizationId',
+      type: filterHelper.types.NUMBER
+    },
+    {
+      urlName: 'default',
+      queryName: 'default',
+      type: filterHelper.types.BOOLEAN
+    }
+  ];
 /**
  * Budget API
  */
 router.route('/budgets')
     .get(function (req, res) {
-        if (!req.query.orgId) {
+        if (Object.keys(req.query).length === 0) {
             models.Budget.findAll()
                 .then(function (value) {
                     res.json(value);
@@ -17,7 +28,8 @@ router.route('/budgets')
                     res.json(error);
                 });
         } else {
-            models.Budget.findAll({where: {OrganizationId: req.query.orgId}})
+            var queryObject = filterHelper.getQueryObjectFromUrl(budgetFilters, req.query);
+            models.Budget.findAll({where: queryObject})
                 .then(function (value) {
                     res.json(value);
                 })
@@ -28,9 +40,9 @@ router.route('/budgets')
         }
     });
 
-router.route('/budgets/:budgets_id')
+router.route('/budgets/:budgetId')
     .get(function (req, res) {
-        models.Budget.findById(req.params.budgets_id)
+        models.Budget.findById(req.params.budgetId, { include: models.BudgetItem })
             .then(function (value) {
                 res.json(value);
             })
