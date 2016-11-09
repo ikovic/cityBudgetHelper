@@ -17,40 +17,44 @@ router.route('/token')
                     }
                 })
                 .then(function (user) {
-                    models.User.validPassword(req.body.password, user.hashedPassword, function (isValid) {
-                        if (isValid) {
-                            var payload = {id: user.id};
-                            var secret = config.jwt.secret;
-                            var token = jwt.encode(payload, secret);
-                            user.getOrganization().then(function (organization) {
-                                var userRet = {
-                                    id: user.id,
-                                    email: user.email,
-                                    firstName: user.firstName,
-                                    lastName: user.lastName
-                                };
-                                var orgRet = {
-                                    id: organization.id,
-                                    title: organization.title,
-                                    description: organization.description,
-                                    OIB: organization.OIB,
-                                    IBAN: organization.IBAN,
-                                    address: organization.address,
-                                    taxpayer: organization.taxpayer
-                                };
+                    if (!user) {
+                        res.sendStatus(401);
+                    } else {
+                        models.User.validPassword(req.body.password, user.hashedPassword, function (isValid) {
+                            if (isValid) {
+                                var payload = {id: user.id};
+                                var secret = config.jwt.secret;
+                                var token = jwt.encode(payload, secret);
+                                user.getOrganization().then(function (organization) {
+                                    var userRet = {
+                                        id: user.id,
+                                        email: user.email,
+                                        firstName: user.firstName,
+                                        lastName: user.lastName
+                                    };
+                                    var orgRet = {
+                                        id: organization.id,
+                                        title: organization.title,
+                                        description: organization.description,
+                                        OIB: organization.OIB,
+                                        IBAN: organization.IBAN,
+                                        address: organization.address,
+                                        taxpayer: organization.taxpayer
+                                    };
 
-                                var ret = {
-                                    user: userRet,
-                                    organization: orgRet,
-                                    token
-                                };
-                                res.json(ret);
-                            });
+                                    var ret = {
+                                        user: userRet,
+                                        organization: orgRet,
+                                        token
+                                    };
+                                    res.json(ret);
+                                });
 
-                        } else {
-                            res.sendStatus(401);
-                        }
-                    });
+                            } else {
+                                res.sendStatus(401);
+                            }
+                        });
+                    }
                 })
                 .catch(function (err) {
                     console.log(err);
