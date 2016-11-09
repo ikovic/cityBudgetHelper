@@ -40,9 +40,9 @@ router.route('/budgets')
         }
     });
 
-router.route('/budgets/:budgets_id')
+router.route('/budgets/:budgetId')
     .get(function (req, res) {
-        models.Budget.findById(req.params.budgets_id, { include: models.BudgetItem })
+        models.Budget.findById(req.params.budgetId, { include: models.BudgetItem })
             .then(function (value) {
                 res.json(value);
             })
