@@ -1,21 +1,26 @@
 var express = require('express'),
     router = express.Router(),
     models = require('../../models'),
-    filterHelper = require('../../util/filterHelper.js'),
-    budgetFilters = [{
-      urlName: 'orgId',
-      queryName: 'OrganizationId',
-      type: filterHelper.types.NUMBER
+    filterHelper = require('../../util/filterHelper.js');
+
+var budgetFilters = [
+    {
+        urlName: 'orgId',
+        queryName: 'OrganizationId',
+        type: filterHelper.types.NUMBER
     },
     {
-      urlName: 'default',
-      queryName: 'default',
-      type: filterHelper.types.BOOLEAN
+        urlName: 'default',
+        queryName: 'default',
+        type: filterHelper.types.BOOLEAN
     }
-  ];
+];
+
+
 /**
  * Budget API
  */
+
 router.route('/budgets')
     .get(function (req, res) {
         if (Object.keys(req.query).length === 0) {
@@ -42,7 +47,7 @@ router.route('/budgets')
 
 router.route('/budgets/:budgetId')
     .get(function (req, res) {
-        models.Budget.findById(req.params.budgetId, { include: models.BudgetItem })
+        models.Budget.findById(req.params.budgetId, {include: models.BudgetItem})
             .then(function (value) {
                 res.json(value);
             })
