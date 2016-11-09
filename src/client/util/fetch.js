@@ -1,6 +1,6 @@
 import {fetchUrl} from 'fetch';
 import store from '../redux/store';
-
+import {stringify} from 'query-string';
 
 function getHeaders() {
     let headers = {
@@ -14,7 +14,10 @@ function getHeaders() {
     return headers;
 }
 
-export function get(url, callback) {
+export function get(url, queryParams, callback) {
+    if (queryParams) {
+        url = url + '?' + stringify(queryParams);
+    }
     fetchUrl(url, {
             method: 'GET',
             headers: getHeaders()

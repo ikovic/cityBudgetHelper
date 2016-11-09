@@ -18,7 +18,6 @@ function bootstrap(models) {
 }
 
 function batchCreateOrgAndUsers(organization, models) {
-    console.log('test');
     models.Organization.create(organization,
         {
             include: [

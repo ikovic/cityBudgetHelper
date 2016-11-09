@@ -6,7 +6,7 @@ export default class BudgetTable extends Component {
         return (
             <DataTable id="budgetTable"
                        shadow={0}
-                       rows={this.props.budget.items}
+                       rows={this.props.items}
             >
                 <TableHeader name="position">Pozicija</TableHeader>
                 <TableHeader name="description">Opis</TableHeader>
@@ -17,5 +17,5 @@ export default class BudgetTable extends Component {
 }
 
 BudgetTable.propTypes = {
-    budget: PropTypes.object.isRequired
+    items: PropTypes.array.isRequired
 };

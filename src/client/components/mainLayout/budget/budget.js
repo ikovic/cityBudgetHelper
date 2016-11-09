@@ -11,18 +11,30 @@ class Budget extends Component {
 
     setTableHeight() {
         var height = window.innerHeight;
-        var tableHeight = height - 150;
-        document.getElementById('tableWrapper').setAttribute("style", `height:${tableHeight}px`);
+        var tableHeight = height - 250;
+        document.getElementById('tableContainer').setAttribute("style", `height:${tableHeight}px`);
     }
 
     componentDidMount() {
         this.setTableHeight();
         window.addEventListener('resize', this.setTableHeight);
-        get('http://localhost:3000/api/budgets', (error, meta, body) => {
+        get('http://localhost:3000/api/budgets', {
+            default: true,
+            orgId: this.props.organization.id
+        }, (error, meta, body) => {
             if (!error && meta.status == 200) {
-                var resObj = JSON.parse(body.toString());
-                if (resObj && resObj.length) {
-                    this.props.dispatch(actions.loadBudget(resObj));
+                let budgets = JSON.parse(body.toString());
+                if (budgets && budgets.length) {
+                    this.props.dispatch(actions.loadBudget(budgets[0]));
+                    get(`http://localhost:3000/api/budgets/${budgets[0].id}/budgetItems`, null, (error, meta, body) => {
+                        if (!error && meta.status == 200) {
+                            let budgetItems = JSON.parse(body.toString());
+                            if (budgetItems && budgetItems.length) {
+                                console.dir(budgetItems);
+                                this.props.dispatch(actions.loadBudgetItems(budgetItems));
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -36,12 +48,12 @@ class Budget extends Component {
         return (
             <section id="budgetSection" >
                 <Grid >
-                    <Cell id="tableWrapper" col={8} >
-                        <Card shadow={0} style={{width: '100%', margin: 'auto', minHeight: '50px'}} >
-                            <CardTitle>Proračun</CardTitle>
-                            <CardText>
-                                {this.props.budget ?
-                                    <BudgetTable budget={this.props.budget} />
+                    <Cell col={8} >
+                        <Card shadow={0} style={{width: '100%', margin: 'auto'}} >
+                            <CardTitle>{this.props.budget.title || 'Proračun'}</CardTitle>
+                            <CardText id="tableContainer">
+                                {this.props.budgetItems ?
+                                    <BudgetTable items={this.props.budgetItems} />
                                     :
                                     <h3>Polazni proračun nije postavljen</h3>
                                 }
@@ -65,8 +77,16 @@ class Budget extends Component {
 
 function mapStateToProps(state) {
     return {
-        budget: state.budget
+        budget: state.budget,
+        organization: state.organization,
+        budgetItems: state.budgetItems
     };
 }
+
+Budget.propTypes = {
+    budget: PropTypes.object.isRequired,
+    organization: PropTypes.object.isRequired,
+    budgetItems: PropTypes.array
+};
 
 export default connect(mapStateToProps)(Budget);
