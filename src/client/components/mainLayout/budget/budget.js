@@ -24,9 +24,9 @@ class Budget extends Component {
             orgId: this.props.organization.id
         }, (error, meta, body) => {
             if (!error && meta.status == 200) {
-                var resObj = JSON.parse(body.toString());
-                if (resObj && resObj.length) {
-                    this.props.dispatch(actions.loadBudget(resObj));
+                var budgets = JSON.parse(body.toString());
+                if (budgets && budgets.length) {
+                    this.props.dispatch(actions.loadBudget(budgets[0]));
                 }
             }
         });
@@ -42,10 +42,10 @@ class Budget extends Component {
                 <Grid >
                     <Cell id="tableWrapper" col={8} >
                         <Card shadow={0} style={{width: '100%', margin: 'auto', minHeight: '50px'}} >
-                            <CardTitle>Proračun</CardTitle>
+                            <CardTitle>{this.props.budget.title || 'Proračun'}</CardTitle>
                             <CardText>
                                 {this.props.budgetItems ?
-                                    <BudgetTable budget={this.props.budget} />
+                                    <BudgetTable items={this.props.budgetItems} />
                                     :
                                     <h3>Polazni proračun nije postavljen</h3>
                                 }
@@ -76,7 +76,8 @@ function mapStateToProps(state) {
 
 Budget.propTypes = {
     budget: PropTypes.object.isRequired,
-    organization: PropTypes.object.isRequired
+    organization: PropTypes.object.isRequired,
+    budgetItems: PropTypes.array
 };
 
 export default connect(mapStateToProps)(Budget);
