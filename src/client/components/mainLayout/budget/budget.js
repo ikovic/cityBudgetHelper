@@ -11,8 +11,8 @@ class Budget extends Component {
 
     setTableHeight() {
         var height = window.innerHeight;
-        var tableHeight = height - 150;
-        document.getElementById('tableWrapper').setAttribute("style", `height:${tableHeight}px`);
+        var tableHeight = height - 250;
+        document.getElementById('tableContainer').setAttribute("style", `height:${tableHeight}px`);
     }
 
     componentDidMount() {
@@ -30,6 +30,7 @@ class Budget extends Component {
                         if (!error && meta.status == 200) {
                             let budgetItems = JSON.parse(body.toString());
                             if (budgetItems && budgetItems.length) {
+                                console.dir(budgetItems);
                                 this.props.dispatch(actions.loadBudgetItems(budgetItems));
                             }
                         }
@@ -44,14 +45,13 @@ class Budget extends Component {
     }
 
     render() {
-        console.dir(this.props);
         return (
             <section id="budgetSection" >
                 <Grid >
-                    <Cell id="tableWrapper" col={8} >
-                        <Card shadow={0} style={{width: '100%', margin: 'auto', minHeight: '50px'}} >
+                    <Cell col={8} >
+                        <Card shadow={0} style={{width: '100%', margin: 'auto'}} >
                             <CardTitle>{this.props.budget.title || 'Proračun'}</CardTitle>
-                            <CardText>
+                            <CardText id="tableContainer">
                                 {this.props.budgetItems ?
                                     <BudgetTable items={this.props.budgetItems} />
                                     :
@@ -86,7 +86,7 @@ function mapStateToProps(state) {
 Budget.propTypes = {
     budget: PropTypes.object.isRequired,
     organization: PropTypes.object.isRequired,
-    budgetItems: PropTypes.object
+    budgetItems: PropTypes.array
 };
 
 export default connect(mapStateToProps)(Budget);
