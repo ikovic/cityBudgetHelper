@@ -1,6 +1,6 @@
 import constants from '../constants';
 
-function budgetReducer(state = null, action) {
+function budgetReducer(state = {}, action) {
     switch (action.type) {
         case constants.LOAD_BUDGET:
             return Object.assign({}, state, {

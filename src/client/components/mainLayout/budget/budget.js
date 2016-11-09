@@ -16,9 +16,13 @@ class Budget extends Component {
     }
 
     componentDidMount() {
+        console.dir(this.props);
         this.setTableHeight();
         window.addEventListener('resize', this.setTableHeight);
-        get('http://localhost:3000/api/budgets', (error, meta, body) => {
+        get('http://localhost:3000/api/budgets', {
+            default: true,
+            orgId: this.props.organization.id
+        }, (error, meta, body) => {
             if (!error && meta.status == 200) {
                 var resObj = JSON.parse(body.toString());
                 if (resObj && resObj.length) {
@@ -40,7 +44,7 @@ class Budget extends Component {
                         <Card shadow={0} style={{width: '100%', margin: 'auto', minHeight: '50px'}} >
                             <CardTitle>Proračun</CardTitle>
                             <CardText>
-                                {this.props.budget ?
+                                {this.props.budgetItems ?
                                     <BudgetTable budget={this.props.budget} />
                                     :
                                     <h3>Polazni proračun nije postavljen</h3>
@@ -65,8 +69,14 @@ class Budget extends Component {
 
 function mapStateToProps(state) {
     return {
-        budget: state.budget
+        budget: state.budget,
+        organization: state.organization
     };
 }
+
+Budget.propTypes = {
+    budget: PropTypes.object.isRequired,
+    organization: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps)(Budget);
