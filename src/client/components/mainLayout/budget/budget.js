@@ -16,7 +16,6 @@ class Budget extends Component {
     }
 
     componentDidMount() {
-        console.dir(this.props);
         this.setTableHeight();
         window.addEventListener('resize', this.setTableHeight);
         get('http://localhost:3000/api/budgets', {
@@ -24,9 +23,17 @@ class Budget extends Component {
             orgId: this.props.organization.id
         }, (error, meta, body) => {
             if (!error && meta.status == 200) {
-                var budgets = JSON.parse(body.toString());
+                let budgets = JSON.parse(body.toString());
                 if (budgets && budgets.length) {
                     this.props.dispatch(actions.loadBudget(budgets[0]));
+                    get(`http://localhost:3000/api/budgets/${budgets[0].id}/budgetItems`, null, (error, meta, body) => {
+                        if (!error && meta.status == 200) {
+                            let budgetItems = JSON.parse(body.toString());
+                            if (budgetItems && budgetItems.length) {
+                                this.props.dispatch(actions.loadBudgetItems(budgetItems));
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -37,6 +44,7 @@ class Budget extends Component {
     }
 
     render() {
+        console.dir(this.props);
         return (
             <section id="budgetSection" >
                 <Grid >
@@ -70,14 +78,15 @@ class Budget extends Component {
 function mapStateToProps(state) {
     return {
         budget: state.budget,
-        organization: state.organization
+        organization: state.organization,
+        budgetItems: state.budgetItems
     };
 }
 
 Budget.propTypes = {
     budget: PropTypes.object.isRequired,
     organization: PropTypes.object.isRequired,
-    budgetItems: PropTypes.array
+    budgetItems: PropTypes.object
 };
 
 export default connect(mapStateToProps)(Budget);

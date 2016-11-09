@@ -36,6 +36,15 @@ class Actions {
             }
         }
     }
+
+    loadBudgetItems(budgetItems) {
+        return {
+            type: constants.LOAD_BUDGET_ITEMS,
+            data: {
+                budgetItems
+            }
+        }
+    }
 }
 
 const actions = new Actions();
