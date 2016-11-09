@@ -14,7 +14,7 @@ export default class MainLayout extends React.Component {
 
         this.handleTabChange = this.handleTabChange.bind(this);
 
-        this.state = {activeTab: 0};
+        this.state = {activeTab: 1};
     }
 
     getDisplayElement(tabId) {
