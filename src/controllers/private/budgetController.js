@@ -42,7 +42,7 @@ router.route('/budgets')
 
 router.route('/budgets/:budgets_id')
     .get(function (req, res) {
-        models.Budget.findById(req.params.budgets_id)
+        models.Budget.findById(req.params.budgets_id, { include: models.BudgetItem })
             .then(function (value) {
                 res.json(value);
             })
