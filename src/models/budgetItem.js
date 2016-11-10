@@ -23,7 +23,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     BudgetItem.associate = function (models) {
-        BudgetItem.belongsTo(models.Budget);
+        BudgetItem.belongsTo(models.Budget, { foreignKey: { allowNull: false }});
         BudgetItem.hasMany(models.Order);
     };
 

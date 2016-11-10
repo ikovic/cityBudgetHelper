@@ -43,6 +43,16 @@ router.route('/budgets')
                     res.json(error);
                 });
         }
+    })
+    .put(function (req, res) {
+        models.Budget.create(req.body, {fields: ['year', 'default', 'title', 'OrganizationId']})
+            .then(function (createdBudget) {
+                res.json(createdBudget);
+            })
+            .catch(function (error) {
+                console.log('Error with PUT budget:', error);
+                res.json(error);
+            });
     });
 
 router.route('/budgets/:budgetId')
@@ -55,6 +65,19 @@ router.route('/budgets/:budgetId')
                 console.log('Error with GET budget:', error);
                 res.json(error);
             });
+    })
+    .post(function (req, res) {
+        models.Budget.findById(req.params.budgetId)
+        .then(function(budget) {
+          return budget.update(req.body, {fields: ['year', 'default', 'title']})
+        })
+        .then(function(updatedBudget){
+          res.json(updatedBudget);
+        })
+        .catch(function(error) {
+          console.log('Error with POST budget:', error);
+          res.json(error);
+        });
     });
 
 module.exports = router;
