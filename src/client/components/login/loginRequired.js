@@ -1,11 +1,16 @@
 import {Component, PropTypes} from 'react';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
+import actions from '../../redux/actions';
 
 class UndecoratedLoginRequired extends Component {
 
     componentWillMount() {
-        if (!this.props.loggedIn) {
+        var loginData = sessionStorage.getItem('budget-session');
+        if (loginData) {
+            var storedState = JSON.parse(loginData);
+            this.props.logIn(storedState.user, storedState.token);
+        } else if (!this.props.loggedIn) {
             this.props.router.push('/login');
         }
     }
@@ -17,9 +22,13 @@ class UndecoratedLoginRequired extends Component {
     }
 
     render() {
-        return (
-            this.props.children
-        );
+        if (this.props.loggedIn) {
+            return (
+                this.props.children
+            );
+        } else {
+            return null;
+        }
     }
 }
 
@@ -38,6 +47,12 @@ function mapStateToProps(state) {
     };
 }
 
-var LoginRequired = withRouter(connect(mapStateToProps)(UndecoratedLoginRequired));
+function mapDispatchToProps(dispatch) {
+    return ({
+        logIn: (user, token) => dispatch(actions.logIn(user, token))
+    });
+}
+
+var LoginRequired = withRouter(connect(mapStateToProps, mapDispatchToProps)(UndecoratedLoginRequired));
 
 export default LoginRequired;
