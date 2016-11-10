@@ -18,5 +18,39 @@
       "lastName": "Ant",
       "password": "5678"
     }
+  ],
+  "budgets": [
+    {
+      "default": true,
+      "title": "Defaultni budget",
+      "budgetItems": [
+        {
+          "position": "defaultno nebitno 1",
+          "description": "Bla bla bla bla",
+          "amount": 10
+        },
+        {
+          "position": "defaultno nebitno 2",
+          "description": "Blu blu blu blu",
+          "amount": 20
+        }
+      ]
+    },
+    {
+      "default": false,
+      "title": "Neki drugi budget",
+      "budgetItems": [
+        {
+          "position": "nedefaultno nebitno 1",
+          "description": "Bli bli bli bli",
+          "amount": 111
+        },
+        {
+          "position": "nedefaultno nebitno 2",
+          "description": "Ble ble ble ble",
+          "amount": 222
+        }
+      ]
+    }
   ]
 }
