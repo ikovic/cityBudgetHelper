@@ -24,6 +24,16 @@ function batchCreateOrgAndUsers(organization, models) {
                 {
                     model: models.User,
                     as: 'users'
+                },
+                {
+                    model: models.Budget,
+                    as: 'budgets',
+                    include: [
+                      {
+                        model: models.BudgetItem,
+                        as: 'budgetItems'
+                      }
+                    ]
                 }
             ]
         }
