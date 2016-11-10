@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Budget.associate = function (models) {
-        Budget.belongsTo(models.Organization);
+        Budget.belongsTo(models.Organization, { foreignKey: { allowNull: false }});
         Budget.hasMany(models.BudgetItem, {as: 'budgetItems'});
     };
 
