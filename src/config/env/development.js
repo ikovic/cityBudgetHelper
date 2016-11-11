@@ -1,3 +1,5 @@
+'use strict';
+
 const config = {
     db: {
         connectionString: 'mysql://root:root@example.com:3306/budget_helper',
