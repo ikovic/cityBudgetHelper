@@ -1,9 +1,11 @@
-var express = require('express'),
-    router = express.Router(),
-    models = require('../../models'),
-    filterHelper = require('../../util/filterHelper.js');
+'use strict';
 
-var budgetFilters = [
+const express = require('express');
+const router = express.Router();
+const models = require('../../models');
+const filterHelper = require('../../util/filterHelper.js');
+
+const budgetFilters = [
     {
         urlName: 'orgId',
         queryName: 'OrganizationId',
@@ -33,7 +35,7 @@ router.route('/budgets')
                     res.json(error);
                 });
         } else {
-            var queryObject = filterHelper.getQueryObjectFromUrl(budgetFilters, req.query);
+            let queryObject = filterHelper.getQueryObjectFromUrl(budgetFilters, req.query);
             models.Budget.findAll({where: queryObject})
                 .then(function (value) {
                     res.json(value);
@@ -68,16 +70,16 @@ router.route('/budgets/:budgetId')
     })
     .post(function (req, res) {
         models.Budget.findById(req.params.budgetId)
-        .then(function(budget) {
-          return budget.update(req.body, {fields: ['year', 'default', 'title']})
-        })
-        .then(function(updatedBudget){
-          res.json(updatedBudget);
-        })
-        .catch(function(error) {
-          console.log('Error with POST budget:', error);
-          res.json(error);
-        });
+            .then(function (budget) {
+                return budget.update(req.body, {fields: ['year', 'default', 'title']})
+            })
+            .then(function (updatedBudget) {
+                res.json(updatedBudget);
+            })
+            .catch(function (error) {
+                console.log('Error with POST budget:', error);
+                res.json(error);
+            });
     });
 
 module.exports = router;

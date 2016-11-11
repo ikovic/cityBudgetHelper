@@ -1,6 +1,8 @@
-var express = require('express'),
-    router = express.Router(),
-    models = require('../../models');
+'use strict';
+
+const express = require('express');
+const router = express.Router();
+const models = require('../../models');
 
 /**
  * Organizations API
@@ -40,16 +42,16 @@ router.route('/organizations/:orgId')
     })
     .post(function (req, res) {
         models.Organization.findById(req.params.orgId)
-        .then(function(organization) {
-          return organization.update(req.body, {fields: ['title', 'description', 'OIB', 'IBAN', 'address', 'taxpayer']})
-        })
-        .then(function(updatedOrganization){
-          res.json(updatedOrganization);
-        })
-        .catch(function(error) {
-          console.log('Error with POST organization:', error);
-          res.json(error);
-        })
+            .then(function (organization) {
+                return organization.update(req.body, {fields: ['title', 'description', 'OIB', 'IBAN', 'address', 'taxpayer']})
+            })
+            .then(function (updatedOrganization) {
+                res.json(updatedOrganization);
+            })
+            .catch(function (error) {
+                console.log('Error with POST organization:', error);
+                res.json(error);
+            })
     });
 
 module.exports = router;
