@@ -1,7 +1,9 @@
-var passport = require('passport'),
-    JwtStrategy = require('passport-jwt').Strategy,
-    ExtractJwt = require('passport-jwt').ExtractJwt,
-    config = require('../config/config');
+'use strict';
+
+const passport = require('passport');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const config = require('../config/config');
 
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
@@ -15,7 +17,6 @@ function configurePassportJwt(models) {
                     done(null, user);
                 } else {
                     done(null, false);
-                    // or you could create a new account
                 }
                 return user;
             })

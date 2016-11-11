@@ -11,7 +11,7 @@
     "bootstrap": "node app.js bootstrap"
   },
   "engines": {
-    "node": "4.4.7"
+    "node": "6.9.1"
   },
   "repository": {
     "type": "git",

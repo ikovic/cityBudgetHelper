@@ -1,10 +1,12 @@
-var fs = require('fs');
+'use strict';
+
+const fs = require('fs');
 
 function bootstrap(models) {
-    var organization = JSON.parse(fs.readFileSync('./bootstrap.json', 'utf-8'));
-    var nOfUsers = organization.users.length;
-    for (var i = 0; i < nOfUsers; i++) {
-        var user = organization.users[i];
+    let organization = JSON.parse(fs.readFileSync('./bootstrap.json', 'utf-8'));
+    let nOfUsers = organization.users.length;
+    for (let i = 0; i < nOfUsers; i++) {
+        let user = organization.users[i];
         models.User.setPassword(user, user.password, function (updatedUser) {
             var currIndex = organization.users.findIndex(function (element) {
                 return element.email === updatedUser.email;
@@ -29,10 +31,10 @@ function batchCreateOrgAndUsers(organization, models) {
                     model: models.Budget,
                     as: 'budgets',
                     include: [
-                      {
-                        model: models.BudgetItem,
-                        as: 'budgetItems'
-                      }
+                        {
+                            model: models.BudgetItem,
+                            as: 'budgetItems'
+                        }
                     ]
                 }
             ]

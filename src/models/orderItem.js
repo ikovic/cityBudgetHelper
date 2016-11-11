@@ -1,5 +1,7 @@
+'use strict';
+
 module.exports = function (sequelize, DataTypes) {
-    var OrderItem = sequelize.define('OrderItem', {
+    const OrderItem = sequelize.define('OrderItem', {
         id: {
             type: DataTypes.INTEGER(11),
             allowNull: false,

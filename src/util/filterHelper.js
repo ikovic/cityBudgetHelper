@@ -1,10 +1,12 @@
-var types = {BOOLEAN: 'BOOLEAN', STRING: 'STRING', NUMBER: 'NUMBER'};
+'use strict';
+
+const types = {BOOLEAN: 'BOOLEAN', STRING: 'STRING', NUMBER: 'NUMBER'};
 
 function getQueryObjectFromUrl(allowedFilters, urlFilters) {
-    var queryObject = {};
+    let queryObject = {};
     allowedFilters.forEach(function (filter) {
         if (urlFilters.hasOwnProperty(filter.urlName)) {
-            var acceptedFilter = urlFilters[filter.urlName];
+            let acceptedFilter = urlFilters[filter.urlName];
             if (filter.type === types.BOOLEAN) {
                 queryObject[filter.queryName] = acceptedFilter.toLowerCase() === 'true';
             } else {
