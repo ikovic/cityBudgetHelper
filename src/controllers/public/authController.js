@@ -1,8 +1,10 @@
-var express = require('express'),
-    router = express.Router(),
-    jwt = require('jwt-simple'),
-    config = require('../../config/config'),
-    models = require('../../models');
+'use strict';
+
+const express = require('express');
+const router = express.Router();
+const jwt = require('jwt-simple');
+const config = require('../../config/config');
+const models = require('../../models');
 
 router.route('/token')
     .post(function (req, res) {
@@ -22,17 +24,17 @@ router.route('/token')
                     } else {
                         models.User.validPassword(req.body.password, user.hashedPassword, function (isValid) {
                             if (isValid) {
-                                var payload = {id: user.id};
-                                var secret = config.jwt.secret;
-                                var token = jwt.encode(payload, secret);
+                                let payload = {id: user.id};
+                                let secret = config.jwt.secret;
+                                let token = jwt.encode(payload, secret);
                                 user.getOrganization().then(function (organization) {
-                                    var userRet = {
+                                    let userRet = {
                                         id: user.id,
                                         email: user.email,
                                         firstName: user.firstName,
                                         lastName: user.lastName
                                     };
-                                    var orgRet = {
+                                    let orgRet = {
                                         id: organization.id,
                                         title: organization.title,
                                         description: organization.description,
@@ -42,7 +44,7 @@ router.route('/token')
                                         taxpayer: organization.taxpayer
                                     };
 
-                                    var ret = {
+                                    let ret = {
                                         user: userRet,
                                         organization: orgRet,
                                         token
