@@ -1,5 +1,7 @@
+'use strict';
+
 module.exports = function (sequelize, DataTypes) {
-    var BudgetItem = sequelize.define('BudgetItem', {
+    const BudgetItem = sequelize.define('BudgetItem', {
         id: {
             type: DataTypes.INTEGER(11),
             allowNull: false,

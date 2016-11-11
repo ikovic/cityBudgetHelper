@@ -1,9 +1,11 @@
-var fs = require("fs"),
-    path = require("path"),
-    Sequelize = require("sequelize"),
-    config = require('../config/config'),
-    sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, config.db.options),
-    db = {};
+'use strict';
+
+const fs = require("fs");
+const path = require("path");
+const Sequelize = require("sequelize");
+const config = require('../config/config');
+const sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, config.db.options);
+const db = {};
 
 fs
     .readdirSync(__dirname)
@@ -11,7 +13,7 @@ fs
         return (file.indexOf(".js") !== 0) && (file !== "index.js");
     })
     .forEach(function (file) {
-        var model = sequelize.import(path.join(__dirname, file));
+        let model = sequelize.import(path.join(__dirname, file));
         db[model.name] = model;
     });
 
