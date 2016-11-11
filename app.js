@@ -1,13 +1,15 @@
-var express = require('express'),
-    app = express(),
-    path = require('path'),
-    bodyParser = require('body-parser'),
-    config = require('./src/config/config'),
-    models = require('./src/models'),
-    privateControllers = require('./src/controllers/private')(app),
-    publicControllers = require('./src/controllers/public')(app),
-    passport = require('./src/auth/passport')(models),
-    bootstrap = require('./src/util/bootstrap.js').bootstrap;
+'use strict';
+
+const express = require('express');
+const app = express();
+const path = require('path');
+const bodyParser = require('body-parser');
+const config = require('./src/config/config');
+const models = require('./src/models');
+const privateControllers = require('./src/controllers/private')(app);
+const publicControllers = require('./src/controllers/public')(app);
+const passport = require('./src/auth/passport')(models);
+const bootstrap = require('./src/util/bootstrap.js').bootstrap;
 
 // configure app to use bodyParser for POST data
 app.use(bodyParser.json());
@@ -36,7 +38,7 @@ models.sequelize
         return models.sequelize.sync();
     })
     .then(function () {
-        args = process.argv.slice(2);
+        let args = process.argv.slice(2);
         if (args[0] == 'bootstrap') {
             bootstrap(models);
         } else {
