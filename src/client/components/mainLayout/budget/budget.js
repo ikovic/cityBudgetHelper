@@ -9,9 +9,33 @@ import BudgetItem from './budgetItem/budgetItem';
 
 class Budget extends Component {
 
+    constructor() {
+        super();
+
+        this.deleteBudgetItem = this.deleteBudgetItem.bind(this);
+        this.editBudgetItem = this.editBudgetItem.bind(this);
+        this.cancelEditBudgetItem = this.cancelEditBudgetItem.bind(this);
+
+        this.state = {
+            itemToEdit: null
+        };
+    }
+
+    deleteBudgetItem(item) {
+        console.log('delete', item);
+    }
+
+    editBudgetItem(item) {
+        this.setState({itemToEdit: item});
+    }
+
+    cancelEditBudgetItem() {
+        this.setState({itemToEdit: null});
+    }
+
     setTableHeight() {
-        var height = window.innerHeight;
-        var tableHeight = height - 250;
+        let height = window.innerHeight;
+        let tableHeight = height - 250;
         document.getElementById('tableContainer').setAttribute("style", `height:${tableHeight}px`);
     }
 
@@ -30,7 +54,6 @@ class Budget extends Component {
                         if (!error && meta.status == 200) {
                             let budgetItems = JSON.parse(body.toString());
                             if (budgetItems && budgetItems.length) {
-                                console.dir(budgetItems);
                                 this.props.dispatch(actions.loadBudgetItems(budgetItems));
                             }
                         }
@@ -46,26 +69,30 @@ class Budget extends Component {
 
     render() {
         return (
-            <section id="budgetSection" >
+            <section id="budgetSection">
                 <Grid >
-                    <Cell col={8} >
-                        <Card shadow={0} style={{width: '100%', margin: 'auto'}} >
+                    <Cell col={8}>
+                        <Card shadow={0} style={{width: '100%', margin: 'auto'}}>
                             <CardTitle>{this.props.budget.title || 'Proračun'}</CardTitle>
                             <CardText id="tableContainer">
                                 {this.props.budgetItems ?
-                                    <BudgetTable items={this.props.budgetItems} />
+                                    <BudgetTable items={this.props.budgetItems}
+                                                 deleteItem={this.deleteBudgetItem}
+                                                 editItem={this.editBudgetItem}/>
                                     :
                                     <h3>Polazni proračun nije postavljen</h3>
                                 }
                             </CardText>
                         </Card>
                     </Cell>
-                    <Cell id="budgetTools" col={4} >
+                    <Cell id="budgetTools" col={4}>
                         <BudgetSearch/>
-                        <BudgetItem/>
-                        <div className="actionWrapper" >
-                            <FABButton colored ripple >
-                                <Icon name="add" />
+                        <BudgetItem item={this.state.itemToEdit}
+                                    cancelEdit={this.cancelEditBudgetItem}
+                        />
+                        <div className="actionWrapper">
+                            <FABButton colored ripple>
+                                <Icon name="add"/>
                             </FABButton>
                         </div>
                     </Cell>
