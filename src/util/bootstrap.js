@@ -19,6 +19,18 @@ function bootstrap(models) {
     }
 }
 
+function addOrgIdToBudgetItems(newOrg) {
+  let nOfBudgets = newOrg.budgets.length;
+  for (let i = 0; i < nOfBudgets; i++) {
+    let nOfBudgetItems = newOrg.budgets[i].budgetItems.length;
+    for (let j = 0; j < nOfBudgetItems; j++) {
+      newOrg.budgets[i].budgetItems[j].organization = newOrg;
+      console.log(newOrg.budgets[i].budgetItems[j].organization);
+    }
+  }
+  return newOrg;
+}
+
 function batchCreateOrgAndUsers(organization, models) {
     models.Organization.create(organization,
         {
@@ -39,7 +51,15 @@ function batchCreateOrgAndUsers(organization, models) {
                 }
             ]
         }
-    ).catch(function (err) {
+    )
+    .then(function(newOrg){
+      newOrg = addOrgIdToBudgetItems(newOrg);
+      return newOrg.save();
+    })
+    .then(function(newestOrg){
+      console.log(newestOrg);
+    })
+    .catch(function (err) {
         console.log(err);
     });
 }
