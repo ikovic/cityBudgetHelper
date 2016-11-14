@@ -19,6 +19,15 @@ function bootstrap(models) {
     }
 }
 
+function addOrgIdToBudgetItems(newOrg) {
+    newOrg.budgets.forEach(budget => {
+        budget.budgetItems.forEach(budgetItem => {
+            budgetItem.setOrganization(newOrg);
+        });
+    });
+    return newOrg;
+}
+
 function batchCreateOrgAndUsers(organization, models) {
     models.Organization.create(organization,
         {
@@ -39,9 +48,14 @@ function batchCreateOrgAndUsers(organization, models) {
                 }
             ]
         }
-    ).catch(function (err) {
-        console.log(err);
-    });
+    )
+        .then(function (newOrg) {
+            newOrg = addOrgIdToBudgetItems(newOrg);
+            return newOrg.save();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 }
 
 module.exports = {
