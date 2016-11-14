@@ -20,15 +20,12 @@ function bootstrap(models) {
 }
 
 function addOrgIdToBudgetItems(newOrg) {
-  let nOfBudgets = newOrg.budgets.length;
-  for (let i = 0; i < nOfBudgets; i++) {
-    let nOfBudgetItems = newOrg.budgets[i].budgetItems.length;
-    for (let j = 0; j < nOfBudgetItems; j++) {
-      newOrg.budgets[i].budgetItems[j].organization = newOrg;
-      console.log(newOrg.budgets[i].budgetItems[j].organization);
-    }
-  }
-  return newOrg;
+    newOrg.budgets.forEach(budget => {
+        budget.budgetItems.forEach(budgetItem => {
+            budgetItem.setOrganization(newOrg);
+        });
+    });
+    return newOrg;
 }
 
 function batchCreateOrgAndUsers(organization, models) {
@@ -52,16 +49,13 @@ function batchCreateOrgAndUsers(organization, models) {
             ]
         }
     )
-    .then(function(newOrg){
-      newOrg = addOrgIdToBudgetItems(newOrg);
-      return newOrg.save();
-    })
-    .then(function(newestOrg){
-      console.log(newestOrg);
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
+        .then(function (newOrg) {
+            newOrg = addOrgIdToBudgetItems(newOrg);
+            return newOrg.save();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 }
 
 module.exports = {
