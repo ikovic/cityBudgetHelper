@@ -4,12 +4,16 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 const config = require('./src/config/config');
 const models = require('./src/models');
 const privateControllers = require('./src/controllers/private')(app);
 const publicControllers = require('./src/controllers/public')(app);
 const passport = require('./src/auth/passport')(models);
 const bootstrap = require('./src/util/bootstrap.js').bootstrap;
+
+// set secure HTTP headers
+app.use(helmet());
 
 // configure app to use bodyParser for POST data
 app.use(bodyParser.json());
