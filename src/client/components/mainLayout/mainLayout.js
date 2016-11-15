@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Layout, Content} from 'react-mdl';
 import {get} from '../../util/fetch';
@@ -10,7 +10,7 @@ import Orders from './orders/orders';
 import BudgetDialog from '../dialog/budgetDialog';
 import dialogPolyfill from 'dialog-polyfill';
 
-class MainLayout extends React.Component {
+class MainLayout extends Component {
 
     constructor(props) {
         super(props);
@@ -76,5 +76,9 @@ function mapStateToProps(state) {
         user: state.session.user
     };
 }
+
+MainLayout.propTypes = {
+    user: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps)(MainLayout);
