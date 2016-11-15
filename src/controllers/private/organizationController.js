@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const authorize = require('../../middleware/authorization').authorize;
 const models = require('../../models');
 
 /**
@@ -30,6 +31,7 @@ router.route('/organizations')
     });
 
 router.route('/organizations/:orgId')
+    .all(authorize)
     .get(function (req, res) {
         models.Organization.findById(req.params.orgId)
             .then(function (value) {

@@ -20,7 +20,6 @@ class UndecoratedLogin extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
         if (nextProps.isLoggedIn) {
             this.props.router.push('/');
         }
@@ -43,7 +42,6 @@ class UndecoratedLogin extends Component {
             if (!error && meta.status == 200) {
                 var resObj = JSON.parse(body.toString());
                 this.props.dispatch(actions.logIn(resObj.user, resObj.token));
-                this.props.dispatch(actions.loadOrganization(resObj.organization));
                 this.props.router.push('/');
             }
         });

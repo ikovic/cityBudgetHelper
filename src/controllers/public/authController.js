@@ -27,30 +27,18 @@ router.route('/token')
                                 let payload = {id: user.id};
                                 let secret = config.jwt.secret;
                                 let token = jwt.encode(payload, secret);
-                                user.getOrganization().then(function (organization) {
-                                    let userRet = {
-                                        id: user.id,
-                                        email: user.email,
-                                        firstName: user.firstName,
-                                        lastName: user.lastName
-                                    };
-                                    let orgRet = {
-                                        id: organization.id,
-                                        title: organization.title,
-                                        description: organization.description,
-                                        OIB: organization.OIB,
-                                        IBAN: organization.IBAN,
-                                        address: organization.address,
-                                        taxpayer: organization.taxpayer
-                                    };
-
-                                    let ret = {
-                                        user: userRet,
-                                        organization: orgRet,
-                                        token
-                                    };
-                                    res.json(ret);
-                                });
+                                let userRet = {
+                                    id: user.id,
+                                    email: user.email,
+                                    firstName: user.firstName,
+                                    lastName: user.lastName,
+                                    orgId: user.OrganizationId
+                                };
+                                let ret = {
+                                    user: userRet,
+                                    token
+                                };
+                                res.json(ret);
 
                             } else {
                                 res.sendStatus(401);

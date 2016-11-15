@@ -3,11 +3,13 @@
 const express = require('express');
 const router = express.Router();
 const models = require('../../models');
+const authorize = require('../../middleware/authorization').authorize;
 
 /**
  * Budget Items API
  */
-router.route('/budgets/:budgetId/budgetItems')
+router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
+    .all(authorize)
     .get(function (req, res) {
         models.BudgetItem.findAll({where: {BudgetId: req.params.budgetId}})
             .then(function (value) {
@@ -30,7 +32,8 @@ router.route('/budgets/:budgetId/budgetItems')
             });
     });
 
-router.route('/budgets/:budgetId/budgetItems/:budgetItemsId')
+router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemsId')
+    .all(authorize)
     .post(function (req, res) {
         models.BudgetItem.findOne({where: {id: req.params.budgetItemsId, BudgetId: req.params.budgetId}})
             .then(function (budgetItem) {
