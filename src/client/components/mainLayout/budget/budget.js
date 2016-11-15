@@ -40,9 +40,10 @@ class Budget extends Component {
     }
 
     componentDidMount() {
+        console.dir(this.props);
         this.setTableHeight();
         window.addEventListener('resize', this.setTableHeight);
-        get('http://localhost:3000/api/budgets', {
+        get('http://localhost:3000/api/organizations/' + this.props.organization.id +'/budgets', {
             default: true,
             orgId: this.props.organization.id
         }, (error, meta, body) => {
@@ -50,7 +51,7 @@ class Budget extends Component {
                 let budgets = JSON.parse(body.toString());
                 if (budgets && budgets.length) {
                     this.props.dispatch(actions.loadBudget(budgets[0]));
-                    get(`http://localhost:3000/api/budgets/${budgets[0].id}/budgetItems`, null, (error, meta, body) => {
+                    get(`http://localhost:3000/api/organizations/${this.props.organization.id}/budgets/${budgets[0].id}/budgetItems`, null, (error, meta, body) => {
                         if (!error && meta.status == 200) {
                             let budgetItems = JSON.parse(body.toString());
                             if (budgetItems && budgetItems.length) {

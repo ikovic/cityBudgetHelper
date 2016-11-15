@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const models = require('../../models');
 const filterHelper = require('../../util/filterHelper.js');
+const authorize = require('../../middleware/authorization').authorize;
 
 const budgetFilters = [
     {
@@ -23,7 +24,8 @@ const budgetFilters = [
  * Budget API
  */
 
-router.route('/budgets')
+router.route('/organizations/:orgId/budgets')
+    .all(authorize)
     .get(function (req, res) {
         if (Object.keys(req.query).length === 0) {
             models.Budget.findAll()
@@ -57,7 +59,8 @@ router.route('/budgets')
             });
     });
 
-router.route('/budgets/:budgetId')
+router.route('/organizations/:orgId/budgets/:budgetId')
+    .all(authorize)
     .get(function (req, res) {
         models.Budget.findById(req.params.budgetId, {include: models.BudgetItem})
             .then(function (value) {
