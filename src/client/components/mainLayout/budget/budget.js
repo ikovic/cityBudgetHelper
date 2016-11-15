@@ -21,6 +21,32 @@ class Budget extends Component {
         };
     }
 
+    loadBudgetItems(orgId) {
+        get(`http://localhost:3000/api/organizations/${orgId}/budgets`,
+            {
+                default: true,
+                orgId: orgId
+            },
+            (error, meta, body) => {
+                if (!error && meta.status == 200) {
+                    let budgets = JSON.parse(body.toString());
+                    if (budgets && budgets.length) {
+                        this.props.dispatch(actions.loadBudget(budgets[0]));
+                        get(`http://localhost:3000/api/organizations/${orgId}/budgets/${budgets[0].id}/budgetItems`,
+                            null,
+                            (error, meta, body) => {
+                                if (!error && meta.status == 200) {
+                                    let budgetItems = JSON.parse(body.toString());
+                                    if (budgetItems && budgetItems.length) {
+                                        this.props.dispatch(actions.loadBudgetItems(budgetItems));
+                                    }
+                                }
+                            });
+                    }
+                }
+            });
+    }
+
     deleteBudgetItem(item) {
         console.log('delete', item);
     }
@@ -43,50 +69,14 @@ class Budget extends Component {
         this.setTableHeight();
         window.addEventListener('resize', this.setTableHeight);
         if (this.props.organization.id) {
-            get('http://localhost:3000/api/organizations/' + this.props.organization.id + '/budgets', {
-                default: true,
-                orgId: this.props.organization.id
-            }, (error, meta, body) => {
-                if (!error && meta.status == 200) {
-                    let budgets = JSON.parse(body.toString());
-                    if (budgets && budgets.length) {
-                        this.props.dispatch(actions.loadBudget(budgets[0]));
-                        get(`http://localhost:3000/api/organizations/${this.props.organization.id}/budgets/${budgets[0].id}/budgetItems`, null, (error, meta, body) => {
-                            if (!error && meta.status == 200) {
-                                let budgetItems = JSON.parse(body.toString());
-                                if (budgetItems && budgetItems.length) {
-                                    this.props.dispatch(actions.loadBudgetItems(budgetItems));
-                                }
-                            }
-                        });
-                    }
-                }
-            });
+            this.loadBudgetItems(this.props.organization.id);
         }
     }
 
     componentWillReceiveProps(nextProps) {
         const orgId = nextProps.organization.id;
         if (orgId != this.props.organization.id) {
-            get('http://localhost:3000/api/organizations/' + orgId + '/budgets', {
-                default: true,
-                orgId: orgId
-            }, (error, meta, body) => {
-                if (!error && meta.status == 200) {
-                    let budgets = JSON.parse(body.toString());
-                    if (budgets && budgets.length) {
-                        this.props.dispatch(actions.loadBudget(budgets[0]));
-                        get(`http://localhost:3000/api/organizations/${orgId}/budgets/${budgets[0].id}/budgetItems`, null, (error, meta, body) => {
-                            if (!error && meta.status == 200) {
-                                let budgetItems = JSON.parse(body.toString());
-                                if (budgetItems && budgetItems.length) {
-                                    this.props.dispatch(actions.loadBudgetItems(budgetItems));
-                                }
-                            }
-                        });
-                    }
-                }
-            });
+            this.loadBudgetItems(orgId);
         }
     }
 
