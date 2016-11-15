@@ -1,5 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Layout, Content} from 'react-mdl';
+import {get} from '../../util/fetch';
+import actions from '../../redux/actions';
 import Sidebar from './sidebar/sidebar';
 import Header from './header/header';
 import Budget from './budget/budget';
@@ -7,7 +10,7 @@ import Orders from './orders/orders';
 import BudgetDialog from '../dialog/budgetDialog';
 import dialogPolyfill from 'dialog-polyfill';
 
-export default class MainLayout extends React.Component {
+class MainLayout extends React.Component {
 
     constructor(props) {
         super(props);
@@ -40,20 +43,38 @@ export default class MainLayout extends React.Component {
     // <BudgetDialog/>
     componentDidMount() {
         // for the dialog example, we have to register the dialogs window
-        const dialogs = document.querySelector("dialog"); dialogs && dialogPolyfill.registerDialog(dialogs);
+        const dialogs = document.querySelector("dialog");
+        dialogs && dialogPolyfill.registerDialog(dialogs);
+
+        get('http://localhost:3000/api/organizations/' + this.props.user.orgId,
+            null,
+            (error, meta, body) => {
+                if (!error && meta.status == 200) {
+                    let org = JSON.parse(body.toString());
+                    this.props.dispatch(actions.loadOrganization(org));
+                }
+            });
     }
 
     render() {
         return (
-            <div id="tabsLayout">
-                <Layout fixedHeader>
-                    <Header activeTab={this.state.activeTab} changeTab={this.handleTabChange}/>
+            <div id="tabsLayout" >
+                <Layout fixedHeader >
+                    <Header activeTab={this.state.activeTab} changeTab={this.handleTabChange} />
                     <Sidebar />
-                    <Content id="appContent">
-                        <div className="page-content">{this.getDisplayElement(this.state.activeTab)}</div>
+                    <Content id="appContent" >
+                        <div className="page-content" >{this.getDisplayElement(this.state.activeTab)}</div>
                     </Content>
                 </Layout>
             </div>
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.session.user
+    };
+}
+
+export default connect(mapStateToProps)(MainLayout);

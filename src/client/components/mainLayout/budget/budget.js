@@ -40,28 +40,54 @@ class Budget extends Component {
     }
 
     componentDidMount() {
-        console.dir(this.props);
         this.setTableHeight();
         window.addEventListener('resize', this.setTableHeight);
-        get('http://localhost:3000/api/organizations/' + this.props.organization.id +'/budgets', {
-            default: true,
-            orgId: this.props.organization.id
-        }, (error, meta, body) => {
-            if (!error && meta.status == 200) {
-                let budgets = JSON.parse(body.toString());
-                if (budgets && budgets.length) {
-                    this.props.dispatch(actions.loadBudget(budgets[0]));
-                    get(`http://localhost:3000/api/organizations/${this.props.organization.id}/budgets/${budgets[0].id}/budgetItems`, null, (error, meta, body) => {
-                        if (!error && meta.status == 200) {
-                            let budgetItems = JSON.parse(body.toString());
-                            if (budgetItems && budgetItems.length) {
-                                this.props.dispatch(actions.loadBudgetItems(budgetItems));
+        if (this.props.organization.id) {
+            get('http://localhost:3000/api/organizations/' + this.props.organization.id + '/budgets', {
+                default: true,
+                orgId: this.props.organization.id
+            }, (error, meta, body) => {
+                if (!error && meta.status == 200) {
+                    let budgets = JSON.parse(body.toString());
+                    if (budgets && budgets.length) {
+                        this.props.dispatch(actions.loadBudget(budgets[0]));
+                        get(`http://localhost:3000/api/organizations/${this.props.organization.id}/budgets/${budgets[0].id}/budgetItems`, null, (error, meta, body) => {
+                            if (!error && meta.status == 200) {
+                                let budgetItems = JSON.parse(body.toString());
+                                if (budgetItems && budgetItems.length) {
+                                    this.props.dispatch(actions.loadBudgetItems(budgetItems));
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const orgId = nextProps.organization.id;
+        if (orgId != this.props.organization.id) {
+            get('http://localhost:3000/api/organizations/' + orgId + '/budgets', {
+                default: true,
+                orgId: orgId
+            }, (error, meta, body) => {
+                if (!error && meta.status == 200) {
+                    let budgets = JSON.parse(body.toString());
+                    if (budgets && budgets.length) {
+                        this.props.dispatch(actions.loadBudget(budgets[0]));
+                        get(`http://localhost:3000/api/organizations/${orgId}/budgets/${budgets[0].id}/budgetItems`, null, (error, meta, body) => {
+                            if (!error && meta.status == 200) {
+                                let budgetItems = JSON.parse(body.toString());
+                                if (budgetItems && budgetItems.length) {
+                                    this.props.dispatch(actions.loadBudgetItems(budgetItems));
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -70,30 +96,30 @@ class Budget extends Component {
 
     render() {
         return (
-            <section id="budgetSection">
+            <section id="budgetSection" >
                 <Grid >
-                    <Cell col={8}>
-                        <Card shadow={0} style={{width: '100%', margin: 'auto'}}>
+                    <Cell col={8} >
+                        <Card shadow={0} style={{width: '100%', margin: 'auto'}} >
                             <CardTitle>{this.props.budget.title || 'Proračun'}</CardTitle>
-                            <CardText id="tableContainer">
+                            <CardText id="tableContainer" >
                                 {this.props.budgetItems ?
                                     <BudgetTable items={this.props.budgetItems}
                                                  deleteItem={this.deleteBudgetItem}
-                                                 editItem={this.editBudgetItem}/>
+                                                 editItem={this.editBudgetItem} />
                                     :
                                     <h3>Polazni proračun nije postavljen</h3>
                                 }
                             </CardText>
                         </Card>
                     </Cell>
-                    <Cell id="budgetTools" col={4}>
+                    <Cell id="budgetTools" col={4} >
                         <BudgetSearch/>
                         <BudgetItem item={this.state.itemToEdit}
                                     cancelEdit={this.cancelEditBudgetItem}
                         />
-                        <div className="actionWrapper">
-                            <FABButton colored ripple>
-                                <Icon name="add"/>
+                        <div className="actionWrapper" >
+                            <FABButton colored ripple >
+                                <Icon name="add" />
                             </FABButton>
                         </div>
                     </Cell>
