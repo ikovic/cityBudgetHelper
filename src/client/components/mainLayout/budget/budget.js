@@ -90,7 +90,10 @@ class Budget extends Component {
                 <Grid >
                     <Cell col={8} >
                         <Card shadow={0} style={{width: '100%', margin: 'auto'}} >
-                            <CardTitle>{this.props.budget.title || 'Proračun'}</CardTitle>
+                            <CardTitle
+                                style={{backgroundColor: '#9fa8da', color: '#fff'}} >
+                                {this.props.budget.title || 'Proračun'}
+                            </CardTitle>
                             <CardText id="tableContainer" >
                                 {this.props.budgetItems ?
                                     <BudgetTable items={this.props.budgetItems}
