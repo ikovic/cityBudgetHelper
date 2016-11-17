@@ -22,6 +22,9 @@ function budgetItemsReducer(state = [], action) {
         case constants.ADD_BUDGET_ITEM:
             return [...state, action.data.budgetItem];
 
+        case constants.REMOVE_BUDGET_ITEM:
+            return state.filter((item) => item.id !== action.data.budgetItem.id);
+
         case constants.UPDATE_BUDGET_ITEM:
             return state.map(item => budgetItemReducer(item, action));
 

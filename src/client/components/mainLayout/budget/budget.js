@@ -53,7 +53,10 @@ class Budget extends Component {
     }
 
     deleteBudgetItem(item) {
-        console.log('delete', item);
+        if (this.state.editBudgetItem.item && (item.id === this.state.editBudgetItem.item.id)) {
+            this.cancelEditBudgetItem();
+        }
+        this.props.dispatch(actions.removeBudgetItem(item));
     }
 
     editBudgetItem(item) {
@@ -138,7 +141,8 @@ class Budget extends Component {
                         <Card id="tableCard" shadow={0} >
                             <CardTitle className="tableCardTitle" >
                                 <span>{this.props.budget.title || 'Proračun'}</span>
-                                <FABButton id="addBudgetItemBtn" colored ripple onClick={() => this.createBudgetItem()} >
+                                <FABButton id="addBudgetItemBtn" colored ripple
+                                           onClick={() => this.createBudgetItem()} >
                                     <Icon name="add" />
                                 </FABButton>
                             </CardTitle>

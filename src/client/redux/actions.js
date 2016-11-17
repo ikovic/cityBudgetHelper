@@ -63,6 +63,15 @@ class Actions {
             }
         }
     }
+
+    removeBudgetItem(budgetItem) {
+        return {
+            type: constants.REMOVE_BUDGET_ITEM,
+            data: {
+                budgetItem
+            }
+        }
+    }
 }
 
 const actions = new Actions();
