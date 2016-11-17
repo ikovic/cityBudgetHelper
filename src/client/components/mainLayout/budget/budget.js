@@ -18,7 +18,11 @@ class Budget extends Component {
         this.saveBudgetItem = this.saveBudgetItem.bind(this);
 
         this.state = {
-            itemToEdit: null
+            editBudgetItem: {
+                item: null,
+                edit: false,
+                create: false
+            }
         };
     }
 
@@ -53,11 +57,33 @@ class Budget extends Component {
     }
 
     editBudgetItem(item) {
-        this.setState({itemToEdit: item});
+        this.setState({
+            editBudgetItem: {
+                item: item,
+                edit: true,
+                create: false
+            }
+        });
+    }
+
+    createBudgetItem() {
+        this.setState({
+            editBudgetItem: {
+                item: null,
+                edit: false,
+                create: true
+            }
+        });
     }
 
     cancelEditBudgetItem() {
-        this.setState({itemToEdit: null});
+        this.setState({
+            editBudgetItem: {
+                item: null,
+                edit: false,
+                create: false
+            }
+        });
     }
 
     saveBudgetItem(item) {
@@ -76,7 +102,7 @@ class Budget extends Component {
                 }
             }
         );
-        this.setState({itemToEdit: null});
+        this.cancelEditBudgetItem();
     }
 
     setTableHeight() {
@@ -109,10 +135,12 @@ class Budget extends Component {
             <section id="budgetSection" >
                 <Grid >
                     <Cell col={8} >
-                        <Card shadow={0} style={{width: '100%', margin: 'auto'}} >
-                            <CardTitle
-                                style={{backgroundColor: '#9fa8da', color: '#fff'}} >
-                                {this.props.budget.title || 'Proračun'}
+                        <Card id="tableCard" shadow={0} >
+                            <CardTitle className="tableCardTitle" >
+                                <span>{this.props.budget.title || 'Proračun'}</span>
+                                <FABButton id="addBudgetItemBtn" colored ripple onClick={() => this.createBudgetItem()} >
+                                    <Icon name="add" />
+                                </FABButton>
                             </CardTitle>
                             <CardText id="tableContainer" >
                                 {this.props.budgetItems ?
@@ -128,15 +156,11 @@ class Budget extends Component {
                     </Cell>
                     <Cell id="budgetTools" col={4} >
                         <BudgetSearch/>
-                        <BudgetItem item={this.state.itemToEdit}
+                        <BudgetItem item={this.state.editBudgetItem.item}
+                                    options={{edit: this.state.editBudgetItem.edit, create: this.state.editBudgetItem.create}}
                                     saveItem={this.saveBudgetItem}
                                     cancelEdit={this.cancelEditBudgetItem}
                         />
-                        <div className="actionWrapper" >
-                            <FABButton colored ripple >
-                                <Icon name="add" />
-                            </FABButton>
-                        </div>
                     </Cell>
                 </Grid>
             </section>

@@ -5,15 +5,30 @@
     overflow: auto;
   }
 
+  #tableCard {
+    width: 100%;
+    margin: auto;
+
+    div.tableCardTitle {
+      position: relative;
+      background-color: #9fa8da;
+      color: #fff;
+
+      #addBudgetItemBtn {
+        position: absolute;
+        top: 25px;
+        right: 150px;
+        z-index: 1;
+      }
+    }
+  }
+
   #budgetTable {
     width: 100%;
   }
 
   #budgetTools {
     padding-top: 1px;
-    div.actionWrapper {
-      width: 100%;
-      text-align: right;
-    }
   }
+
 }

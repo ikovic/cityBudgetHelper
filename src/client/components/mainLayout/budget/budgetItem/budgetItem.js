@@ -38,15 +38,30 @@ export default class BudgetItem extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        const isEditMode = this.props.options.edit;
+        const isCreateMode = this.props.options.create;
+        const isActive = isCreateMode || isEditMode;
+
+        if ((isActive) && (isEditMode !== prevProps.options.edit || isCreateMode !== prevProps.options.create)) {
+            document.getElementById('positionInput').focus();
+        }
+    }
+
     render() {
-        const isEditMode = !!this.state.id;
+        const isEditMode = this.props.options.edit;
+        const isCreateMode = this.props.options.create;
+        const isActive = isCreateMode || isEditMode;
 
         return (
-            <div id="budgetItemWrapper">
-                <Card shadow={0} style={{width: '100%', margin: 'auto'}}>
-                    <CardTitle>Stavka proračuna</CardTitle>
+            <div id="budgetItemWrapper" >
+                <Card shadow={0} style={{width: '100%', margin: 'auto'}} >
+                    <CardTitle style={{color: '#fff', backgroundColor: isActive ? '#e91e63' : '#9fa8da'}} >
+                        Stavka proračuna
+                    </CardTitle>
                     <CardText>
                         <Textfield
+                            id="positionInput"
                             onChange={(event) => this.handleChange('position', event.target.value)}
                             value={this.state.position}
                             label="Pozicija"
@@ -71,10 +86,10 @@ export default class BudgetItem extends Component {
                             style={{width: '100%'}}
                         />
                     </CardText>
-                    {isEditMode ?
-                        <CardActions border>
-                            <Button colored onClick={() => this.props.saveItem(this.state)}>OK</Button>
-                            <Button colored onClick={this.props.cancelEdit}>Odustani</Button>
+                    {(isEditMode || isCreateMode) ?
+                        <CardActions border >
+                            <Button colored onClick={() => this.props.saveItem(this.state)} >OK</Button>
+                            <Button colored onClick={this.props.cancelEdit} >Odustani</Button>
                         </CardActions>
                         :
                         null
@@ -88,5 +103,6 @@ export default class BudgetItem extends Component {
 BudgetItem.propTypes = {
     cancelEdit: PropTypes.func.isRequired,
     saveItem: PropTypes.func.isRequired,
-    item: PropTypes.object
+    item: PropTypes.object,
+    options: PropTypes.object
 };
