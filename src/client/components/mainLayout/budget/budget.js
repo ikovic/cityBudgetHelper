@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Grid, Cell, Card, CardTitle, CardText, FABButton, Icon} from 'react-mdl';
-import {get} from '../../../util/fetch';
+import {get, put, post} from '../../../util/fetch';
 import actions from '../../../redux/actions';
 import BudgetTable from './budgetTable/budgetTable';
 import BudgetSearch from './budgetSearch/budgetSearch';
@@ -15,6 +15,7 @@ class Budget extends Component {
         this.deleteBudgetItem = this.deleteBudgetItem.bind(this);
         this.editBudgetItem = this.editBudgetItem.bind(this);
         this.cancelEditBudgetItem = this.cancelEditBudgetItem.bind(this);
+        this.saveBudgetItem = this.saveBudgetItem.bind(this);
 
         this.state = {
             itemToEdit: null
@@ -59,6 +60,25 @@ class Budget extends Component {
         this.setState({itemToEdit: null});
     }
 
+    saveBudgetItem(item) {
+        const orgId = this.props.organization.id;
+        const budgetId = this.props.budget.id;
+        const fetch = item.id ? post : put;
+        const urlId = item.id ? `/${item.id}` : '';
+        const action = item.id ? actions.updateBudgetItem : actions.addBudgetItem;
+
+        fetch(`http://localhost:3000/api/organizations/${orgId}/budgets/${budgetId}/budgetItems${urlId}`,
+            item,
+            (err, meta, body) => {
+                if (!err && meta.status == 200) {
+                    let budgetItem = JSON.parse(body);
+                    this.props.dispatch(action(budgetItem));
+                }
+            }
+        );
+        this.setState({itemToEdit: null});
+    }
+
     setTableHeight() {
         let height = window.innerHeight;
         let tableHeight = height - 250;
@@ -98,7 +118,8 @@ class Budget extends Component {
                                 {this.props.budgetItems ?
                                     <BudgetTable items={this.props.budgetItems}
                                                  deleteItem={this.deleteBudgetItem}
-                                                 editItem={this.editBudgetItem} />
+                                                 editItem={this.editBudgetItem}
+                                    />
                                     :
                                     <h3>Polazni proračun nije postavljen</h3>
                                 }
@@ -108,6 +129,7 @@ class Budget extends Component {
                     <Cell id="budgetTools" col={4} >
                         <BudgetSearch/>
                         <BudgetItem item={this.state.itemToEdit}
+                                    saveItem={this.saveBudgetItem}
                                     cancelEdit={this.cancelEditBudgetItem}
                         />
                         <div className="actionWrapper" >

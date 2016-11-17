@@ -73,7 +73,7 @@ export default class BudgetItem extends Component {
                     </CardText>
                     {isEditMode ?
                         <CardActions border>
-                            <Button colored>OK</Button>
+                            <Button colored onClick={() => this.props.saveItem(this.state)}>OK</Button>
                             <Button colored onClick={this.props.cancelEdit}>Odustani</Button>
                         </CardActions>
                         :
@@ -87,5 +87,6 @@ export default class BudgetItem extends Component {
 
 BudgetItem.propTypes = {
     cancelEdit: PropTypes.func.isRequired,
+    saveItem: PropTypes.func.isRequired,
     item: PropTypes.object
 };

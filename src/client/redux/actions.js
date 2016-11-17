@@ -45,6 +45,24 @@ class Actions {
             }
         }
     }
+
+    addBudgetItem(budgetItem) {
+        return {
+            type: constants.ADD_BUDGET_ITEM,
+            data: {
+                budgetItem
+            }
+        }
+    }
+
+    updateBudgetItem(budgetItem) {
+        return {
+            type: constants.UPDATE_BUDGET_ITEM,
+            data: {
+                budgetItem
+            }
+        }
+    }
 }
 
 const actions = new Actions();

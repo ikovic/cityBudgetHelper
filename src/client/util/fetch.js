@@ -34,3 +34,12 @@ export function post(url, body, callback) {
         callback);
 }
 
+export function put(url, body, callback) {
+    fetchUrl(url, {
+            method: 'PUT',
+            payload: JSON.stringify(body),
+            headers: getHeaders()
+        },
+        callback);
+}
+
