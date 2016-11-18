@@ -21,8 +21,9 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
             });
     })
     .put(function (req, res) {
-        let newBudgetItem = Object.assign({}, req.body, {BudgetId: parseInt(req.params.budgetId, 10)});
-        models.BudgetItem.create(newBudgetItem, {fields: ['position', 'description', 'amount', 'BudgetId']})
+        ['orgId', 'budgetId'].forEach(param => req.sanitizeParams(param).toInt());
+        let newBudgetItem = Object.assign({}, req.body, {BudgetId: req.params.budgetId, OrganizationId: req.params.orgId});
+        models.BudgetItem.create(newBudgetItem, {fields: ['position', 'description', 'amount', 'BudgetId', 'OrganizationId']})
             .then(function (createdBudgetItem) {
                 res.json(createdBudgetItem);
             })
