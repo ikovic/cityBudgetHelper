@@ -11,7 +11,7 @@ const authorize = require('../../middleware/authorization').authorize;
 router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
     .all(authorize)
     .get(function (req, res) {
-        models.BudgetItem.findAll({where: {BudgetId: req.params.budgetId}})
+        models.BudgetItem.findAll({where: {BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
             .then(function (value) {
                 res.json(value);
             })
