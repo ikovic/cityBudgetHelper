@@ -69,7 +69,7 @@ router.route('/organizations/:orgId/budgets/:budgetId')
       next();
     })
     .get(function (req, res) {
-        models.Budget.findAll({where: {id: req.params.budgetId, OrganizationId: req.params.orgId}, include: models.BudgetItem})
+        models.Budget.findAll({where: {id: req.params.budgetId, OrganizationId: req.params.orgId}, include: [{model: models.BudgetItem, as: 'budgetItems'}]})
             .then(function (value) {
                 res.json(value);
             })
