@@ -79,7 +79,7 @@ router.route('/organizations/:orgId/budgets/:budgetId')
             });
     })
     .post(function (req, res) {
-        models.Budget.findById(req.params.budgetId)
+        models.Budget.findOne({where: {id: req.params.budgetId, OrganizationId: req.params.orgId}})
             .then(function (budget) {
                 return budget.update(req.body, {fields: ['year', 'default', 'title']})
             })
