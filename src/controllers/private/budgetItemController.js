@@ -53,6 +53,19 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemId'
                 console.log('Error with POST budgetItem:', error);
                 res.json(error);
             });
+    })
+    .delete(function (req, res) {
+        models.BudgetItem.findOne({where: {id: req.params.budgetItemId, BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
+            .then(function (budgetItem) {
+                return budgetItem.destroy()
+            })
+            .then(function (updatedBudgetItem) {
+                res.json(updatedBudgetItem);
+            })
+            .catch(function (error) {
+                console.log('Error with DELETE budgetItem:', error);
+                res.json(error);
+            });
     });
 
 module.exports = router;
