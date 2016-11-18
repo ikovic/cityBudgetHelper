@@ -92,12 +92,9 @@ router.route('/organizations/:orgId/budgets/:budgetId')
             });
     })
     .delete(function (req, res) {
-        models.Budget.findOne({where: {id: req.params.budgetId, OrganizationId: req.params.orgId}})
-            .then(function (budget) {
-                return budget.destroy()
-            })
-            .then(function (updatedBudget) {
-                res.json(updatedBudget);
+        models.Budget.destroy({where: {id: req.params.budgetId, OrganizationId: req.params.orgId}})
+            .then(function (rowsModified) {
+                res.sendStatus(200);
             })
             .catch(function (error) {
                 console.log('Error with DELETE budget:', error);

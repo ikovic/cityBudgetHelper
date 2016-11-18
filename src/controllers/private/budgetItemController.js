@@ -55,12 +55,9 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemId'
             });
     })
     .delete(function (req, res) {
-        models.BudgetItem.findOne({where: {id: req.params.budgetItemId, BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
-            .then(function (budgetItem) {
-                return budgetItem.destroy()
-            })
-            .then(function (updatedBudgetItem) {
-                res.json(updatedBudgetItem);
+        models.BudgetItem.destroy({where: {id: req.params.budgetItemId, BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
+            .then(function (rowsModified) {
+                res.sendStatus(200);
             })
             .catch(function (error) {
                 console.log('Error with DELETE budgetItem:', error);
