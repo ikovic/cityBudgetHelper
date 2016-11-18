@@ -9,7 +9,10 @@ const authorize = require('../../middleware/authorization').authorize;
  * Budget Items API
  */
 router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
-    .all(authorize)
+    .all(authorize, (req, res, next) => {
+      sanitizeIds(['orgId', 'budgetId'], req);
+      next();
+    })
     .get(function (req, res) {
         models.BudgetItem.findAll({where: {BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
             .then(function (value) {
@@ -21,7 +24,6 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
             });
     })
     .put(function (req, res) {
-        ['orgId', 'budgetId'].forEach(param => req.sanitizeParams(param).toInt());
         let newBudgetItem = Object.assign({}, req.body, {BudgetId: req.params.budgetId, OrganizationId: req.params.orgId});
         models.BudgetItem.create(newBudgetItem, {fields: ['position', 'description', 'amount', 'BudgetId', 'OrganizationId']})
             .then(function (createdBudgetItem) {
@@ -33,10 +35,13 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
             });
     });
 
-router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemsId')
-    .all(authorize)
+router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemId')
+    .all(authorize, (req, res, next) => {
+      sanitizeIds(['orgId', 'budgetId', 'budgetItemId'], req);
+      next();
+    })
     .post(function (req, res) {
-        models.BudgetItem.findOne({where: {id: req.params.budgetItemsId, BudgetId: req.params.budgetId}})
+        models.BudgetItem.findOne({where: {id: req.params.budgetItemId, BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
             .then(function (budgetItem) {
                 return budgetItem.update(req.body, {fields: ['position', 'description', 'amount']})
             })
@@ -48,5 +53,9 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemsId
                 res.json(error);
             });
     });
+
+function sanitizeIds(ids, req){
+  ids.forEach(param => req.sanitizeParams(param).toInt());
+}
 
 module.exports = router;
