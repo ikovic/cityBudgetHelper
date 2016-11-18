@@ -4,13 +4,14 @@ const express = require('express');
 const router = express.Router();
 const models = require('../../models');
 const authorize = require('../../middleware/authorization').authorize;
+const sanitizers = require('../../util/sanitizers');
 
 /**
  * Budget Items API
  */
 router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
     .all(authorize, (req, res, next) => {
-      sanitizeIds(['orgId', 'budgetId'], req);
+      sanitizers.sanitizeIntegers(['orgId', 'budgetId'], req);
       next();
     })
     .get(function (req, res) {
@@ -37,7 +38,7 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
 
 router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemId')
     .all(authorize, (req, res, next) => {
-      sanitizeIds(['orgId', 'budgetId', 'budgetItemId'], req);
+      sanitizers.sanitizeIntegers(['orgId', 'budgetId', 'budgetItemId'], req);
       next();
     })
     .post(function (req, res) {
@@ -53,9 +54,5 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemId'
                 res.json(error);
             });
     });
-
-function sanitizeIds(ids, req){
-  ids.forEach(param => req.sanitizeParams(param).toInt());
-}
 
 module.exports = router;
