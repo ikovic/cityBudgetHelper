@@ -28,7 +28,7 @@ $ npm install
 ```
 * run the server
 ```sh
-$ npm run start
+$ npm start
 ```
 * run Gulp in a separate terminal to compile front end assets
 ```sh
