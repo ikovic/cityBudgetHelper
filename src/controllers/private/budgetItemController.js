@@ -11,7 +11,7 @@ const sanitizers = require('../../util/sanitizers');
  */
 router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
     .all(authorize, (req, res, next) => {
-      sanitizers.sanitizeIntegers(['orgId', 'budgetId'], req);
+      sanitizers.sanitizeParamIntegers(['orgId', 'budgetId'], req);
       next();
     })
     .get(function (req, res) {
@@ -38,7 +38,7 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
 
 router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemId')
     .all(authorize, (req, res, next) => {
-      sanitizers.sanitizeIntegers(['orgId', 'budgetId', 'budgetItemId'], req);
+      sanitizers.sanitizeParamIntegers(['orgId', 'budgetId', 'budgetItemId'], req);
       next();
     })
     .post(function (req, res) {
