@@ -4,14 +4,18 @@ const express = require('express');
 const router = express.Router();
 const models = require('../../models');
 const authorize = require('../../middleware/authorization').authorize;
+const sanitizers = require('../../util/sanitizers');
 
 /**
  * Budget Items API
  */
 router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
-    .all(authorize)
+    .all(authorize, (req, res, next) => {
+      sanitizers.sanitizeParamIntegers(['orgId', 'budgetId'], req);
+      next();
+    })
     .get(function (req, res) {
-        models.BudgetItem.findAll({where: {BudgetId: req.params.budgetId}})
+        models.BudgetItem.findAll({where: {BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
             .then(function (value) {
                 res.json(value);
             })
@@ -21,8 +25,8 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
             });
     })
     .put(function (req, res) {
-        let newBudgetItem = Object.assign({}, req.body, {BudgetId: parseInt(req.params.budgetId, 10)});
-        models.BudgetItem.create(newBudgetItem, {fields: ['position', 'description', 'amount', 'BudgetId']})
+        let newBudgetItem = Object.assign({}, req.body, {BudgetId: req.params.budgetId, OrganizationId: req.params.orgId});
+        models.BudgetItem.create(newBudgetItem, {fields: ['position', 'description', 'amount', 'BudgetId', 'OrganizationId']})
             .then(function (createdBudgetItem) {
                 res.json(createdBudgetItem);
             })
@@ -32,10 +36,13 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
             });
     });
 
-router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemsId')
-    .all(authorize)
+router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemId')
+    .all(authorize, (req, res, next) => {
+      sanitizers.sanitizeParamIntegers(['orgId', 'budgetId', 'budgetItemId'], req);
+      next();
+    })
     .post(function (req, res) {
-        models.BudgetItem.findOne({where: {id: req.params.budgetItemsId, BudgetId: req.params.budgetId}})
+        models.BudgetItem.findOne({where: {id: req.params.budgetItemId, BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
             .then(function (budgetItem) {
                 return budgetItem.update(req.body, {fields: ['position', 'description', 'amount']})
             })
@@ -44,6 +51,16 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemsId
             })
             .catch(function (error) {
                 console.log('Error with POST budgetItem:', error);
+                res.json(error);
+            });
+    })
+    .delete(function (req, res) {
+        models.BudgetItem.destroy({where: {id: req.params.budgetItemId, BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
+            .then(function (rowsModified) {
+                res.sendStatus(200);
+            })
+            .catch(function (error) {
+                console.log('Error with DELETE budgetItem:', error);
                 res.json(error);
             });
     });
