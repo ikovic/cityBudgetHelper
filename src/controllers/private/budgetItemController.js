@@ -11,8 +11,8 @@ const sanitizers = require('../../util/sanitizers');
  */
 router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
     .all(authorize, (req, res, next) => {
-      sanitizers.sanitizeParamIntegers(['orgId', 'budgetId'], req);
-      next();
+        sanitizers.sanitizeParamIntegers(['orgId', 'budgetId'], req);
+        next();
     })
     .get(function (req, res) {
         models.BudgetItem.findAll({where: {BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
@@ -25,7 +25,10 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
             });
     })
     .put(function (req, res) {
-        let newBudgetItem = Object.assign({}, req.body, {BudgetId: req.params.budgetId, OrganizationId: req.params.orgId});
+        let newBudgetItem = Object.assign({}, req.body, {
+            BudgetId: req.params.budgetId,
+            OrganizationId: req.params.orgId
+        });
         models.BudgetItem.create(newBudgetItem, {fields: ['position', 'description', 'amount', 'BudgetId', 'OrganizationId']})
             .then(function (createdBudgetItem) {
                 res.json(createdBudgetItem);
@@ -38,11 +41,17 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems')
 
 router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemId')
     .all(authorize, (req, res, next) => {
-      sanitizers.sanitizeParamIntegers(['orgId', 'budgetId', 'budgetItemId'], req);
-      next();
+        sanitizers.sanitizeParamIntegers(['orgId', 'budgetId', 'budgetItemId'], req);
+        next();
     })
     .post(function (req, res) {
-        models.BudgetItem.findOne({where: {id: req.params.budgetItemId, BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
+        models.BudgetItem.findOne({
+            where: {
+                id: req.params.budgetItemId,
+                BudgetId: req.params.budgetId,
+                OrganizationId: req.params.orgId
+            }
+        })
             .then(function (budgetItem) {
                 return budgetItem.update(req.body, {fields: ['position', 'description', 'amount']})
             })
@@ -55,7 +64,13 @@ router.route('/organizations/:orgId/budgets/:budgetId/budgetItems/:budgetItemId'
             });
     })
     .delete(function (req, res) {
-        models.BudgetItem.destroy({where: {id: req.params.budgetItemId, BudgetId: req.params.budgetId, OrganizationId: req.params.orgId}})
+        models.BudgetItem.destroy({
+            where: {
+                id: req.params.budgetItemId,
+                BudgetId: req.params.budgetId,
+                OrganizationId: req.params.orgId
+            }
+        })
             .then(function (rowsModified) {
                 res.sendStatus(200);
             })

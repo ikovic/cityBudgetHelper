@@ -27,8 +27,8 @@ const budgetFilters = [
 
 router.route('/organizations/:orgId/budgets')
     .all(authorize, (req, res, next) => {
-      sanitizers.sanitizeParamIntegers(['orgId'], req);
-      next();
+        sanitizers.sanitizeParamIntegers(['orgId'], req);
+        next();
     })
     .get(function (req, res) {
         if (Object.keys(req.query).length === 0) {
@@ -65,11 +65,14 @@ router.route('/organizations/:orgId/budgets')
 
 router.route('/organizations/:orgId/budgets/:budgetId')
     .all(authorize, (req, res, next) => {
-      sanitizers.sanitizeParamIntegers(['orgId', 'budgetId'], req);
-      next();
+        sanitizers.sanitizeParamIntegers(['orgId', 'budgetId'], req);
+        next();
     })
     .get(function (req, res) {
-        models.Budget.findOne({where: {id: req.params.budgetId, OrganizationId: req.params.orgId}, include: [{model: models.BudgetItem, as: 'budgetItems'}]})
+        models.Budget.findOne({
+            where: {id: req.params.budgetId, OrganizationId: req.params.orgId},
+            include: [{model: models.BudgetItem, as: 'budgetItems'}]
+        })
             .then(function (value) {
                 res.json(value);
             })
