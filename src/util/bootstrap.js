@@ -3,6 +3,8 @@
 const fs = require('fs');
 
 function bootstrap(models) {
+    models.sequelize.sync({force: true})
+    .then(function() {
     let organization = JSON.parse(fs.readFileSync('./bootstrap.json', 'utf-8'));
     let nOfUsers = organization.users.length;
     for (let i = 0; i < nOfUsers; i++) {
@@ -17,6 +19,7 @@ function bootstrap(models) {
             }
         })
     }
+  });
 }
 
 function addOrgIdToBudgetItems(newOrg) {
