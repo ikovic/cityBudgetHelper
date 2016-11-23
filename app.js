@@ -43,7 +43,7 @@ models.sequelize
     .authenticate()
     .then(function (err) {
         console.log('Connection has been established successfully.');
-        return models.sequelize.sync();
+        return models.sequelize.sync({force: true});
     })
     .then(function () {
         let args = process.argv.slice(2);
