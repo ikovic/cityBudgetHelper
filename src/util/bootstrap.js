@@ -31,12 +31,16 @@ function addOrgIdToBudgetItems(newOrg) {
 function addOrgIdToOrderAndOrderItems(newOrg) {
   newOrg.budgets.forEach(budget => {
       budget.budgetItems.forEach(budgetItem => {
+        if (budgetItem.orders) {
           budgetItem.orders.forEach(order => {
             order.setOrganization(newOrg);
-            order.orderItems.forEach(orderItem => {
-              orderItem.setOrganization(newOrg);
-            });
+            if (order.orderItems) {
+              order.orderItems.forEach(orderItem => {
+                orderItem.setOrganization(newOrg);
+              });
+            }
           });
+        }
       });
   });
   return newOrg;

@@ -31,51 +31,51 @@
           "orders": [
             {
               "identificator": "random indentificator 1",
-              "dateRecieved": true,
+              "dateReceived": "2016-01-01",
               "type": "roba",
               "orderItems": [
                 {
                   "title": "Zastitna traka",
                   "unitOfMeasure": "metar",
-                  "quantity": "100",
-                  "price": "88"
+                  "quantity": 100,
+                  "price": 88
                 },
                 {
                   "title": "Ljepljiva pasta",
                   "unitOfMeasure": "litra",
-                  "quantity": "1",
-                  "price": "200"
+                  "quantity": 1,
+                  "price": 200
                 },
                 {
                   "title": "Marker",
                   "unitOfMeasure": "komad",
-                  "quantity": "3",
-                  "price": "8"
+                  "quantity": 3,
+                  "price": 8
                 }
               ]
             },
             {
               "identificator": "random indentificator 2",
-              "dateRecieved": false,
+              "dateReceived": "2016-01-01",
               "type": "usluga",
               "orderItems": [
                 {
                   "title": "Procjena prije rada",
                   "unitOfMeasure": "sat",
-                  "quantity": "2",
-                  "price": "250"
+                  "quantity": 2,
+                  "price": 250
                 },
                 {
                   "title": "Bojanje zidova",
                   "unitOfMeasure": "sat",
-                  "quantity": "8",
-                  "price": "200"
+                  "quantity": 8,
+                  "price": 200
                 },
                 {
                   "title": "Boja",
                   "unitOfMeasure": "litra",
-                  "quantity": "10",
-                  "price": "90"
+                  "quantity": 10,
+                  "price": 90
                 }
               ]
             }
