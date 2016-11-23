@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     OrderItem.associate = function (models) {
-        OrderItem.belongsTo(models.Organization, { foreignKey: { allowNull: false }});
+        OrderItem.belongsTo(models.Organization, { foreignKey: { allowNull: true }});
         OrderItem.belongsTo(models.Order);
     };
 
