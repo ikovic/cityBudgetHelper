@@ -12,6 +12,7 @@ const publicControllers = require('./src/controllers/public')(app);
 const passport = require('./src/auth/passport')(models);
 const bootstrap = require('./src/util/bootstrap.js').bootstrap;
 const expressValidator = require('express-validator');
+const args = process.argv.slice(2);
 
 // set secure HTTP headers
 app.use(helmet());
@@ -43,10 +44,12 @@ models.sequelize
     .authenticate()
     .then(function (err) {
         console.log('Connection has been established successfully.');
+        if(args[0] == 'bootstrap') {
+          return models.sequelize.sync({force: true});
+        }
         return models.sequelize.sync();
     })
     .then(function () {
-        let args = process.argv.slice(2);
         if (args[0] == 'bootstrap') {
             bootstrap(models);
         } else {
