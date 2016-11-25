@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (sequelize, DataTypes) {
-    var Order = sequelize.define('Order', {
+    const Order = sequelize.define('Order', {
         id: {
             type: DataTypes.INTEGER(11),
             allowNull: false,
@@ -28,7 +28,8 @@ module.exports = function (sequelize, DataTypes) {
     Order.associate = function (models) {
         Order.belongsTo(models.BudgetItem);
         Order.belongsTo(models.Organization, {as: 'buyer'});
-        Order.belongsTo(models.Organization, {as: 'supplier'});
+        Order.belongsTo(models.Organization, {as: 'Organization'});
+        Order.hasMany(models.OrderItem, {as: 'orderItems'});
     };
 
     return Order;

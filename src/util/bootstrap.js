@@ -28,6 +28,24 @@ function addOrgIdToBudgetItems(newOrg) {
     return newOrg;
 }
 
+function addOrgIdToOrderAndOrderItems(newOrg) {
+  newOrg.budgets.forEach(budget => {
+      budget.budgetItems.forEach(budgetItem => {
+        if (budgetItem.orders) {
+          budgetItem.orders.forEach(order => {
+            order.setOrganization(newOrg);
+            if (order.orderItems) {
+              order.orderItems.forEach(orderItem => {
+                orderItem.setOrganization(newOrg);
+              });
+            }
+          });
+        }
+      });
+  });
+  return newOrg;
+}
+
 function batchCreateOrgAndUsers(organization, models) {
     models.Organization.create(organization,
         {
@@ -42,7 +60,19 @@ function batchCreateOrgAndUsers(organization, models) {
                     include: [
                         {
                             model: models.BudgetItem,
-                            as: 'budgetItems'
+                            as: 'budgetItems',
+                            include: [
+                              {
+                                model: models.Order,
+                                as: 'orders',
+                                include: [
+                                  {
+                                    model: models.OrderItem,
+                                    as: 'orderItems'
+                                  }
+                                ]
+                              }
+                            ]
                         }
                     ]
                 }
@@ -51,6 +81,7 @@ function batchCreateOrgAndUsers(organization, models) {
     )
         .then(function (newOrg) {
             newOrg = addOrgIdToBudgetItems(newOrg);
+            newOrg = addOrgIdToOrderAndOrderItems(newOrg);
             return newOrg.save();
         })
         .catch(function (err) {
