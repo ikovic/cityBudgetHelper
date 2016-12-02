@@ -3,6 +3,7 @@
   #tableContainer {
     width: auto;
     overflow: auto;
+    padding: 0;
   }
 
   #tableCard {
@@ -16,7 +17,7 @@
 
       #addBudgetItemBtn {
         position: absolute;
-        top: 25px;
+        top: 30px;
         right: 150px;
         z-index: 1;
       }
