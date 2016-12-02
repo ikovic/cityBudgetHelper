@@ -44,8 +44,8 @@ models.sequelize
     .authenticate()
     .then(function (err) {
         console.log('Connection has been established successfully.');
-        if(args[0] == 'bootstrap') {
-          return models.sequelize.sync({force: true});
+        if (args[0] == 'bootstrap') {
+            return models.sequelize.sync({force: true});
         }
         return models.sequelize.sync();
     })

@@ -29,21 +29,21 @@ function addOrgIdToBudgetItems(newOrg) {
 }
 
 function addOrgIdToOrderAndOrderItems(newOrg) {
-  newOrg.budgets.forEach(budget => {
-      budget.budgetItems.forEach(budgetItem => {
-        if (budgetItem.orders) {
-          budgetItem.orders.forEach(order => {
-            order.setOrganization(newOrg);
-            if (order.orderItems) {
-              order.orderItems.forEach(orderItem => {
-                orderItem.setOrganization(newOrg);
-              });
+    newOrg.budgets.forEach(budget => {
+        budget.budgetItems.forEach(budgetItem => {
+            if (budgetItem.orders) {
+                budgetItem.orders.forEach(order => {
+                    order.setOrganization(newOrg);
+                    if (order.orderItems) {
+                        order.orderItems.forEach(orderItem => {
+                            orderItem.setOrganization(newOrg);
+                        });
+                    }
+                });
             }
-          });
-        }
-      });
-  });
-  return newOrg;
+        });
+    });
+    return newOrg;
 }
 
 function batchCreateOrgAndUsers(organization, models) {
@@ -62,16 +62,16 @@ function batchCreateOrgAndUsers(organization, models) {
                             model: models.BudgetItem,
                             as: 'budgetItems',
                             include: [
-                              {
-                                model: models.Order,
-                                as: 'orders',
-                                include: [
-                                  {
-                                    model: models.OrderItem,
-                                    as: 'orderItems'
-                                  }
-                                ]
-                              }
+                                {
+                                    model: models.Order,
+                                    as: 'orders',
+                                    include: [
+                                        {
+                                            model: models.OrderItem,
+                                            as: 'orderItems'
+                                        }
+                                    ]
+                                }
                             ]
                         }
                     ]
