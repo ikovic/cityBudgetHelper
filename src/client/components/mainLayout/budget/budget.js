@@ -134,13 +134,14 @@ class Budget extends Component {
     }
 
     render() {
+        // <span>{this.props.budget.title || 'Proračun'}</span>
         return (
             <section id="budgetSection" >
                 <Grid >
                     <Cell col={8} >
                         <Card id="tableCard" shadow={0} >
                             <CardTitle className="tableCardTitle" >
-                                <span>{this.props.budget.title || 'Proračun'}</span>
+                                <h2 className="mdl-card__title-text" >{this.props.budget.title || 'Proračun'}</h2>
                                 <FABButton id="addBudgetItemBtn" colored ripple
                                            onClick={() => this.createBudgetItem()} >
                                     <Icon name="add" />
