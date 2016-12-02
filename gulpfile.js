@@ -8,7 +8,7 @@ var source = require('vinyl-source-stream');
 
 // source & build paths
 var paths = {
-    CSS_SRC: '.src/client/**/*.scss',
+    CSS_SRC: './src/client/**/*.scss',
     CSS_MAIN: './src/client/main.scss',
     CSS_BUILD: './public/css/',
     JS_MAIN: './src/client/app.js',

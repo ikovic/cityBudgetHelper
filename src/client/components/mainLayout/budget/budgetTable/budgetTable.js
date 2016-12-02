@@ -15,8 +15,7 @@ export default class BudgetTable extends Component {
     render() {
         const {items} = this.props;
         return (
-            <DataTable id="budgetTable"
-                       shadow={0}
+            <DataTable id="budgetTable"                       
                        rows={items}
             >
                 <TableHeader name="position">Pozicija</TableHeader>
