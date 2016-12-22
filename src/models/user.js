@@ -39,9 +39,9 @@ module.exports = function (sequelize, DataTypes) {
                     });
                 });
             },
-            validatePassword(password, hashedPassword) {
+            validatePassword(password) {
                 return new Promise((resolve, reject) => {
-                    bcrypt.compare(password, hashedPassword, function (err, res) {
+                    bcrypt.compare(password, this.hashedPassword, function (err, res) {
                         if (err || !res) {
                             reject(err);
                         } else {
