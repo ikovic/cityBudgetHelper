@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
         }
     }, {
         tableName: 'user',
-        instanceMethods: {
+        classMethods: {
             setPassword(user, password, done) {
                 bcrypt.genSalt(10, function (err, salt) {
                     bcrypt.hash(password, salt, function (err, hash) {
@@ -38,7 +38,9 @@ module.exports = function (sequelize, DataTypes) {
                         }
                     });
                 });
-            },
+            }
+        },
+        instanceMethods: {
             validatePassword(password) {
                 return new Promise((resolve, reject) => {
                     bcrypt.compare(password, this.hashedPassword, function (err, res) {
