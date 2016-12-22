@@ -9,6 +9,7 @@ const models = require('../../models');
 router.route('/token')
     .post(function (req, res) {
         const {email, password} = req.body;
+        
         if (!email || !password) {
             return res.sendStatus(400);
         }
