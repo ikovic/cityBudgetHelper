@@ -28,8 +28,8 @@ module.exports = function (sequelize, DataTypes) {
         }
     }, {
         tableName: 'user',
-        classMethods: {
-            setPassword: function (user, password, done) {
+        instanceMethods: {
+            setPassword(user, password, done) {
                 bcrypt.genSalt(10, function (err, salt) {
                     bcrypt.hash(password, salt, function (err, hash) {
                         if (hash) {
@@ -39,10 +39,25 @@ module.exports = function (sequelize, DataTypes) {
                     });
                 });
             },
-            validPassword: function (password, hashedPassword, callback) {
-                bcrypt.compare(password, hashedPassword, function (err, res) {
-                    callback(res);
+            validatePassword(password) {
+                return new Promise((resolve, reject) => {
+                    bcrypt.compare(password, this.hashedPassword, function (err, res) {
+                        if (err || !res) {
+                            reject(err);
+                        } else {
+                            resolve(res);
+                        }
+                    });
                 });
+            },
+            toJson() {
+                return {
+                    id: this.id,
+                    email: this.email,
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    orgId: this.OrganizationId
+                }
             }
         }
     });

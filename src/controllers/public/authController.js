@@ -8,50 +8,34 @@ const models = require('../../models');
 
 router.route('/token')
     .post(function (req, res) {
-        if (Object.keys(req.body).length === 0 && req.body.constructor === Object) {
+        const {email, password} = req.body;
+        
+        if (!email || !password) {
             return res.sendStatus(400);
-        } else {
-            // get the email & password
-            models.User.findOne(
-                {
-                    where: {
-                        email: req.body.email
-                    }
-                })
-                .then(function (user) {
-                    if (!user) {
-                        res.sendStatus(401);
-                    } else {
-                        models.User.validPassword(req.body.password, user.hashedPassword, function (isValid) {
-                            if (isValid) {
-                                let payload = {id: user.id};
-                                let secret = config.jwt.secret;
-                                let token = jwt.encode(payload, secret);
-                                let userRet = {
-                                    id: user.id,
-                                    email: user.email,
-                                    firstName: user.firstName,
-                                    lastName: user.lastName,
-                                    orgId: user.OrganizationId
-                                };
-                                let ret = {
-                                    user: userRet,
-                                    token
-                                };
-                                res.json(ret);
-
-                            } else {
-                                res.sendStatus(401);
-                            }
-                        });
-                    }
-                })
-                .catch(function (err) {
-                    console.log(err);
-                    res.sendStatus(401);
-                });
         }
+
+        authenticate(email, password)
+            .then(authData => res.json(authData))
+            .catch(() => res.sendStatus(401));
     });
 
-module.exports = router;
+function authenticate(email, password) {
+    var existingUser;
+    return getUser(email)
+        .then(user => {
+            existingUser = user;
+            return user.validatePassword(password);
+        })
+        .then(() => {
+            const payload = {id: existingUser.id};
+            const secret = config.jwt.secret;
+            const token = jwt.encode(payload, secret);
+            return {token, user: existingUser.toJson()}
+        });
+}
 
+function getUser(email) {
+    return models.User.findOne({where: {email}});
+}
+
+module.exports = router;
