@@ -6,9 +6,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const config = require('./src/config/config');
+const consign = require('consign');
 const models = require('./src/models');
-const privateControllers = require('./src/controllers/private')(app);
-const publicControllers = require('./src/controllers/public')(app);
+//const privateControllers = require('./src/controllers/private')(app);
+//const publicControllers = require('./src/controllers/public')(app);
 const passport = require('./src/auth/passport')(models);
 const bootstrap = require('./src/util/bootstrap.js').bootstrap;
 const expressValidator = require('express-validator');
@@ -27,9 +28,17 @@ app.use(expressValidator());
 // configure authentication
 app.use(passport.initialize());
 
+// autoload controllers
+/*let test = {};
+consign({cwd: 'src'})
+  .include('controllers')
+  .into(test);
+
+console.dir(test);*/
+
 // wire in controllers
-app.use('/api/', passport.authenticate('jwt', {session: false}), privateControllers);
-app.use('/', publicControllers);
+//app.use('/api/', passport.authenticate('jwt', {session: false}), privateControllers);
+//app.use('/', publicControllers);
 
 // serve static files
 app.use(express.static('public'));
