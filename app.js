@@ -29,12 +29,12 @@ app.use(expressValidator());
 app.use(passport.initialize());
 
 // autoload controllers
-/*let test = {};
+let test = {};
 consign({cwd: 'src'})
   .include('controllers')
   .into(test);
 
-console.dir(test);*/
+console.dir(test);
 
 // wire in controllers
 //app.use('/api/', passport.authenticate('jwt', {session: false}), privateControllers);
