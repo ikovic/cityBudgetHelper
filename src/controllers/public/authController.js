@@ -7,17 +7,19 @@ const config = require('../../config/config');
 const models = require('../../models');
 
 router.route('/token')
-  .post(function (req, res) {
-    const {email, password} = req.body;
+  .post(logIn);
 
-    if (!email || !password) {
-      return res.sendStatus(400);
-    }
+function logIn(req, res) {
+  const {email, password} = req.body;
 
-    authenticate(email, password)
-      .then(authData => res.json(authData))
-      .catch(() => res.sendStatus(401));
-  });
+  if (!email || !password) {
+    return res.sendStatus(400);
+  }
+
+  authenticate(email, password)
+    .then(authData => res.json(authData))
+    .catch(() => res.sendStatus(401));
+}
 
 function authenticate(email, password) {
   var existingUser;
