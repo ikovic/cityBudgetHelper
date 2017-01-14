@@ -15,7 +15,11 @@ const resources = {
       [keys.BUDGET_ITEM.CONFIRM]: "OK",
       [keys.BUDGET_ITEM.CANCEL]: "Odustani",
       [keys.BUDGET_SEARCH.CARD_TITLE]: "Pretraga",
-      [keys.BUDGET_SEARCH.POSITION]: "Pozicija"
+      [keys.BUDGET_SEARCH.POSITION]: "Pozicija",
+      [keys.BUDGET_TABLE.POSITION]: "Pozicija",
+      [keys.BUDGET_TABLE.DESCRIPTION]: "Opis",
+      [keys.BUDGET_TABLE.AMOUNT]: "Iznos",
+      [keys.BUDGET_TABLE.ACTIONS]: "Akcije",
     }
   },
   "en": {
@@ -32,7 +36,11 @@ const resources = {
       [keys.BUDGET_ITEM.CONFIRM]: "OK",
       [keys.BUDGET_ITEM.CANCEL]: "Cancel",
       [keys.BUDGET_SEARCH.CARD_TITLE]: "Search",
-      [keys.BUDGET_SEARCH.POSITION]: "Position"
+      [keys.BUDGET_SEARCH.POSITION]: "Position",
+      [keys.BUDGET_TABLE.POSITION]: "Position",
+      [keys.BUDGET_TABLE.DESCRIPTION]: "Description",
+      [keys.BUDGET_TABLE.AMOUNT]: "Amount",
+      [keys.BUDGET_TABLE.ACTIONS]: "Actions",
     }
   }
 };
