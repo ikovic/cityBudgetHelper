@@ -1,9 +1,9 @@
 {
-  "title": "testni org",
-  "description": "Neki random opis",
+  "title": "Test org",
+  "description": "Random description",
   "OIB": 1234567895,
   "IBAN": 35353543,
-  "address": "Boobsova",
+  "address": "Street 14",
   "taxpayer": false,
   "users": [
     {
@@ -22,33 +22,33 @@
   "budgets": [
     {
       "default": true,
-      "title": "Defaultni budget",
+      "title": "Default budget",
       "budgetItems": [
         {
-          "position": "defaultno nebitno 1",
-          "description": "Bla bla bla bla",
+          "position": "def 1",
+          "description": "Anything",
           "amount": 10,
           "orders": [
             {
-              "identificator": "random indentificator 1",
+              "identificator": "random identificator 1",
               "dateReceived": "2016-01-01",
-              "type": "roba",
+              "type": "ware",
               "orderItems": [
                 {
-                  "title": "Zastitna traka",
-                  "unitOfMeasure": "metar",
+                  "title": "Track thing",
+                  "unitOfMeasure": "meter",
                   "quantity": 100,
                   "price": 88
                 },
                 {
-                  "title": "Ljepljiva pasta",
-                  "unitOfMeasure": "litra",
+                  "title": "Glue",
+                  "unitOfMeasure": "liter",
                   "quantity": 1,
                   "price": 200
                 },
                 {
                   "title": "Marker",
-                  "unitOfMeasure": "komad",
+                  "unitOfMeasure": "piece",
                   "quantity": 3,
                   "price": 8
                 }
@@ -57,23 +57,23 @@
             {
               "identificator": "random indentificator 2",
               "dateReceived": "2016-01-01",
-              "type": "usluga",
+              "type": "service",
               "orderItems": [
                 {
-                  "title": "Procjena prije rada",
-                  "unitOfMeasure": "sat",
+                  "title": "Estimate",
+                  "unitOfMeasure": "hour",
                   "quantity": 2,
                   "price": 250
                 },
                 {
-                  "title": "Bojanje zidova",
-                  "unitOfMeasure": "sat",
+                  "title": "Painting",
+                  "unitOfMeasure": "hour",
                   "quantity": 8,
                   "price": 200
                 },
                 {
-                  "title": "Boja",
-                  "unitOfMeasure": "litra",
+                  "title": "Color",
+                  "unitOfMeasure": "liter",
                   "quantity": 10,
                   "price": 90
                 }
@@ -82,24 +82,24 @@
           ]
         },
         {
-          "position": "defaultno nebitno 2",
-          "description": "Blu blu blu blu",
+          "position": "defaultno 2",
+          "description": "desc 2",
           "amount": 20
         }
       ]
     },
     {
       "default": false,
-      "title": "Neki drugi budget",
+      "title": "Some other budget",
       "budgetItems": [
         {
-          "position": "nedefaultno nebitno 1",
-          "description": "Bli bli bli bli",
+          "position": "non default 1",
+          "description": "One One One",
           "amount": 111
         },
         {
-          "position": "nedefaultno nebitno 2",
-          "description": "Ble ble ble ble",
+          "position": "Non default 2",
+          "description": "Two Two Two",
           "amount": 222
         }
       ]
