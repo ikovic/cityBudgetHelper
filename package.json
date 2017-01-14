@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "start": "node app.js",
+    "start": "gulp prod && node app.js",
     "debug": "node --debug app.js",
     "lint": "eslint './src/client/**/*.js' || exit 0",
     "bootstrap": "node app.js bootstrap"
