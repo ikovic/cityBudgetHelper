@@ -13,7 +13,9 @@ const resources = {
       [keys.BUDGET_ITEM.AMOUNT]: "Iznos",
       [keys.BUDGET_ITEM.AMOUNT_ERROR]: "Unesite ispravan iznos",
       [keys.BUDGET_ITEM.CONFIRM]: "OK",
-      [keys.BUDGET_ITEM.CANCEL]: "Odustani"
+      [keys.BUDGET_ITEM.CANCEL]: "Odustani",
+      [keys.BUDGET_SEARCH.CARD_TITLE]: "Pretraga",
+      [keys.BUDGET_SEARCH.POSITION]: "Pozicija"
     }
   },
   "en": {
@@ -28,7 +30,9 @@ const resources = {
       [keys.BUDGET_ITEM.AMOUNT]: "Amount",
       [keys.BUDGET_ITEM.AMOUNT_ERROR]: "Enter a valid amount",
       [keys.BUDGET_ITEM.CONFIRM]: "OK",
-      [keys.BUDGET_ITEM.CANCEL]: "Cancel"
+      [keys.BUDGET_ITEM.CANCEL]: "Cancel",
+      [keys.BUDGET_SEARCH.CARD_TITLE]: "Search",
+      [keys.BUDGET_SEARCH.POSITION]: "Position"
     }
   }
 };

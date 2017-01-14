@@ -13,6 +13,10 @@ const keys = {
     AMOUNT_ERROR: 'AMOUNT_ERROR',
     CONFIRM: 'CONFIRM',
     CANCEL: 'CANCEL'
+  },
+  BUDGET_SEARCH: {
+    CARD_TITLE: 'CARD_TITLE',
+    POSITION: 'POSITION'
   }
 };
 
