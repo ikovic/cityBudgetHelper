@@ -59,21 +59,21 @@ export default class BudgetItem extends Component {
       <div id="budgetItemWrapper">
         <Card shadow={0} style={{width: '100%', margin: 'auto'}}>
           <CardTitle style={{color: '#fff', backgroundColor: isActive ? '#e91e63' : '#9fa8da'}}>
-            {i18n.getTranslatedString(keys.BUDGET_ITEM.CARD_TITLE)}
+            {i18n.getTranslation(keys.BUDGET_ITEM.CARD_TITLE)}
           </CardTitle>
           <CardText>
             <Textfield
               id="positionInput"
               onChange={(event) => this.handleChange('position', event.target.value)}
               value={this.state.position}
-              label={i18n.getTranslatedString(keys.BUDGET_ITEM.POSITION)}
+              label={i18n.getTranslation(keys.BUDGET_ITEM.POSITION)}
               floatingLabel
               style={{width: '100%'}}
             />
             <Textfield
               onChange={(event) => this.handleChange('description', event.target.value)}
               value={this.state.description}
-              label={i18n.getTranslatedString(keys.BUDGET_ITEM.DESCRIPTION)}
+              label={i18n.getTranslation(keys.BUDGET_ITEM.DESCRIPTION)}
               floatingLabel
               rows={2}
               style={{width: '100%'}}
@@ -82,8 +82,8 @@ export default class BudgetItem extends Component {
               onChange={(event) => this.handleChange('amount', event.target.value)}
               value={this.state.amount}
               pattern="-?[0-9]*(\.[0-9]+)?"
-              error={i18n.getTranslatedString(keys.BUDGET_ITEM.AMOUNT_ERROR)}
-              label={i18n.getTranslatedString(keys.BUDGET_ITEM.AMOUNT)}
+              error={i18n.getTranslation(keys.BUDGET_ITEM.AMOUNT_ERROR)}
+              label={i18n.getTranslation(keys.BUDGET_ITEM.AMOUNT)}
               floatingLabel
               style={{width: '100%'}}
             />
@@ -91,10 +91,10 @@ export default class BudgetItem extends Component {
           {(isEditMode || isCreateMode) ?
             <CardActions border>
               <Button colored onClick={() => this.props.saveItem(this.state)}>
-                {i18n.getTranslatedString(keys.BUDGET_ITEM.CONFIRM)}
+                {i18n.getTranslation(keys.BUDGET_ITEM.CONFIRM)}
               </Button>
               <Button colored onClick={this.props.cancelEdit}>
-                {i18n.getTranslatedString(keys.BUDGET_ITEM.CANCEL)}
+                {i18n.getTranslation(keys.BUDGET_ITEM.CANCEL)}
               </Button>
             </CardActions>
             :

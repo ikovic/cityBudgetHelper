@@ -10,7 +10,7 @@ export default class I18n {
     i18next.init(options);
   }
 
-  static getTranslatedString(key) {
+  static getTranslation(key) {
     return i18next.t(key);
   }
 }

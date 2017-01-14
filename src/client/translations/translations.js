@@ -20,6 +20,8 @@ const resources = {
       [keys.BUDGET_TABLE.DESCRIPTION]: "Opis",
       [keys.BUDGET_TABLE.AMOUNT]: "Iznos",
       [keys.BUDGET_TABLE.ACTIONS]: "Akcije",
+      [keys.BUDGET.DEFAULT_TITLE]: "Proračun",
+      [keys.BUDGET.NO_DEFAULT_ERROR]: "Polazni proračun nije postavljen"
     }
   },
   "en": {
@@ -41,6 +43,8 @@ const resources = {
       [keys.BUDGET_TABLE.DESCRIPTION]: "Description",
       [keys.BUDGET_TABLE.AMOUNT]: "Amount",
       [keys.BUDGET_TABLE.ACTIONS]: "Actions",
+      [keys.BUDGET.DEFAULT_TITLE]: "Budget",
+      [keys.BUDGET.NO_DEFAULT_ERROR]: "Default budget is not set"
     }
   }
 };

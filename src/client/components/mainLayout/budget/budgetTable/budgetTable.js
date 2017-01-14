@@ -20,12 +20,12 @@ export default class BudgetTable extends Component {
       <DataTable id="budgetTable"
                  rows={items}
       >
-        <TableHeader name="position">{i18n.getTranslatedString(keys.BUDGET_TABLE.POSITION)}</TableHeader>
-        <TableHeader name="description">{i18n.getTranslatedString(keys.BUDGET_TABLE.DESCRIPTION)}</TableHeader>
-        <TableHeader numeric name="amount">{i18n.getTranslatedString(keys.BUDGET_TABLE.AMOUNT)}</TableHeader>
+        <TableHeader name="position">{i18n.getTranslation(keys.BUDGET_TABLE.POSITION)}</TableHeader>
+        <TableHeader name="description">{i18n.getTranslation(keys.BUDGET_TABLE.DESCRIPTION)}</TableHeader>
+        <TableHeader numeric name="amount">{i18n.getTranslation(keys.BUDGET_TABLE.AMOUNT)}</TableHeader>
         <TableHeader numeric name="delete"
                      cellFormatter={(cell, row, idx) => this.rowActions(row)}>
-          {i18n.getTranslatedString(keys.BUDGET_TABLE.ACTIONS)}
+          {i18n.getTranslation(keys.BUDGET_TABLE.ACTIONS)}
         </TableHeader>
       </DataTable>
     );
