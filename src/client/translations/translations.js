@@ -26,7 +26,12 @@ const resources = {
       [keys.TABS_HEADER.ORDERS]: "Narudžbenice",
       [keys.TABS_HEADER.BUDGET]: "Proračun",
       [keys.TABS_HEADER.SUPPLIERS]: "Dobavljači",
-      [keys.TABS_HEADER.COSTS]: "Troškovi"
+      [keys.TABS_HEADER.COSTS]: "Troškovi",
+      [keys.SETTINGS.TITLE]: "Postavke",
+      [keys.SETTINGS.PROFILE]: "Profil",
+      [keys.SETTINGS.ORGANIZATION]: "Organizacija",
+      [keys.SETTINGS.BUDGETS]: "Proračuni",
+      [keys.SETTINGS.LOGOUT]: "Odjava"
     }
   },
   "en": {
@@ -54,7 +59,12 @@ const resources = {
       [keys.TABS_HEADER.ORDERS]: "Orders",
       [keys.TABS_HEADER.BUDGET]: "Budget",
       [keys.TABS_HEADER.SUPPLIERS]: "Suppliers",
-      [keys.TABS_HEADER.COSTS]: "Costs"
+      [keys.TABS_HEADER.COSTS]: "Costs",
+      [keys.SETTINGS.TITLE]: "Settings",
+      [keys.SETTINGS.PROFILE]: "Profile",
+      [keys.SETTINGS.ORGANIZATION]: "Organization",
+      [keys.SETTINGS.BUDGETS]: "Budgets",
+      [keys.SETTINGS.LOGOUT]: "Log Out"
     }
   }
 };
