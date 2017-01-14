@@ -2,10 +2,13 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
+import i18n from './util/i18n';
 import MainLayout from './components/mainLayout/mainLayout';
 import Login from './components/login/login';
 import LoginRequired from './components/login/loginRequired';
 import store from './redux/store';
+
+i18n.init();
 
 const router = (
     <Router history={browserHistory} >
