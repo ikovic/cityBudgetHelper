@@ -21,7 +21,12 @@ const resources = {
       [keys.BUDGET_TABLE.AMOUNT]: "Iznos",
       [keys.BUDGET_TABLE.ACTIONS]: "Akcije",
       [keys.BUDGET.DEFAULT_TITLE]: "Proračun",
-      [keys.BUDGET.NO_DEFAULT_ERROR]: "Polazni proračun nije postavljen"
+      [keys.BUDGET.NO_DEFAULT_ERROR]: "Polazni proračun nije postavljen",
+      [keys.TABS_HEADER.TITLE]: "Distribucija troškova po stavci proračuna",
+      [keys.TABS_HEADER.ORDERS]: "Narudžbenice",
+      [keys.TABS_HEADER.BUDGET]: "Proračun",
+      [keys.TABS_HEADER.SUPPLIERS]: "Dobavljači",
+      [keys.TABS_HEADER.COSTS]: "Troškovi"
     }
   },
   "en": {
@@ -44,7 +49,12 @@ const resources = {
       [keys.BUDGET_TABLE.AMOUNT]: "Amount",
       [keys.BUDGET_TABLE.ACTIONS]: "Actions",
       [keys.BUDGET.DEFAULT_TITLE]: "Budget",
-      [keys.BUDGET.NO_DEFAULT_ERROR]: "Default budget is not set"
+      [keys.BUDGET.NO_DEFAULT_ERROR]: "Default budget is not set",
+      [keys.TABS_HEADER.TITLE]: "Distribution of costs per budget item",
+      [keys.TABS_HEADER.ORDERS]: "Orders",
+      [keys.TABS_HEADER.BUDGET]: "Budget",
+      [keys.TABS_HEADER.SUPPLIERS]: "Suppliers",
+      [keys.TABS_HEADER.COSTS]: "Costs"
     }
   }
 };
