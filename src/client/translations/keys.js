@@ -1,5 +1,10 @@
 const keys = {
-  LOGIN: 'LOGIN'
+  LOGIN: {
+    TITLE: 'TITLE',
+    USERNAME: 'USERNAME',
+    PASSWORD: 'PASSWORD',
+    CONFIRM: 'CONFIRM'
+  }
 };
 
 export default keys;

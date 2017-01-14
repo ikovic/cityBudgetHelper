@@ -3,12 +3,18 @@ import keys from './keys';
 const resources = {
   "hr": {
     "translation": {
-      [keys.LOGIN]: "Prijava"
+      [keys.LOGIN.TITLE]: "Prijava",
+      [keys.LOGIN.USERNAME]: "Email",
+      [keys.LOGIN.PASSWORD]: "Lozinka",
+      [keys.LOGIN.CONFIRM]: "Kreni"
     }
   },
   "en": {
     "translation": {
-      [keys.LOGIN]: "Log In"
+      [keys.LOGIN.TITLE]: "Log In",
+      [keys.LOGIN.USERNAME]: "Email",
+      [keys.LOGIN.PASSWORD]: "Password",
+      [keys.LOGIN.CONFIRM]: "Go"
     }
   }
 };

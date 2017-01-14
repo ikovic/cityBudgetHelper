@@ -70,19 +70,19 @@ class UndecoratedLogin extends Component {
               color: '#fff',
               background: '#3e4eb8 none repeat scroll 0 0'
             }}>
-            {i18n.getTranslatedString(keys.LOGIN)}
+            {i18n.getTranslatedString(keys.LOGIN.TITLE)}
           </CardTitle>
           <CardText>
             <Textfield onChange={(e) => {
               this._handleChange('email', e)
             }}
-                       label="Email"
+                       label={i18n.getTranslatedString(keys.LOGIN.USERNAME)}
                        floatingLabel
                        style={{width: '100%'}}/>
             <Textfield onChange={(e) => {
               this._handleChange('password', e)
             }}
-                       label="Lozinka"
+                       label={i18n.getTranslatedString(keys.LOGIN.PASSWORD)}
                        floatingLabel
                        type="password"
                        style={{width: '100%'}}/>
@@ -90,7 +90,7 @@ class UndecoratedLogin extends Component {
           <CardActions border>
             <Button colored
                     onClick={(e) => this._login(e)}>
-              Kreni
+              {i18n.getTranslatedString(keys.LOGIN.CONFIRM)}
             </Button>
           </CardActions>
         </Card>
