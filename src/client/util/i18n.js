@@ -13,4 +13,7 @@ export default class I18n {
   static getTranslation(key) {
     return i18next.t(key);
   }
+
+  // TODO: use redux middleware to change language setting
+  // https://github.com/reactjs/react-redux/issues/361
 }

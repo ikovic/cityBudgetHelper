@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 
-
-export default class Translation {
+class Translation {
 
 
 
@@ -11,5 +11,14 @@ export default class Translation {
 }
 
 Translation.propTypes = {
-  translationKey: PropTypes.string.isRequired
+  translationKey: PropTypes.string.isRequired,
+  translation: PropTypes.object.isRequired
 };
+
+function mapStateToProps(state) {
+  return {
+    translation: state.translation
+  };
+}
+
+export default connect(mapStateToProps)(Translation);
