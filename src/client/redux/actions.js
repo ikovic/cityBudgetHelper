@@ -1,4 +1,5 @@
 import constants from './constants';
+import i18n from '../util/i18n';
 
 class Actions {
 
@@ -73,6 +74,22 @@ class Actions {
     }
   }
 
+  changeLanguage(language) {
+    return dispatch => {
+      i18n.changeLanguage(language, () => {
+        dispatch(this.updateTranslations(language));
+      });
+    }
+  }
+
+  updateTranslations(language) {
+    return {
+      type: constants.UPDATE_TRANSLATIONS,
+      data: {
+        language
+      }
+    }
+  }
 
 }
 
