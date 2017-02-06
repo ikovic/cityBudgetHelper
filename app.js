@@ -36,28 +36,28 @@ app.use(express.static('public'));
 
 // handle every other route with index.html
 app.get('*', function (request, response) {
-    response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 });
 
 // synchronize MySQL on start
 models.sequelize
-    .authenticate()
-    .then(function (err) {
-        console.log('Connection has been established successfully.');
-        if (args[0] == 'bootstrap') {
-            return models.sequelize.sync({force: true});
-        }
-        return models.sequelize.sync();
-    })
-    .then(function () {
-        if (args[0] == 'bootstrap') {
-            bootstrap(models);
-        } else {
-            app.listen(config.app.port, function () {
-                console.log('Listening on port', config.app.port);
-            });
-        }
-    })
-    .catch(function (err) {
-        console.log('Error!', err);
-    });
+  .authenticate()
+  .then(function (err) {
+    console.log('Connection has been established successfully.');
+    if (args[0] == 'bootstrap') {
+      return models.sequelize.sync({force: true});
+    }
+    return models.sequelize.sync();
+  })
+  .then(function () {
+    if (args[0] == 'bootstrap') {
+      bootstrap(models);
+    } else {
+      app.listen(config.app.port, function () {
+        console.log('Listening on port', config.app.port);
+      });
+    }
+  })
+  .catch(function (err) {
+    console.log('Error!', err);
+  });

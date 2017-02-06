@@ -18,7 +18,16 @@ router.route('/organizations/:orgId/budgets/:budgetId/orders')
   .get(getOrders);
 
 function getOrders(req, res) {
-  models.Order.findAll({where: {OrganizationId: req.params.orgId}})
+  models.Order.findAll({
+    where: {OrganizationId: req.params.orgId},
+    include: [
+      {
+        model: models.BudgetItem,
+        attributes: ['position'],
+        where: {budgetId: req.params.budgetId}
+      }
+    ]
+  })
     .then(function (value) {
       res.json(value);
     })
