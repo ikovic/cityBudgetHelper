@@ -1,5 +1,6 @@
 import constants from './constants';
 import i18n from '../util/i18n';
+import {get, put, post} from '../util/fetch';
 
 class Actions {
 
@@ -70,6 +71,30 @@ class Actions {
       type: constants.REMOVE_BUDGET_ITEM,
       data: {
         budgetItem
+      }
+    }
+  }
+
+  loadOrders(orgId, budgetId) {
+    return dispatch => {
+      get(`http://localhost:3000/api/organizations/${orgId}/budgets/${budgetId}/orders`,
+        null,
+        (error, meta, body) => {
+          if (!error && meta.status == 200) {
+            let orders = JSON.parse(body.toString());
+            if (orders && orders.length) {
+              dispatch(this.setOrders(orders));
+            }
+          }
+        });
+    }
+  }
+
+  setOrders(orders) {
+    return {
+      type: constants.LOAD_ORDERS,
+      data: {
+        orders
       }
     }
   }

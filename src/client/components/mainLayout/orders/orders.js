@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 import i18n from '../../../util/i18n';
 import keys from '../../../translations/keys';
 import {Grid, Cell, Card, CardTitle, CardText, FABButton, Icon} from 'react-mdl';
-import {getOrders} from '../../../services/orderService';
+import actions from '../../../redux/actions';
 
 class Orders extends Component {
 
   loadOrders() {
     // only the default budget is present in the store
-    const {organization, budget} = this.props;
-    getOrders(organization.id, budget.id);
+    const {organization, budget, loadOrders} = this.props;
+    loadOrders(organization.id, budget.id);
   }
 
   componentDidMount() {
@@ -18,7 +18,6 @@ class Orders extends Component {
   }
 
   render() {
-    // <span>{this.props.budget.title || 'Proračun'}</span>
     return (
       <section id="budgetSection">
         <Grid >
@@ -34,7 +33,7 @@ class Orders extends Component {
                 </FABButton>
               </CardTitle>
               <CardText id="tableContainer">
-                  <h3>{i18n.getTranslation(keys.BUDGET.DEFAULT_TITLE)}</h3>
+                <h3>{i18n.getTranslation(keys.BUDGET.DEFAULT_TITLE)}</h3>
               </CardText>
             </Card>
           </Cell>
@@ -55,10 +54,16 @@ function mapStateToProps(state) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    loadOrders: (orgId, budgetId) => dispatch(actions.loadOrders(orgId, budgetId))
+  }
+}
+
 Orders.propTypes = {
   budget: PropTypes.object.isRequired,
   organization: PropTypes.object.isRequired,
   orders: PropTypes.array
 };
 
-export default connect(mapStateToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
