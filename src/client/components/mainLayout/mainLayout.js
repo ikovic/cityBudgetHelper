@@ -23,9 +23,9 @@ class MainLayout extends Component {
   getDisplayElement(tabId) {
     switch (tabId) {
       case 0:
-        return <Orders/>;
+        return <Orders language={this.props.language}/>;
       case 1:
-        return <Budget/>;
+        return <Budget language={this.props.language}/>;
       case 2:
         return tabId;
       case 3:
@@ -57,11 +57,12 @@ class MainLayout extends Component {
   }
 
   render() {
+    console.log('render main layout');
     return (
       <div id="tabsLayout">
         <Layout fixedHeader>
-          <Header activeTab={this.state.activeTab} changeTab={this.handleTabChange}/>
-          <Sidebar />
+          <Header language={this.props.language} activeTab={this.state.activeTab} changeTab={this.handleTabChange}/>
+          <Sidebar language={this.props.language}/>
           <Content id="appContent">
             <div className="page-content">{this.getDisplayElement(this.state.activeTab)}</div>
           </Content>
@@ -73,12 +74,14 @@ class MainLayout extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.session.user
+    user: state.session.user,
+    language: state.translation.language
   };
 }
 
 MainLayout.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  language: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps)(MainLayout);

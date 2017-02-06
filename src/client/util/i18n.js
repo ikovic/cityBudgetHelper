@@ -13,4 +13,9 @@ export default class I18n {
   static getTranslation(key) {
     return i18next.t(key);
   }
+
+  static changeLanguage(language, callback) {
+    i18next.changeLanguage(language, callback);
+  }
+
 }
