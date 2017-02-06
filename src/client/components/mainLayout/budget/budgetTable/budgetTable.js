@@ -8,9 +8,9 @@ export default class BudgetTable extends Component {
   rowActions(row) {
     return (
       <span>
-                <IconButton name="mode_edit" onClick={() => this.props.editItem(row)}/>
-                <IconButton name="delete" onClick={() => this.props.deleteItem(row)}/>
-            </span>
+        <IconButton name="mode_edit" onClick={() => this.props.editItem(row)}/>
+        <IconButton name="delete" onClick={() => this.props.deleteItem(row)}/>
+      </span>
     )
   }
 

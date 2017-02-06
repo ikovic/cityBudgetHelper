@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 
-export default class Orders extends Component {
+class Orders extends Component {
     render () {
         return (
             <section>
@@ -39,3 +40,19 @@ export default class Orders extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+  return {
+    budget: state.budget,
+    organization: state.organization,
+    orders: state.orders
+  };
+}
+
+Orders.propTypes = {
+  budget: PropTypes.object.isRequired,
+  organization: PropTypes.object.isRequired,
+  orders: PropTypes.array
+};
+
+export default connect(mapStateToProps)(Orders);
