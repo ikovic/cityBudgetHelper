@@ -22,7 +22,7 @@ class Sidebar extends Component {
           </ListItem>
           <ListItem>
             <ListItemContent icon="translate"
-                             onClick={() => this.props.changeLanguage('hr')}>
+                             onClick={() => this.props.changeLanguage(this.props.language === 'hr' ? 'en' : 'hr')}>
               {i18n.getTranslation(keys.SETTINGS.LANGUAGE)}
             </ListItemContent>
           </ListItem>
