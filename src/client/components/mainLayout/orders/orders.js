@@ -4,6 +4,7 @@ import i18n from '../../../util/i18n';
 import keys from '../../../translations/keys';
 import {Grid, Cell, Card, CardTitle, CardText, FABButton, Icon} from 'react-mdl';
 import actions from '../../../redux/actions';
+import OrdersTable from './ordersTable/ordersTable';
 
 class Orders extends Component {
 
@@ -13,19 +14,29 @@ class Orders extends Component {
     loadOrders(organization.id, budget.id);
   }
 
+  setTableHeight() {
+    let height = window.innerHeight;
+    let tableHeight = height - 250;
+    document.getElementById('tableContainer').setAttribute("style", `height:${tableHeight}px`);
+  }
+
   componentDidMount() {
-    this.loadOrders();
+    this.setTableHeight();
+    window.addEventListener('resize', this.setTableHeight);
+    if (this.props.organization.id && this.props.budget.id) {
+      this.loadOrders();
+    }
   }
 
   render() {
     return (
-      <section id="budgetSection">
+      <section id="ordersSection">
         <Grid >
           <Cell col={8}>
             <Card id="tableCard" shadow={0}>
               <CardTitle className="tableCardTitle">
                 <h2 className="mdl-card__title-text">
-                  {this.props.budget.title || i18n.getTranslation(keys.BUDGET.DEFAULT_TITLE)}
+                  {this.props.budget.title || i18n.getTranslation(keys.ORDER.DEFAULT_TITLE)}
                 </h2>
                 <FABButton id="addBudgetItemBtn" colored ripple
                            onClick={() => console.log('clicked new')}>
@@ -33,7 +44,11 @@ class Orders extends Component {
                 </FABButton>
               </CardTitle>
               <CardText id="tableContainer">
-                <h3>{i18n.getTranslation(keys.BUDGET.DEFAULT_TITLE)}</h3>
+                {this.props.orders ?
+                  <OrdersTable items={this.props.orders}/>
+                  :
+                  <h3>{i18n.getTranslation(keys.ORDER.DEFAULT_TITLE)}</h3>
+                }
               </CardText>
             </Card>
           </Cell>

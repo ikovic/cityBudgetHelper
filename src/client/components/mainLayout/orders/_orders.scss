@@ -1,0 +1,36 @@
+#ordersSection {
+
+  #tableContainer {
+    width: auto;
+    overflow: auto;
+    padding: 0;
+  }
+
+  #tableCard {
+    width: 100%;
+    margin: auto;
+
+    div.tableCardTitle {
+      position: relative;
+      background-color: #9fa8da;
+      color: #fff;
+
+      #addBudgetItemBtn {
+        position: absolute;
+        top: 30px;
+        right: 150px;
+        z-index: 1;
+      }
+    }
+  }
+
+  #ordersTable {
+    width: 100%;
+    border: none;
+  }
+
+  #budgetTools {
+    padding-top: 1px;
+  }
+
+}

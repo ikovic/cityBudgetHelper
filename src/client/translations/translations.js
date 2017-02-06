@@ -32,7 +32,11 @@ const resources = {
       [keys.SETTINGS.ORGANIZATION]: "Organizacija",
       [keys.SETTINGS.BUDGETS]: "Proračuni",
       [keys.SETTINGS.LANGUAGE]: "Jezik",
-      [keys.SETTINGS.LOGOUT]: "Odjava"
+      [keys.SETTINGS.LOGOUT]: "Odjava",
+      [keys.ORDER.DEFAULT_TITLE]: "Narudžbenice",
+      [keys.ORDER.DATE_RECEIVED]: "Zaprimljeno",
+      [keys.ORDER.IDENTIFICATOR]: "Identifikator",
+      [keys.ORDER.TYPE]: "Tip"
     }
   },
   "en": {
@@ -66,7 +70,11 @@ const resources = {
       [keys.SETTINGS.ORGANIZATION]: "Organization",
       [keys.SETTINGS.BUDGETS]: "Budgets",
       [keys.SETTINGS.LANGUAGE]: "Languge",
-      [keys.SETTINGS.LOGOUT]: "Log Out"
+      [keys.SETTINGS.LOGOUT]: "Log Out",
+      [keys.ORDER.DEFAULT_TITLE]: "Orders",
+      [keys.ORDER.DATE_RECEIVED]: "Received",
+      [keys.ORDER.IDENTIFICATOR]: "Identificator",
+      [keys.ORDER.TYPE]: "Type"
     }
   }
 };
