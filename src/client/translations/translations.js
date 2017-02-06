@@ -36,7 +36,8 @@ const resources = {
       [keys.ORDER.DEFAULT_TITLE]: "Narudžbenice",
       [keys.ORDER.DATE_RECEIVED]: "Zaprimljeno",
       [keys.ORDER.IDENTIFICATOR]: "Identifikator",
-      [keys.ORDER.TYPE]: "Tip"
+      [keys.ORDER.TYPE]: "Tip",
+      [keys.ORDER.BUDGET_ITEM_POSITION]: "Stavka proračuna"
     }
   },
   "en": {
@@ -74,7 +75,8 @@ const resources = {
       [keys.ORDER.DEFAULT_TITLE]: "Orders",
       [keys.ORDER.DATE_RECEIVED]: "Received",
       [keys.ORDER.IDENTIFICATOR]: "Identificator",
-      [keys.ORDER.TYPE]: "Type"
+      [keys.ORDER.TYPE]: "Type",
+      [keys.ORDER.BUDGET_ITEM_POSITION]: "Budget Item"
     }
   }
 };

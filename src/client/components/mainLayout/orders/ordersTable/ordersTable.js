@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {DataTable, TableHeader, IconButton} from 'react-mdl';
 import i18n from '../../../../util/i18n';
 import keys from '../../../../translations/keys';
+import moment from 'moment';
 
 const OrdersTable = ({items, editItem, deleteItem}) => {
 
@@ -14,13 +15,28 @@ const OrdersTable = ({items, editItem, deleteItem}) => {
     )
   }
 
+  function budgetItemFormat(row) {
+    return <span>{row.BudgetItem.position}</span>
+  }
+
+  function formatDate(row) {
+    return <span>{moment(row.dateReceived).format('DD/MM/YYYY')}</span>
+  }
+
   return (
     <DataTable id="ordersTable"
                rows={items}
     >
       <TableHeader name="identificator">{i18n.getTranslation(keys.ORDER.IDENTIFICATOR)}</TableHeader>
-      <TableHeader name="dateReceived">{i18n.getTranslation(keys.ORDER.DATE_RECEIVED)}</TableHeader>
+      <TableHeader name="dateReceived"
+                   cellFormatter={(cell, row, idx) => formatDate(row)}>
+        {i18n.getTranslation(keys.ORDER.DATE_RECEIVED)}
+      </TableHeader>
       <TableHeader numeric name="type">{i18n.getTranslation(keys.ORDER.TYPE)}</TableHeader>
+      <TableHeader numeric name="budgetItem"
+                   cellFormatter={(cell, row, idx) => budgetItemFormat(row)}>
+        {i18n.getTranslation(keys.ORDER.BUDGET_ITEM_POSITION)}
+      </TableHeader>
       <TableHeader numeric name="delete"
                    cellFormatter={(cell, row, idx) => rowActions(row)}>
         {i18n.getTranslation(keys.BUDGET_TABLE.ACTIONS)}
