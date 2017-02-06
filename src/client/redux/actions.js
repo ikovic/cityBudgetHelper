@@ -84,7 +84,7 @@ class Actions {
 
   updateTranslations(language) {
     return {
-      type: constants.UPDATE_TRANSLATIONS,
+      type: constants.SET_LANGUAGE,
       data: {
         language
       }

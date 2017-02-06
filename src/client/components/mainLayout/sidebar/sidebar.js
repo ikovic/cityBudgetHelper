@@ -21,7 +21,14 @@ class Sidebar extends Component {
             <ListItemContent icon="account_balance">{i18n.getTranslation(keys.SETTINGS.BUDGETS)}</ListItemContent>
           </ListItem>
           <ListItem>
-            <ListItemContent icon="power_settings_new" onClick={() => this.props.logOut()}>
+            <ListItemContent icon="translate"
+                             onClick={() => this.props.changeLanguage('hr')}>
+              {i18n.getTranslation(keys.SETTINGS.LANGUAGE)}
+            </ListItemContent>
+          </ListItem>
+          <ListItem>
+            <ListItemContent icon="power_settings_new"
+                             onClick={() => this.props.logOut()}>
               {i18n.getTranslation(keys.SETTINGS.LOGOUT)}
             </ListItemContent>
           </ListItem>
@@ -33,13 +40,15 @@ class Sidebar extends Component {
 }
 
 Sidebar.PropTypes = {
-  logOut: PropTypes.func.isRequired
+  logOut: PropTypes.func.isRequired,
+  changeLanguage: PropTypes.func.isRequired
 };
 
 
 function mapDispatchToProps(dispatch) {
   return ({
-    logOut: () => dispatch(actions.logOut())
+    logOut: () => dispatch(actions.logOut()),
+    changeLanguage: lng => dispatch(actions.changeLanguage(lng))
   });
 }
 

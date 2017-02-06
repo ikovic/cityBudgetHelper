@@ -1,18 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import i18n from '../../util/i18n';
 
-class Translation {
-
-
-
-  render() {
-
-  }
-}
+const Translation = ({translationKey}) => {
+  return <span>{i18n.getTranslation(translationKey)}</span>
+};
 
 Translation.propTypes = {
-  translationKey: PropTypes.string.isRequired,
-  translation: PropTypes.object.isRequired
+  translationKey: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {

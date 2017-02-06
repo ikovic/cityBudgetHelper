@@ -31,6 +31,7 @@ const resources = {
       [keys.SETTINGS.PROFILE]: "Profil",
       [keys.SETTINGS.ORGANIZATION]: "Organizacija",
       [keys.SETTINGS.BUDGETS]: "Proračuni",
+      [keys.SETTINGS.LANGUAGE]: "Jezik",
       [keys.SETTINGS.LOGOUT]: "Odjava"
     }
   },
@@ -64,6 +65,7 @@ const resources = {
       [keys.SETTINGS.PROFILE]: "Profile",
       [keys.SETTINGS.ORGANIZATION]: "Organization",
       [keys.SETTINGS.BUDGETS]: "Budgets",
+      [keys.SETTINGS.LANGUAGE]: "Languge",
       [keys.SETTINGS.LOGOUT]: "Log Out"
     }
   }

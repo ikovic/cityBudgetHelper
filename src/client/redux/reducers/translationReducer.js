@@ -6,7 +6,7 @@ function setLanguage(state, data) {
   });
 }
 
-function translationReducer(state = {}, action) {
+function translationReducer(state = {language: 'en'}, action) {
   switch (action.type) {
     case constants.SET_LANGUAGE:
       return setLanguage(state, action.data);
