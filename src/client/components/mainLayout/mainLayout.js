@@ -57,7 +57,6 @@ class MainLayout extends Component {
   }
 
   render() {
-    console.log('render main layout');
     return (
       <div id="tabsLayout">
         <Layout fixedHeader>

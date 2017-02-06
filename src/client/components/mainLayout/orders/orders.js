@@ -1,44 +1,50 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import i18n from '../../../util/i18n';
+import keys from '../../../translations/keys';
+import {Grid, Cell, Card, CardTitle, CardText, FABButton, Icon} from 'react-mdl';
+import {getOrders} from '../../../services/orderService';
 
 class Orders extends Component {
-    render () {
-        return (
-            <section>
-                <table className="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-                    <thead>
-                    <tr><th className="mdl-data-table__cell--non-numeric">Student</th><th>Class</th><th>Grade</th></tr>
-                    </thead>
-                    <tbody>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Rahul Sharma</td><td>VI</td><td>B</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mohan Sood</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Rahul Sharma</td><td>VI</td><td>B</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mohan Sood</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Rahul Sharma</td><td>VI</td><td>B</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mohan Sood</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Rahul Sharma</td><td>VI</td><td>B</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mohan Sood</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Rahul Sharma</td><td>VI</td><td>B</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mohan Sood</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Rahul Sharma</td><td>VI</td><td>B</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mohan Sood</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Rahul Sharma</td><td>VI</td><td>B</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mohan Sood</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Rahul Sharma</td><td>VI</td><td>B</td></tr>
-                    <tr><td className="mdl-data-table__cell--non-numeric">Mohan Sood</td><td>VI</td><td>A</td></tr>
-                    </tbody>
-                </table>
-            </section>
-        );
-    }
+
+  loadOrders() {
+    // only the default budget is present in the store
+    const {organization, budget} = this.props;
+    getOrders(organization.id, budget.id);
+  }
+
+  componentDidMount() {
+    this.loadOrders();
+  }
+
+  render() {
+    // <span>{this.props.budget.title || 'Proračun'}</span>
+    return (
+      <section id="budgetSection">
+        <Grid >
+          <Cell col={8}>
+            <Card id="tableCard" shadow={0}>
+              <CardTitle className="tableCardTitle">
+                <h2 className="mdl-card__title-text">
+                  {this.props.budget.title || i18n.getTranslation(keys.BUDGET.DEFAULT_TITLE)}
+                </h2>
+                <FABButton id="addBudgetItemBtn" colored ripple
+                           onClick={() => console.log('clicked new')}>
+                  <Icon name="add"/>
+                </FABButton>
+              </CardTitle>
+              <CardText id="tableContainer">
+                  <h3>{i18n.getTranslation(keys.BUDGET.DEFAULT_TITLE)}</h3>
+              </CardText>
+            </Card>
+          </Cell>
+          <Cell id="budgetTools" col={4}>
+
+          </Cell>
+        </Grid>
+      </section>
+    );
+  }
 }
 
 function mapStateToProps(state) {

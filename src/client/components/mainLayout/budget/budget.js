@@ -29,6 +29,10 @@ class Budget extends Component {
   }
 
   loadBudgetItems(orgId) {
+    // TODO this is bad for multiple reasons
+    // load only the default budget each time
+    // load all budgets only when selecting the default one
+    // use thunk to dispatch async actions
     get(`http://localhost:3000/api/organizations/${orgId}/budgets`,
       {
         default: true,

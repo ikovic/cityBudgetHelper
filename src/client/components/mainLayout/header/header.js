@@ -6,7 +6,6 @@ import keys from '../../../translations/keys';
 
 class TabsHeader extends Component {
   render() {
-    console.log(this.props.language);
     return (
       <Header >
         <HeaderRow title={i18n.getTranslation(keys.TABS_HEADER.TITLE)}>
