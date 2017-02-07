@@ -4,7 +4,7 @@ import translations from '../translations/translations';
 export default class I18n {
   static init(config) {
     let options = Object.assign({
-      lng: 'en',
+      lng: 'hr',
       resources: translations
     }, config);
     i18next.init(options);

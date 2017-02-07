@@ -5,9 +5,53 @@ import keys from '../../../translations/keys';
 import {Grid, Cell, Card, CardTitle, CardText, FABButton, Icon} from 'react-mdl';
 import actions from '../../../redux/actions';
 import OrdersTable from './ordersTable/ordersTable';
-import OrderSearch from './orderSearch/orderSearch';
+import OrderDetails from './orderDetails/orderDetails';
 
 class Orders extends Component {
+
+  constructor() {
+    super();
+
+    this.editBudgetItem = this.editBudgetItem.bind(this);
+
+    this.state = {
+      editOrder: {
+        item: null,
+        edit: false,
+        create: false
+      }
+    };
+  }
+
+  editBudgetItem(item) {
+    this.setState({
+      editOrder: {
+        item: item,
+        edit: true,
+        create: false
+      }
+    });
+  }
+
+  createBudgetItem() {
+    this.setState({
+      editOrder: {
+        item: null,
+        edit: false,
+        create: true
+      }
+    });
+  }
+
+  cancelEditBudgetItem() {
+    this.setState({
+      editOrder: {
+        item: null,
+        edit: false,
+        create: false
+      }
+    });
+  }
 
   loadOrders() {
     // only the default budget is present in the store
@@ -46,7 +90,9 @@ class Orders extends Component {
               </CardTitle>
               <CardText id="tableContainer">
                 {this.props.orders ?
-                  <OrdersTable items={this.props.orders}/>
+                  <OrdersTable
+                    editItem={this.editBudgetItem}
+                    items={this.props.orders}/>
                   :
                   <h3>{i18n.getTranslation(keys.ORDER.DEFAULT_TITLE)}</h3>
                 }
@@ -54,7 +100,13 @@ class Orders extends Component {
             </Card>
           </Cell>
           <Cell id="orderTools" col={6}>
-            <OrderSearch/>
+            <OrderDetails
+              item={this.state.editOrder.item}
+              options={{edit: this.state.editOrder.edit, create: this.state.editOrder.create}}
+              cancelEdit={() => {
+              }}
+              saveItem={() => {
+              }}/>
           </Cell>
         </Grid>
       </section>

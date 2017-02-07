@@ -78,7 +78,7 @@ const resources = {
       [keys.ORDER.DATE_RECEIVED]: "Received",
       [keys.ORDER.IDENTIFICATOR]: "Identificator",
       [keys.ORDER.TYPE]: "Type",
-      [keys.ORDER.BUDGET_ITEM_POSITION]: "Budget Item",
+      [keys.ORDER.BUDGET_ITEM_POSITION]: "Budget item",
       [keys.ORDER.SEARCH_TITLE]: "Search",
       [keys.ORDER.SEARCH_IDENTIFICATOR]: "Identificator"
     }
