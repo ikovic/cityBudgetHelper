@@ -37,7 +37,9 @@ const resources = {
       [keys.ORDER.DATE_RECEIVED]: "Zaprimljeno",
       [keys.ORDER.IDENTIFICATOR]: "Identifikator",
       [keys.ORDER.TYPE]: "Tip",
-      [keys.ORDER.BUDGET_ITEM_POSITION]: "Stavka proračuna"
+      [keys.ORDER.BUDGET_ITEM_POSITION]: "Stavka proračuna",
+      [keys.ORDER.SEARCH_TITLE]: "Pretraga",
+      [keys.ORDER.SEARCH_IDENTIFICATOR]: "Identifikator"
     }
   },
   "en": {
@@ -76,7 +78,9 @@ const resources = {
       [keys.ORDER.DATE_RECEIVED]: "Received",
       [keys.ORDER.IDENTIFICATOR]: "Identificator",
       [keys.ORDER.TYPE]: "Type",
-      [keys.ORDER.BUDGET_ITEM_POSITION]: "Budget Item"
+      [keys.ORDER.BUDGET_ITEM_POSITION]: "Budget Item",
+      [keys.ORDER.SEARCH_TITLE]: "Search",
+      [keys.ORDER.SEARCH_IDENTIFICATOR]: "Identificator"
     }
   }
 };

@@ -5,6 +5,7 @@ import keys from '../../../translations/keys';
 import {Grid, Cell, Card, CardTitle, CardText, FABButton, Icon} from 'react-mdl';
 import actions from '../../../redux/actions';
 import OrdersTable from './ordersTable/ordersTable';
+import OrderSearch from './orderSearch/orderSearch';
 
 class Orders extends Component {
 
@@ -32,13 +33,13 @@ class Orders extends Component {
     return (
       <section id="ordersSection">
         <Grid >
-          <Cell col={8}>
+          <Cell col={6}>
             <Card id="tableCard" shadow={0}>
               <CardTitle className="tableCardTitle">
                 <h2 className="mdl-card__title-text">
                   {this.props.budget.title || i18n.getTranslation(keys.ORDER.DEFAULT_TITLE)}
                 </h2>
-                <FABButton id="addBudgetItemBtn" colored ripple
+                <FABButton id="addOrderBtn" colored ripple
                            onClick={() => console.log('clicked new')}>
                   <Icon name="add"/>
                 </FABButton>
@@ -52,8 +53,8 @@ class Orders extends Component {
               </CardText>
             </Card>
           </Cell>
-          <Cell id="budgetTools" col={4}>
-
+          <Cell id="orderTools" col={6}>
+            <OrderSearch/>
           </Cell>
         </Grid>
       </section>
