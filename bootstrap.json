@@ -38,19 +38,22 @@
                   "title": "Track thing",
                   "unitOfMeasure": "meter",
                   "quantity": 100,
-                  "price": 88
+                  "price": 88,
+                  "total": 8800
                 },
                 {
                   "title": "Glue",
                   "unitOfMeasure": "liter",
                   "quantity": 1,
-                  "price": 200
+                  "price": 200,
+                  "total": 200
                 },
                 {
                   "title": "Marker",
                   "unitOfMeasure": "piece",
                   "quantity": 3,
-                  "price": 8
+                  "price": 8,
+                  "total": 24
                 }
               ]
             },
@@ -63,19 +66,22 @@
                   "title": "Estimate",
                   "unitOfMeasure": "hour",
                   "quantity": 2,
-                  "price": 250
+                  "price": 250,
+                  "total": 500
                 },
                 {
                   "title": "Painting",
                   "unitOfMeasure": "hour",
                   "quantity": 8,
-                  "price": 200
+                  "price": 200,
+                  "total": 1600
                 },
                 {
                   "title": "Color",
                   "unitOfMeasure": "liter",
                   "quantity": 10,
-                  "price": 90
+                  "price": 90,
+                  "total": 900
                 }
               ]
             }

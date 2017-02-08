@@ -25,6 +25,10 @@ function getOrders(req, res) {
         model: models.BudgetItem,
         attributes: ['position'],
         where: {budgetId: req.params.budgetId}
+      },
+      {
+        model: models.OrderItem,
+        as: 'orderItems'
       }
     ]
   })

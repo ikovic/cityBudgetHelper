@@ -17,8 +17,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true
     },
     type: {
-      type: DataTypes.ENUM,
-      values: ['roba', 'rad', 'usluga'],
+      type: DataTypes.STRING,
       allowNull: true
     }
   }, {

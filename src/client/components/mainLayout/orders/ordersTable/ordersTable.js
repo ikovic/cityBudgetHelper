@@ -19,6 +19,10 @@ const OrdersTable = ({items, editItem, deleteItem}) => {
     return <span>{row.BudgetItem.position}</span>
   }
 
+  function totalAmountFormat(row) {
+    return <span>{row.orderItems.reduce((sum, item) => sum + item.total, 0)}</span>
+  }
+
   function formatDate(row) {
     return <span>{moment(row.dateReceived).format('DD/MM/YYYY')}</span>
   }
@@ -36,6 +40,10 @@ const OrdersTable = ({items, editItem, deleteItem}) => {
       <TableHeader numeric name="budgetItem"
                    cellFormatter={(cell, row, idx) => budgetItemFormat(row)}>
         {i18n.getTranslation(keys.ORDER.BUDGET_ITEM_POSITION)}
+      </TableHeader>
+      <TableHeader numeric name="amount"
+                   cellFormatter={(cell, row, idx) => totalAmountFormat(row)}>
+        {i18n.getTranslation(keys.ORDER.TOTAL_AMOUNT)}
       </TableHeader>
       <TableHeader numeric name="delete"
                    cellFormatter={(cell, row, idx) => rowActions(row)}>

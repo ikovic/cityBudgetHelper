@@ -74,6 +74,7 @@ class Orders extends Component {
   }
 
   render() {
+    console.dir(this.props.orders);
     return (
       <section id="ordersSection">
         <Grid >
