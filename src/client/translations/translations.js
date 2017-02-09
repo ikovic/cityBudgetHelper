@@ -40,7 +40,9 @@ const resources = {
       [keys.ORDER.BUDGET_ITEM_POSITION]: "Stavka proračuna",
       [keys.ORDER.SEARCH_TITLE]: "Pretraga",
       [keys.ORDER.SEARCH_IDENTIFICATOR]: "Identifikator",
-      [keys.ORDER.TOTAL_AMOUNT]: "Iznos"
+      [keys.ORDER.TOTAL_AMOUNT]: "Iznos",
+      [keys.ORDER.DROPDOWN_TYPES_WARES]: "Roba",
+      [keys.ORDER.DROPDOWN_TYPES_SERVICE]: "Usluga"
     }
   },
   "en": {
@@ -82,7 +84,9 @@ const resources = {
       [keys.ORDER.BUDGET_ITEM_POSITION]: "Budget item",
       [keys.ORDER.SEARCH_TITLE]: "Search",
       [keys.ORDER.SEARCH_IDENTIFICATOR]: "Identificator",
-      [keys.ORDER.TOTAL_AMOUNT]: "Amount"
+      [keys.ORDER.TOTAL_AMOUNT]: "Amount",
+      [keys.ORDER.DROPDOWN_TYPES_WARES]: "Wares",
+      [keys.ORDER.DROPDOWN_TYPES_SERVICE]: "Service"
     }
   }
 };

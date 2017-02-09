@@ -4,6 +4,7 @@ import keys from '../../../../../translations/keys';
 import i18n from '../../../../../util/i18n';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
+import Select from 'react-select';
 
 class DetailsForm extends Component {
 
@@ -57,6 +58,12 @@ class DetailsForm extends Component {
   }
 
   render() {
+
+    const options = [
+      {value: 'wares', label: i18n.getTranslation(keys.ORDER.DROPDOWN_TYPES_WARES)},
+      {value: 'service', label: i18n.getTranslation(keys.ORDER.DROPDOWN_TYPES_SERVICE)}
+    ];
+
     return (
       <div>
         <Textfield
@@ -79,6 +86,12 @@ class DetailsForm extends Component {
           selected={this.state.momentReceived}
           onChange={(date) => this.handleChange('momentReceived', date)}
         />
+
+        <Select name="type"
+                options={options}
+                onChange={(value) => this.handleChange('type', value)}
+                value={this.state.type}/>
+
         <Textfield
           onChange={(event) => this.handleChange('type', event.target.value)}
           value={this.state.type}
