@@ -2,6 +2,8 @@ import React, {PropTypes, Component} from 'react';
 import {Textfield} from 'react-mdl';
 import keys from '../../../../../translations/keys';
 import i18n from '../../../../../util/i18n';
+import moment from 'moment';
+import DatePicker from 'react-datepicker';
 
 class DetailsForm extends Component {
 
@@ -12,6 +14,7 @@ class DetailsForm extends Component {
       id: null,
       identificator: '',
       dateReceived: '',
+      momentReceived: moment(),
       type: '',
       options: null
     };
@@ -23,6 +26,7 @@ class DetailsForm extends Component {
         id: nextProps.order.id,
         identificator: nextProps.order.identificator,
         dateReceived: nextProps.order.dateReceived,
+        momentReceived: moment(nextProps.order.dateReceived),
         type: nextProps.order.type
       });
     } else {
@@ -30,6 +34,7 @@ class DetailsForm extends Component {
         id: null,
         identificator: '',
         dateReceived: '',
+        momentReceived: moment(),
         type: ''
       });
     }
@@ -69,6 +74,10 @@ class DetailsForm extends Component {
           floatingLabel
           rows={2}
           style={{width: '100%'}}
+        />
+        <DatePicker
+          selected={this.state.momentReceived}
+          onChange={(date) => this.handleChange('momentReceived', date)}
         />
         <Textfield
           onChange={(event) => this.handleChange('type', event.target.value)}
