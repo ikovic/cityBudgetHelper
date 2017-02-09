@@ -56,7 +56,7 @@ const OrdersTable = ({items, editItem, deleteItem}) => {
 
 OrdersTable.propTypes = {
   items: PropTypes.array.isRequired,
-  //deleteItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
   editItem: PropTypes.func.isRequired
 };
 

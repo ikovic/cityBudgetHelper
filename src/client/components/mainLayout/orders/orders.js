@@ -12,7 +12,7 @@ class Orders extends Component {
   constructor() {
     super();
 
-    this.editBudgetItem = this.editBudgetItem.bind(this);
+    this.editOrder = this.editOrder.bind(this);
 
     this.state = {
       editOrder: {
@@ -23,7 +23,7 @@ class Orders extends Component {
     };
   }
 
-  editBudgetItem(item) {
+  editOrder(item) {
     this.setState({
       editOrder: {
         item: item,
@@ -33,7 +33,7 @@ class Orders extends Component {
     });
   }
 
-  createBudgetItem() {
+  createOrder() {
     this.setState({
       editOrder: {
         item: null,
@@ -43,7 +43,7 @@ class Orders extends Component {
     });
   }
 
-  cancelEditBudgetItem() {
+  cancelEditOrder() {
     this.setState({
       editOrder: {
         item: null,
@@ -74,7 +74,6 @@ class Orders extends Component {
   }
 
   render() {
-    console.dir(this.props.orders);
     return (
       <section id="ordersSection">
         <Grid >
@@ -92,7 +91,8 @@ class Orders extends Component {
               <CardText id="tableContainer">
                 {this.props.orders ?
                   <OrdersTable
-                    editItem={this.editBudgetItem}
+                    deleteItem={() => alert('NYI')}
+                    editItem={(item) => this.editOrder(item)}
                     items={this.props.orders}/>
                   :
                   <h3>{i18n.getTranslation(keys.ORDER.DEFAULT_TITLE)}</h3>
@@ -101,13 +101,19 @@ class Orders extends Component {
             </Card>
           </Cell>
           <Cell id="orderTools" col={6}>
-            <OrderDetails
-              item={this.state.editOrder.item}
-              options={{edit: this.state.editOrder.edit, create: this.state.editOrder.create}}
-              cancelEdit={() => {
-              }}
-              saveItem={() => {
-              }}/>
+            {this.props.orders ?
+              <OrderDetails
+                item={this.state.editOrder.item}
+                options={{edit: this.state.editOrder.edit, create: this.state.editOrder.create}}
+                cancelEdit={() => {
+                  this.cancelEditOrder()
+                }}
+                saveItem={() => {
+                  alert('NYI');
+                }}/>
+              :
+              null
+            }
           </Cell>
         </Grid>
       </section>

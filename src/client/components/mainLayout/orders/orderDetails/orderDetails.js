@@ -6,57 +6,10 @@ import keys from '../../../../translations/keys';
 
 export default class OrderDetails extends Component {
 
-  constructor() {
-    super();
-
-    this.state = {
-      id: null,
-      position: '',
-      description: '',
-      amount: ''
-    }
-  }
-
-  handleChange(name, value) {
-    this.setState({
-      [name]: value
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.item) {
-      this.setState({
-        id: nextProps.item.id,
-        position: nextProps.item.position,
-        description: nextProps.item.description,
-        amount: nextProps.item.amount
-      });
-    } else {
-      this.setState({
-        id: null,
-        position: '',
-        description: '',
-        amount: ''
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const isEditMode = this.props.options.edit;
-    const isCreateMode = this.props.options.create;
-    const isActive = isCreateMode || isEditMode;
-
-    if ((isActive) && (isEditMode !== prevProps.options.edit || isCreateMode !== prevProps.options.create)) {
-      document.getElementById('positionInput').focus();
-    }
-  }
-
   render() {
     const isEditMode = this.props.options.edit;
     const isCreateMode = this.props.options.create;
     const isActive = isCreateMode || isEditMode;
-
-    //<DetailsForm order={this.props.item} onChange={this.handleChange}/>
 
     return (
       <div id="budgetItemWrapper">
@@ -65,7 +18,9 @@ export default class OrderDetails extends Component {
             {i18n.getTranslation(keys.BUDGET_ITEM.CARD_TITLE)}
           </CardTitle>
           <CardText>
-
+            <DetailsForm order={this.props.item}
+                         options={{edit: isEditMode, create: isCreateMode}}
+            />
           </CardText>
           {(isEditMode || isCreateMode) ?
             <CardActions border>
