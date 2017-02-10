@@ -12,10 +12,10 @@ export default class OrderDetails extends Component {
     const isActive = isCreateMode || isEditMode;
 
     return (
-      <div id="budgetItemWrapper">
+      <div id="orderDetailsWrapper">
         <Card shadow={0} style={{width: '100%', margin: 'auto'}}>
           <CardTitle style={{color: '#fff', backgroundColor: isActive ? '#e91e63' : '#9fa8da'}}>
-            {i18n.getTranslation(keys.BUDGET_ITEM.CARD_TITLE)}
+            {i18n.getTranslation(keys.ORDER.DETAILS_CARD_TITLE)}
           </CardTitle>
           <CardText>
             <DetailsForm order={this.props.item}
@@ -25,10 +25,10 @@ export default class OrderDetails extends Component {
           {(isEditMode || isCreateMode) ?
             <CardActions border>
               <Button colored onClick={() => this.props.saveItem(this.state)}>
-                {i18n.getTranslation(keys.BUDGET_ITEM.CONFIRM)}
+                {i18n.getTranslation(keys.GENERAL.OK)}
               </Button>
               <Button colored onClick={this.props.cancelEdit}>
-                {i18n.getTranslation(keys.BUDGET_ITEM.CANCEL)}
+                {i18n.getTranslation(keys.GENERAL.CANCEL)}
               </Button>
             </CardActions>
             :

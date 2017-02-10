@@ -81,10 +81,10 @@ class Orders extends Component {
             <Card id="tableCard" shadow={0}>
               <CardTitle className="tableCardTitle">
                 <h2 className="mdl-card__title-text">
-                  {this.props.budget.title || i18n.getTranslation(keys.ORDER.DEFAULT_TITLE)}
+                  {i18n.getTranslation(keys.ORDER.DEFAULT_TITLE)}
                 </h2>
                 <FABButton id="addOrderBtn" colored ripple
-                           onClick={() => console.log('clicked new')}>
+                           onClick={() => this.createOrder()}>
                   <Icon name="add"/>
                 </FABButton>
               </CardTitle>

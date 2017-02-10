@@ -3,6 +3,8 @@ import keys from './keys';
 const resources = {
   "hr": {
     "translation": {
+      [keys.GENERAL.OK]: "OK",
+      [keys.GENERAL.CANCEL]: "Odustani",
       [keys.LOGIN.TITLE]: "Prijava",
       [keys.LOGIN.USERNAME]: "Email",
       [keys.LOGIN.PASSWORD]: "Lozinka",
@@ -42,11 +44,14 @@ const resources = {
       [keys.ORDER.SEARCH_IDENTIFICATOR]: "Identifikator",
       [keys.ORDER.TOTAL_AMOUNT]: "Iznos",
       [keys.ORDER.DROPDOWN_TYPES_WARES]: "Roba",
-      [keys.ORDER.DROPDOWN_TYPES_SERVICE]: "Usluga"
+      [keys.ORDER.DROPDOWN_TYPES_SERVICE]: "Usluga",
+      [keys.ORDER.DETAILS_CARD_TITLE]: "Stavke narudžbenice"
     }
   },
   "en": {
     "translation": {
+      [keys.GENERAL.OK]: "OK",
+      [keys.GENERAL.CANCEL]: "Cancel",
       [keys.LOGIN.TITLE]: "Log In",
       [keys.LOGIN.USERNAME]: "Email",
       [keys.LOGIN.PASSWORD]: "Password",
@@ -86,7 +91,8 @@ const resources = {
       [keys.ORDER.SEARCH_IDENTIFICATOR]: "Identificator",
       [keys.ORDER.TOTAL_AMOUNT]: "Amount",
       [keys.ORDER.DROPDOWN_TYPES_WARES]: "Wares",
-      [keys.ORDER.DROPDOWN_TYPES_SERVICE]: "Service"
+      [keys.ORDER.DROPDOWN_TYPES_SERVICE]: "Service",
+      [keys.ORDER.DETAILS_CARD_TITLE]: "Order items"
     }
   }
 };

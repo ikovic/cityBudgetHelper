@@ -1,13 +1,13 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var browserify = require('browserify');  // Bundles JS.
-var del = require('del');  // Deletes files.
-var babelify = require('babelify');  // Transforms React JSX to JS.
-var source = require('vinyl-source-stream');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const browserify = require('browserify');  // Bundles JS.
+const del = require('del');  // Deletes files.
+const babelify = require('babelify');  // Transforms React JSX to JS.
+const source = require('vinyl-source-stream');
 
 // source & build paths
-var paths = {
+const paths = {
   CSS_SRC: './src/client/**/*.scss',
   CSS_MAIN: './src/client/main.scss',
   CSS_BUILD: './public/css/',
