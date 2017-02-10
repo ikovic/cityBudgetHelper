@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {Textfield} from 'react-mdl';
+import {Textfield, Grid, Cell} from 'react-mdl';
 import keys from '../../../../../translations/keys';
 import i18n from '../../../../../util/i18n';
 import moment from 'moment';
@@ -58,48 +58,54 @@ class DetailsForm extends Component {
   }
 
   render() {
-
     const options = [
       {value: 'wares', label: i18n.getTranslation(keys.ORDER.DROPDOWN_TYPES_WARES)},
       {value: 'service', label: i18n.getTranslation(keys.ORDER.DROPDOWN_TYPES_SERVICE)}
     ];
 
     return (
-      <div>
-        <Textfield
-          id="identificatorInput"
-          onChange={(event) => this.handleChange('identificator', event.target.value)}
-          value={this.state.identificator}
-          label={i18n.getTranslation(keys.BUDGET_ITEM.POSITION)}
-          floatingLabel
-          style={{width: '100%'}}
-        />
-        <Textfield
-          onChange={(event) => this.handleChange('dateReceived', event.target.value)}
-          value={this.state.dateReceived}
-          label={i18n.getTranslation(keys.BUDGET_ITEM.DESCRIPTION)}
-          floatingLabel
-          rows={2}
-          style={{width: '100%'}}
-        />
-        <DatePicker
-          selected={this.state.momentReceived}
-          onChange={(date) => this.handleChange('momentReceived', date)}
-        />
+      <Grid>
+        <Cell col={8}>
+          <Textfield
+            id="identificatorInput"
+            onChange={(event) => this.handleChange('identificator', event.target.value)}
+            value={this.state.identificator}
+            label={i18n.getTranslation(keys.ORDER.IDENTIFICATOR)}
+            floatingLabel
+            style={{width: '100%'}}
+          />
+        </Cell>
+        <Cell col={4}>
+          <label htmlFor="dateReceivedPicker">{i18n.getTranslation(keys.ORDER.DATE_RECEIVED)}</label>
+          <DatePicker
+            id="dateReceivedPicker"
+            selected={this.state.momentReceived}
+            onChange={(date) => this.handleChange('momentReceived', date)}
+          />
+        </Cell>
 
-        <Select name="type"
-                options={options}
-                onChange={(value) => this.handleChange('type', value)}
-                value={this.state.type}/>
+        <Cell col={6}>
+          <label htmlFor="selectOrderType">{i18n.getTranslation(keys.ORDER.TYPE)}</label>
+          <Select
+            id="selectOrderType"
+            name="type"
+            options={options}
+            onChange={(value) => this.handleChange('type', value)}
+            value={this.state.type}
+          />
+        </Cell>
+        <Cell col={6}>
+          <label htmlFor="selectBudgetItem">{i18n.getTranslation(keys.ORDER.BUDGET_ITEM_POSITION)}</label>
+          <Select
+            id="selectBudgetItem"
+            name="type"
+            options={options}
+            onChange={(value) => this.handleChange('type', value)}
+            value={this.state.type}
+          />
+        </Cell>
 
-        <Textfield
-          onChange={(event) => this.handleChange('type', event.target.value)}
-          value={this.state.type}
-          label={i18n.getTranslation(keys.BUDGET_ITEM.AMOUNT)}
-          floatingLabel
-          style={{width: '100%'}}
-        />
-      </div>
+      </Grid>
     )
   }
 }
