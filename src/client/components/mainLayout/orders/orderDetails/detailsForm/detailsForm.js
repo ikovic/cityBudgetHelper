@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react';
+import {connect} from 'react-redux';
 import {Textfield, Grid, Cell} from 'react-mdl';
 import keys from '../../../../../translations/keys';
 import i18n from '../../../../../util/i18n';
@@ -58,6 +59,8 @@ class DetailsForm extends Component {
   }
 
   render() {
+
+    // TODO extract this somewhere
     const options = [
       {value: 'wares', label: i18n.getTranslation(keys.ORDER.DROPDOWN_TYPES_WARES)},
       {value: 'service', label: i18n.getTranslation(keys.ORDER.DROPDOWN_TYPES_SERVICE)}
@@ -99,7 +102,9 @@ class DetailsForm extends Component {
           <Select
             id="selectBudgetItem"
             name="type"
-            options={options}
+            options={this.props.budgetItems.map(item => {
+              return {value: item.id, label: item.position}
+            })}
             onChange={(value) => this.handleChange('type', value)}
             value={this.state.type}
           />
@@ -111,7 +116,14 @@ class DetailsForm extends Component {
 }
 
 DetailsForm.propTypes = {
-  options: PropTypes.object.isRequired
+  options: PropTypes.object.isRequired,
+  budgetItems: PropTypes.array.isRequired
 };
 
-export default DetailsForm;
+function mapStateToProps(state) {
+  return {
+    budgetItems: state.budgetItems,
+  };
+}
+
+export default connect(mapStateToProps)(DetailsForm);

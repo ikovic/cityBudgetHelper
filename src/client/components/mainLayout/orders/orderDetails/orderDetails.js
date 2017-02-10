@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import {Card, CardTitle, CardText, CardActions, Button, CardMenu, IconButton, Textfield} from 'react-mdl';
+import {Card, CardTitle, CardText, CardActions, Button} from 'react-mdl';
 import DetailsForm from './detailsForm/detailsForm';
+import DetailsTable from './detailsTable/detailsTable';
 import i18n from '../../../../util/i18n';
 import keys from '../../../../translations/keys';
 
@@ -10,6 +11,7 @@ export default class OrderDetails extends Component {
     const isEditMode = this.props.options.edit;
     const isCreateMode = this.props.options.create;
     const isActive = isCreateMode || isEditMode;
+    const order = this.props.item;
 
     return (
       <div id="orderDetailsWrapper">
@@ -18,9 +20,11 @@ export default class OrderDetails extends Component {
             {i18n.getTranslation(keys.ORDER.DETAILS_CARD_TITLE)}
           </CardTitle>
           <CardText>
-            <DetailsForm order={this.props.item}
-                         options={{edit: isEditMode, create: isCreateMode}}
+            <DetailsForm
+              order={order}
+              options={{edit: isEditMode, create: isCreateMode}}
             />
+            {order ? <DetailsTable orderItems={order.orderItems}/> : null}
           </CardText>
           {(isEditMode || isCreateMode) ?
             <CardActions border>
