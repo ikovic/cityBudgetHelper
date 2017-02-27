@@ -79,12 +79,17 @@ class DetailsForm extends Component {
           />
         </Cell>
         <Cell col={4}>
-          <label htmlFor="dateReceivedPicker">{i18n.getTranslation(keys.ORDER.DATE_RECEIVED)}</label>
-          <DatePicker
-            id="dateReceivedPicker"
-            selected={this.state.momentReceived}
-            onChange={(date) => this.handleChange('momentReceived', date)}
-          />
+          <div className="datepicker-container mdl-js-textfield mdl-textfield--floating-label is-upgraded is-focused">
+            <label className="datepicker-label"
+                   htmlFor="dateReceivedPicker">{i18n.getTranslation(keys.ORDER.DATE_RECEIVED)}
+            </label>
+            <DatePicker
+              id="dateReceivedPicker"
+              className="datepicker-input"
+              selected={this.state.momentReceived}
+              onChange={(date) => this.handleChange('momentReceived', date)}
+            />
+          </div>
         </Cell>
 
         <Cell col={6}>
