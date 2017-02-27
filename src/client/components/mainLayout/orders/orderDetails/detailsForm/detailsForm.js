@@ -18,6 +18,7 @@ class DetailsForm extends Component {
       dateReceived: '',
       momentReceived: moment(),
       type: '',
+      budgetItemId: '',
       options: null
     };
   }
@@ -29,6 +30,7 @@ class DetailsForm extends Component {
         identificator: nextProps.order.identificator,
         dateReceived: nextProps.order.dateReceived,
         momentReceived: moment(nextProps.order.dateReceived),
+        budgetItemId: nextProps.order.BudgetItemId,
         type: nextProps.order.type
       });
     } else {
@@ -37,6 +39,7 @@ class DetailsForm extends Component {
         identificator: '',
         dateReceived: '',
         momentReceived: moment(),
+        budgetItemId: '',
         type: ''
       });
     }
@@ -111,7 +114,7 @@ class DetailsForm extends Component {
               return {value: item.id, label: item.position}
             })}
             onChange={(value) => this.handleChange('type', value)}
-            value={this.state.type}
+            value={this.state.budgetItemId}
           />
         </Cell>
 
